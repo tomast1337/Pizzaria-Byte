@@ -1,4 +1,3 @@
-# express app gitignore
-
-/dist
 node_modules
+dist
+.cache
