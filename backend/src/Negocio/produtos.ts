@@ -25,3 +25,5 @@ const produtosSchema: Schema = new Schema({
         required: true,
     },
 });
+
+export default produtosSchema;

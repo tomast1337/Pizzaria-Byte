@@ -24,3 +24,5 @@ const ingredientesSchema: Schema = new Schema({
         required: true,
     },
 });
+
+export default ingredientesSchema;

@@ -25,3 +25,5 @@ const usuariosSchema: Schema = new Schema({
         required: true,
     }
 });
+
+export default usuariosSchema;

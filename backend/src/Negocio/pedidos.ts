@@ -29,3 +29,5 @@ const pedidosSchema: Schema = new Schema({
         required: true,
     },
 });
+
+export default pedidosSchema;

@@ -25,3 +25,5 @@ const pizzasSchema: Schema = new Schema({
         required: true,
     }
 });
+
+export default pizzasSchema;
