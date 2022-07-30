@@ -1,8 +1,23 @@
 import * as React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CriarContaPage from "./Pages/CriarContaPage";
+import LoingPage from "./Pages/LoginPage";
 
-export default () => (
-  <>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal than this React app.</p>
-  </>
-);
+export default () => {
+    return (
+        <BrowserRouter basename={"/"}>
+            <Routes>
+                {/*Login*/}
+                <Route path="/" element={<LoingPage />} />
+                <Route path="/criar-conta" element={<CriarContaPage />} />
+                {/*Cliente*/}
+
+                {/*Admin*/}
+
+                {/*Cozinheiro*/}
+
+                {/*Entregador*/}
+            </Routes>
+        </BrowserRouter>
+    );
+}
