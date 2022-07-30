@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import LandingPageModel from "../Components/LandingPageModel";
 import styles from "./CriarContaPage.module.scss";
 
@@ -31,7 +32,7 @@ const CriarContaPage = () => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles["form-group"]}>
-                        <label htmlFor="nome">Nome:</label>
+                        <label htmlFor="nome">Nome</label>
                         <input
                             id="nome"
                             value={nome}
@@ -40,7 +41,7 @@ const CriarContaPage = () => {
                         />
                     </div>
                     <div className={styles["form-group"]}>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             id="email"
                             value={email}
@@ -49,7 +50,7 @@ const CriarContaPage = () => {
                         />
                     </div>
                     <div className={styles["form-group"]}>
-                        <label htmlFor="senha">Senha:</label>
+                        <label htmlFor="senha">Senha</label>
                         <input
                             id="senha"
                             value={senha}
@@ -67,8 +68,12 @@ const CriarContaPage = () => {
                         />
                     </div>
                     <div className={styles["form-group"]}>
-                        <button type="submit">Criar Conta</button>
+                        <button className={styles["form-button"]} type="submit">Criar Conta</button>
                     </div>
+                    <div className={styles["form-group"]}>
+                        <Link className={styles["form-button"]} to="/">Voltar</Link>
+                    </div>
+
                 </form>
             </div>
         </div>

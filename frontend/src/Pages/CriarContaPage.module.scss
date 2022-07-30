@@ -56,7 +56,8 @@
             width: 100%;
         }
 
-        .form-group button {
+        .form-group button,
+        a {
             border-radius: 0;
             border: 1px solid $brand1;
             padding: 0.5rem;
@@ -64,12 +65,26 @@
             background-color: $brand1;
             color: $brand2;
             display: block;
-            width: 90%;
+            width: 100%;
             margin: 0 auto;
 
             &:focus {
-                outline: none;
-                border-color: $brand2;
+                background-color: $brand2;
+                color: $brand1;
+            }
+
+            &:hover {
+                background-color: $brand2;
+                color: $brand1;
+            }
+
+            &:visited,
+            &:active,
+            &:link {
+                text-decoration: none;
+                font-size: 1.5rem;
+                text-align: center;
+                width: 100%;
             }
         }
     }
