@@ -65,7 +65,7 @@
             background-color: $brand1;
             color: $brand2;
             display: block;
-            width: 100%;
+            width: fit-content;
             margin: 0 auto;
 
             &:focus {
@@ -84,7 +84,6 @@
                 text-decoration: none;
                 font-size: 1.5rem;
                 text-align: center;
-                width: 100%;
             }
         }
     }
