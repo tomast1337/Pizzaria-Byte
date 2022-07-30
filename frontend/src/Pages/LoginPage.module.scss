@@ -8,17 +8,19 @@
         margin-bottom: 1rem;
 
         h1 {
-            font-size: 2rem;
+            font-size: 4rem;
             font-weight: bold;
             color: $brand1;
             margin-bottom: 0;
+            font-family: $title;
         }
 
         h2 {
             margin-top: 0;
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: $brand2;
+            font-family: $sub-title;
         }
     }
 
@@ -31,7 +33,7 @@
 
     form {
         margin-top: 1rem;
-
+        font-family: $text;
         .form-group {
             margin-bottom: 1rem;
         }
@@ -67,6 +69,8 @@
             display: block;
             width: fit-content;
             margin: 0 auto;
+            font-family: $text !important;
+            font-weight: bold;
 
             &:focus {
                 background-color: $brand2;
