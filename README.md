@@ -4,7 +4,7 @@ Esse repositório é uma reescrita do projeto feito para a disciplina Projeto so
 
 O motivo dessa reescrita é que o projeto original por tes sido feito para um disciplina com datas e prazos apertados não ficou tão bom como eu queria que fosse.
 
-# Rodar o projeto
+## Rodar o projeto
 
 configure dos `.env`, um na pasta `backend` e outro na pasta `frontend`, mas informações sobre o `.env` estão no arquivo `README.md` de cada pasta.
 
