@@ -8,13 +8,35 @@ Para rodar o backend e necessário definir essas variáveis no arquivo `.env`:
 
 ```ini
 JWT_SECRET={TOKEN_SECRET}
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.kjdieka.mongodb.net/?retryWrites=true&w=majority
-MONGODB_USERNAME={username do banco}
-MONGODB_PASSWORD={password do banco}
+MONGODB_URI=mongodb://{username}:{password}@localhost:{port}
 ```
 
 Opcional para debugar o backend:
 
 ```ini
 DEBUG=express:*
+```
+
+### Observações sobre o Banco de Dados MongoDB
+
+Para o banco de dados, é necessário ter um servidor MongoDB. Recomendo usar o MongoDB Atlas ou Um Container Docker.
+
+Para criar o container do MongoDB, é necessário ter o Docker instalado, e o setup ocorre dessa forma:
+
+```bash
+docker pull mongo
+docker run -d -p {port}:{port} \
+ --name mongo  \
+ -e MONGO_INITDB_ROOT_USERNAME={username} \
+ -e MONGO_INITDB_ROOT_PASSWORD={password} \
+  mongo
+```
+Troque {port} pelo porta que deseja usar,
+{username} pelo username do banco de dados,
+{password} pelo password do banco de dados.
+
+Apos isso é possível acessar o banco de dados pelo seguinte endereço:
+
+```bash
+mongodb://{username}:{password}@localhost:{port}
 ```
