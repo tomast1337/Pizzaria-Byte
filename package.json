@@ -1,0 +1,23 @@
+{
+  "name": "pizzaria-on",
+  "version": "1.0.0",
+  "description": "Esse repositório é uma reescrita do projeto feito para a disciplina Projeto software Web em 2022.1 localizado aqui: https://github.com/dsm-cefet-rj/ti-2022-1-grupo_8",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "concurrently --prefix \"{name} -- \" --kill-others --names \"BACKEND⚙️⚙️ ,FRONTEND📱\" \"cd backend && npm run start\" \" cd frontend && npm run start\"",
+    "setup": "((npm i) & (cd backend && npm i) & (cd frontend && npm i)) && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomast1337/Pizzaria-On.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomast1337/Pizzaria-On/issues"
+  },
+  "homepage": "https://github.com/tomast1337/Pizzaria-On#readme",
+  "devDependencies": {
+    "concurrently": "^7.3.0"
+  }
+}
