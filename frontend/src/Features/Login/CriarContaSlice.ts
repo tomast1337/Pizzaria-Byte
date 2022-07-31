@@ -1,11 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice,PayloadAction } from "@reduxjs/toolkit";
 import {RootState} from "../store";
-
-const conferirEmail = (email:string):boolean => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(String(email).toLowerCase());
-} 
+import { conferirEmail } from "./util";
 
 const CriarContaSlice = createSlice({
     name: "criarConta",
