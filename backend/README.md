@@ -16,5 +16,5 @@ MONGODB_PASSWORD={password do banco}
 Opcional para debugar o backend:
 
 ```ini
-DEBUG=express:* & node index.js
+DEBUG=express:*
 ```
