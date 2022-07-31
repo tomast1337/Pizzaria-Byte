@@ -1,14 +1,28 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+    selectConfirmarSenha,
+    selectEmail,
+    selectError,
+    selectNome,
+    selectSenha,
+    setNome,
+    setEmail,
+    setSenha,
+    setConfirmarSenha
+} from "../Features/Login/CriarContaSlice";
 import LandingPageModel from "../Components/LandingPageModel";
 import styles from "./CriarContaPage.module.scss";
 
 const CriarContaPage = () => {
-    const [nome, setNome] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [senha, setSenha] = React.useState("");
-    const [confirmarSenha, setConfirmarSenha] = React.useState("");
-    const [erro, setErro] = React.useState("");
+    const nome = useSelector(selectNome);
+    const email = useSelector(selectEmail);
+    const senha = useSelector(selectSenha);
+    const confirmarSenha = useSelector(selectConfirmarSenha);
+    const erro = useSelector(selectError);
+
+    const dispatcher = useDispatch();
 
     React.useEffect(() => {
         document.title = "Pizzaria ON - Criar Usuário";
@@ -36,7 +50,9 @@ const CriarContaPage = () => {
                         <input
                             id="nome"
                             value={nome}
-                            onChange={(e) => setNome(e.target.value)}
+                            onChange={(e) =>
+                                dispatcher(setNome(e.target.value))
+                            }
                             type="text"
                         />
                     </div>
@@ -45,7 +61,9 @@ const CriarContaPage = () => {
                         <input
                             id="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) =>
+                                dispatcher(setEmail(e.target.value))
+                            }
                             type="email"
                         />
                     </div>
@@ -54,7 +72,9 @@ const CriarContaPage = () => {
                         <input
                             id="senha"
                             value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
+                            onChange={(e) =>
+                                dispatcher(setSenha(e.target.value))
+                            }
                             type="password"
                         />
                     </div>
@@ -63,7 +83,9 @@ const CriarContaPage = () => {
                         <input
                             id="confirmarSenha"
                             value={confirmarSenha}
-                            onChange={(e) => setConfirmarSenha(e.target.value)}
+                            onChange={(e) =>
+                                dispatcher(setConfirmarSenha(e.target.value))
+                            }
                             type="password"
                         />
                     </div>
@@ -84,4 +106,4 @@ export default () => (
     <LandingPageModel>
         <CriarContaPage />
     </LandingPageModel>
-) ;
+);

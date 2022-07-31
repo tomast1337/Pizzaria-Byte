@@ -25,10 +25,12 @@
     }
 
     .erro {
-        color: $brand3;
+        color: $black;
         font-size: 1.5rem;
         font-weight: bold;
         margin-top: 1rem;
+        font-family: $text-alt;
+        min-height: 2.5rem;
     }
 
     form {
