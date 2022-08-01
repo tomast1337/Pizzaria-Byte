@@ -50,6 +50,7 @@ const LoingPage = () => {
                                 dispatcher(setEmail(e.target.value))
                             }
                             type="email"
+                            autoComplete="on"
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -61,6 +62,7 @@ const LoingPage = () => {
                                 dispatcher(setSenha(e.target.value))
                             }
                             type="password"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={styles["form-group"]}>

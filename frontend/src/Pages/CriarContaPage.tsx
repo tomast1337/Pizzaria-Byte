@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     selectConfirmarSenha,
     selectEmail,
@@ -10,7 +10,9 @@ import {
     setNome,
     setEmail,
     setSenha,
-    setConfirmarSenha
+    setConfirmarSenha,
+    criarContaFetch,
+    criarContaData,
 } from "../Features/Login/CriarContaSlice";
 import LandingPageModel from "../Components/LandingPageModel";
 import styles from "./CriarContaPage.module.scss";
@@ -24,12 +26,27 @@ const CriarContaPage = () => {
 
     const dispatcher = useDispatch();
 
+    const navigate = useNavigate();
+
     React.useEffect(() => {
         document.title = "Pizzaria ON - Criar Usuário";
     }, []);
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const data:criarContaData = {
+            nome,
+            email,
+            senha,
+            confirmarSenha,
+        };
+        if (erro === "") {
+            dispatcher(criarContaFetch(data));
+        }
+        if (erro === "") {
+            // redirect to login page
+            navigate("/");
+        }
     }
 
     return (
@@ -54,6 +71,7 @@ const CriarContaPage = () => {
                                 dispatcher(setNome(e.target.value))
                             }
                             type="text"
+                            autoComplete="on"
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -65,6 +83,7 @@ const CriarContaPage = () => {
                                 dispatcher(setEmail(e.target.value))
                             }
                             type="email"
+                            autoComplete="on"
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -76,6 +95,7 @@ const CriarContaPage = () => {
                                 dispatcher(setSenha(e.target.value))
                             }
                             type="password"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={styles["form-group"]}>
@@ -87,6 +107,7 @@ const CriarContaPage = () => {
                                 dispatcher(setConfirmarSenha(e.target.value))
                             }
                             type="password"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={styles["form-group"]}>

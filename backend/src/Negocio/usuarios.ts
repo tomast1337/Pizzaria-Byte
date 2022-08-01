@@ -23,6 +23,8 @@ const usuariosSchema: Schema = new Schema({
     type: {
         type: String,
         required: true,
+        enum: ['admin', 'user', 'cozinheiro', 'entregador'],
+        default: 'user',
     }
 });
 
