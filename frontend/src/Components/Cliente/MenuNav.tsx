@@ -6,7 +6,7 @@ import styles from "./MenuNav.module.scss";
 const MenuNav = () => {
     const QuantidadeItensCarrinho = 5;
 
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
     const menuToggle = () => setIsOpen(!isOpen);
 
     return (
@@ -29,16 +29,19 @@ const MenuNav = () => {
                 }}>
                 <ul >
                     <li>
-                        <Link to="/">Menu</Link>
+                        <Link to="/cliente/menu">Menu</Link>
                     </li>
                     <li>
-                        <Link to="/">Criar Pizza</Link>
+                        <Link to="/cliente/criar-pizza">Criar Pizza</Link>
                     </li>
                     <li>
-                        <Link to="/">Meus Pedidos</Link>
+                        <Link to="/cliente/meus-pedidos">Meus Pedidos</Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/cliente/minha-conta">Minha Conta</Link>
+                    </li>
+                    <li>
+                        <Link to="/cliente/carrinho">
                             Carrinho
                             {
                                 QuantidadeItensCarrinho > 0 ?

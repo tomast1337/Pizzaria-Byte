@@ -27,6 +27,8 @@ export default () => {
                         /cliente/criar-pizza
                         /cliente/meus-pedidos
                         /cliente/carrinho
+                        /cliente/minha-conta
+                        /cliente/finalizar-pedido
                     */}
                     <Route path="/cliente/menu" element={<MenuCliente />} />
                     <Route path="/cliente/criar-pizza" element={<CriarPizza />} />
