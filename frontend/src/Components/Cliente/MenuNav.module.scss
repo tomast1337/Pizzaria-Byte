@@ -1,17 +1,24 @@
 @use '../../global-css-vars.scss' as *;
 
 .menuBar {
-    position: sticky;
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
-    padding: 0 2rem;
-    height: fit-content;
+
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+
+    padding: 0 10px;
+
+    margin: 0 auto;
+
     background-color: $brand2;
-    border: 1px solid $brand1;
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    height: 8vh;
+    
+
+    z-index: 1;
 
     .logo {
         h1 {
@@ -19,6 +26,8 @@
             font-weight: bold;
             color: $brand1;
             font-family: $title;
+            margin-left: 1rem;
+            margin: 0;
         }
     }
 
@@ -28,12 +37,16 @@
         justify-content: center;
         width: 3rem;
         height: 3rem;
-        button{
+        margin-left: auto;
+        margin-right: 5rem;
+
+        button {
             background-color: transparent;
             border: none;
             outline: none;
             width: 100%;
             height: 100%;
+
             .menuToggleLine {
                 width: 100%;
                 height: 5px;
@@ -45,22 +58,31 @@
     }
 }
 
-.menu{
+.menu {
     transition: all 0.3s ease-in-out;
-    position: sticky;
-    margin-top: 1vh;
-    margin-left: auto;
-    margin-right: 0;
+    position: fixed;
+    
     width: fit-content;
     height: fit-content;
+
+    top: 6em;
+    left: auto;
+    right: 10px;
+    bottom: auto;
+
+
+
     background-color: $brand2;
     font-family: $text;
     font-size: 1.2em;
     padding: 2rem;
-    border: 1px solid $brand1;
+
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    ul{
+    
+    z-index: 2;
+
+    ul {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -68,24 +90,28 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        li{
+
+        li {
             padding: 0.5rem;
             width: 100%;
             text-align: center;
             border: 1px solid $brand1;
             margin: 0.5rem 0;
             background-color: $brand1;
-            a{
+
+            a {
                 text-decoration: none;
                 color: $brand2;
                 font-family: $text-alt;
                 font-size: 4em;
                 font-weight: bold;
                 transition: all 0.3s ease-in-out;
-                &:hover{
+
+                &:hover {
                     color: $brand3;
                 }
-                .quantidadeItensCarrinho{
+
+                .quantidadeItensCarrinho {
                     color: $brand1;
                     background-color: $brand2;
                     border-radius: 0.5rem;
@@ -101,4 +127,3 @@
         }
     }
 }
-
