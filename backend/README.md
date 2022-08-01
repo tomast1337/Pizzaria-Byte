@@ -8,7 +8,7 @@ Para rodar o backend e necessário definir essas variáveis no arquivo `.env`:
 
 ```ini
 JWT_SECRET={TOKEN_SECRET}
-MONGODB_URI=mongodb://{username}:{password}@localhost:{port}
+MONGODB_URI=mongodb://{username}:{password}@localhost:{port}/pizzariaOn?authSource=admin
 ```
 
 Opcional para debugar o backend:
@@ -74,5 +74,5 @@ exit
 Apos isso é possível acessar o banco de dados pelo seguinte endereço:
 
 ```bash
-mongodb://{username}:{password}@localhost:{port}/pizzariaOn
+mongodb://{username}:{password}@localhost:{port}/pizzariaOn?authSource=admin
 ```

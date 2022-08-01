@@ -2,11 +2,17 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { usuarios } from '../Negocio'
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const saltRounds: number = 10;
 
-const JWT_SECRET: string = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET: string | null = process.env.JWT_SECRET || null;
 
+if (JWT_SECRET === null) {
+    console.error('JWT_SECRET is not defined in .env');
+    process.exit(1);
+}
 
 const router: express.Router = express.Router();
 
