@@ -35,8 +35,44 @@ Troque {port} pelo porta que deseja usar,
 {username} pelo username do banco de dados,
 {password} pelo password do banco de dados.
 
+Apos isso é necessário ainda criar o banco de dados com o nome `pizzariaOn` no MongoDB.
+
+Com o Docker:
+
+```bash
+docker exec -it mongo mongo --username {username} --password {password}
+
+use pizzariaOn
+
+
+db.createCollection("ingredientes")
+db.createCollection("pedidos")
+db.createCollection("pizzas")
+db.createCollection("produtos")
+db.createCollection("usuarios")
+
+exit
+```
+
+Com o MongoDB Atlas: (Não Tenho Conhecimento sobre o MongoDB Atlas)
+```bash
+mongo --username {username} --password {password}
+
+use pizzariaOn
+
+
+db.createCollection("ingredientes")
+db.createCollection("pedidos")
+db.createCollection("pizzas")
+db.createCollection("produtos")
+db.createCollection("usuarios")
+
+exit
+```
+
+
 Apos isso é possível acessar o banco de dados pelo seguinte endereço:
 
 ```bash
-mongodb://{username}:{password}@localhost:{port}
+mongodb://{username}:{password}@localhost:{port}/pizzariaOn
 ```
