@@ -59,7 +59,7 @@ const MenuNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">Sair</Link>
+                        <Link to="/">Logout</Link>
                     </li>
                 </ul>
             </div>
