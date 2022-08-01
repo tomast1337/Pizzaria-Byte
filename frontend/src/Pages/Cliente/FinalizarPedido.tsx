@@ -14,6 +14,7 @@ const FinalizarPedido = () => {
             <MenuNav />
             <div className={stylesBase.page}>
                 <div className={stylesBase.container}>
+                    <h1>Finalizar Pedido</h1>
                 </div>
             </div>
         </>

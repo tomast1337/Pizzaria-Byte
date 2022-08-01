@@ -1,33 +1,61 @@
 @use '../../global-css-vars.scss' as *;
 
 .page {
+
     width: 100%;
     height: fit-content;
-    min-height: 90vh;
+    min-height: 100vh;
     margin: auto auto;
-    padding: 1rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 10vh 10px;
     background-color: $brand3;
 
     .container {
-        width: 100%;
-        height: fit-content;
-        min-height: 90vh;
+        margin: 10em auto;
+        width: 99%;
         margin: auto auto;
-        padding: 1rem;
-        background-color: $white;
+        padding: 1vh auto;
         color: $black;
         border-radius: 1rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-
-
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);    
+        background-color: $white;    
+        h1 {
+            font-family: $title;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        h2 {
+            font-family: $text;
+            font-size: 2em;
+            text-align: center;
+        }
+    
+        h3 {
+            font-family: $text;
+            font-size: 1.5em;
+        }
+        p{
+            font-family: $text-alt;
+            font-size: 1.5em;
+        }
+    
+    
         // desktop
         @media (min-width: 1025px) {
-            width: 80%;
+            width: 90%;
         }
     }
+}
+
+.left {
+    float: left;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.right {
+    float: right;
+    margin: 0 auto;
+    width: 50%;
 }

@@ -14,6 +14,13 @@ const Carrinho = () => {
             <MenuNav />
             <div className={stylesBase.page}>
                 <div className={stylesBase.container}>
+                    <h1>Carrinho</h1>
+                </div>
+                <div className={stylesBase.container}>
+                    <h2>Itens</h2>
+                    <div className={stylesBase.container}>
+
+                    </div>
                 </div>
             </div>
         </>

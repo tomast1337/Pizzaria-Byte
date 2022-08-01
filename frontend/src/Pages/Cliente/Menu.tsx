@@ -13,7 +13,21 @@ const Menu = () => {
         <>
             <MenuNav />
             <div className={stylesBase.page}>
+                {/* Pizzas Mais Pedidas */}
                 <div className={stylesBase.container}>
+                    <h1>Pizzas Mais Pedidas</h1>
+                </div>
+                {/* Crie sua pizza */}
+                <div className={stylesBase.container}>
+                    <h1>Crie sua pizza</h1>
+                </div>
+                {/* Produtos */}
+                <div className={stylesBase.container}>
+                    <h1>Produtos</h1>
+                </div>
+                {/* Todas as pizzas */}
+                <div className={stylesBase.container}>
+                    <h1>Todas as pizzas</h1>
                 </div>
             </div>
         </>

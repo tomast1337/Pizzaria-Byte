@@ -12,7 +12,10 @@ const MeusPedidos = () => {
     return (
         <>
             <MenuNav />
-            <div className={stylesBase.container}>
+            <div className={stylesBase.page}>
+                <div className={stylesBase.container}>
+                    <h1>Meus Pedidos</h1>
+                </div>
             </div>
         </>
     )
