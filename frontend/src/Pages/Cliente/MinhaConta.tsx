@@ -12,7 +12,9 @@ const MinhaConta = () => {
     return (
         <>
             <MenuNav />
-            <div className={stylesBase.container}>
+            <div className={stylesBase.page}>
+                <div className={stylesBase.container}>
+                </div>
             </div>
         </>
     )
