@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./MenuNav.module.scss";
 
 const MenuNav = () => {
-    const QuantidadeItensCarrinho = 1;
+    const QuantidadeItensCarrinho = 5;
 
     const [isOpen, setIsOpen] = React.useState(true);
     const menuToggle = () => setIsOpen(!isOpen);
@@ -42,7 +42,14 @@ const MenuNav = () => {
                             Carrinho
                             {
                                 QuantidadeItensCarrinho > 0 ?
-                                    <span className={styles.quantidadeItensCarrinho}>{QuantidadeItensCarrinho}</span> :
+                                    <span 
+                                    className={styles.quantidadeItensCarrinho}>
+                                        {QuantidadeItensCarrinho} {
+                                            QuantidadeItensCarrinho > 1 ?
+                                                "itens" : "item"
+                                        }
+                                        </span>
+                                         :
                                     null
 
                             }
