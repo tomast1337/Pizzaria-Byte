@@ -12,6 +12,7 @@ import LandingPageModel from "../Components/LandingPageModel";
 import styles from "./CriarContaPage.module.scss";
 
 
+
 const LoingPage = () => {
     const email = useSelector(selectEmail);
     const senha = useSelector(selectSenha);

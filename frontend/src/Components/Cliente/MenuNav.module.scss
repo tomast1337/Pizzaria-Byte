@@ -1,0 +1,104 @@
+@use '../../global-css-vars.scss' as *;
+
+.menuBar {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: fit-content;
+    background-color: $brand2;
+    border: 1px solid $brand1;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    height: 8vh;
+
+    .logo {
+        h1 {
+            font-size: 5em;
+            font-weight: bold;
+            color: $brand1;
+            font-family: $title;
+        }
+    }
+
+    .menuButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        button{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            .menuToggleLine {
+                width: 100%;
+                height: 5px;
+                background-color: $brand1;
+                margin: 8px auto;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+}
+
+.menu{
+    transition: all 0.3s ease-in-out;
+    position: sticky;
+    margin-top: 1vh;
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
+    height: fit-content;
+    background-color: $brand2;
+    font-family: $text;
+    font-size: 1.2em;
+    padding: 2rem;
+    border: 1px solid $brand1;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    ul{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li{
+            padding: 0.5rem;
+            width: 100%;
+            text-align: center;
+            border: 1px solid $brand1;
+            margin: 0.5rem 0;
+            background-color: $brand1;
+            a{
+                text-decoration: none;
+                color: $brand2;
+                font-family: $text-alt;
+                font-size: 4em;
+                font-weight: bold;
+                transition: all 0.3s ease-in-out;
+                &:hover{
+                    color: $brand3;
+                }
+                .quantidadeItensCarrinho{
+                    color: $brand1;
+                    background-color: $brand2;
+                    border-radius: 0.5rem;
+                    font-family: $text;
+                    width: fit-content;
+                    height: fit-content;
+                    padding: 0.3rem;
+                    font-size: 1em;
+                    position: static;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
+
