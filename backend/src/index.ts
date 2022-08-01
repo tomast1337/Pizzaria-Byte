@@ -24,7 +24,7 @@ const main = async () => {
     server.use(express.json());
 
     //rotas 
-    server.use('/', rotas);
+    server.use('/api', rotas);
 
     // 404 handler
     server.use((req, res, next) => {
