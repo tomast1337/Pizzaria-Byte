@@ -5,6 +5,11 @@ import MenuCliente from "./Pages/Cliente/Menu";
 import { store } from "./Features/store";
 import CriarContaPage from "./Pages/CriarContaPage";
 import LoingPage from "./Pages/LoginPage";
+import CriarPizza from "./Pages/Cliente/CriarPizza";
+import Carrinho from "./Pages/Cliente/Carrinho";
+import MeusPedidos from "./Pages/Cliente/MeusPedidos";
+import MinhaConta from "./Pages/Cliente/MinhaConta";
+import FinalizarPedido from "./Pages/Cliente/FinalizarPedido";
 
 export default () => {
     return (
@@ -24,9 +29,11 @@ export default () => {
                         /cliente/carrinho
                     */}
                     <Route path="/cliente/menu" element={<MenuCliente />} />
-                    <Route path="/cliente/criar-pizza" element={<LoingPage />} />
-                    <Route path="/cliente/meus-pedidos" element={<LoingPage />} />
-                    <Route path="/cliente/carrinho" element={<LoingPage />} />
+                    <Route path="/cliente/criar-pizza" element={<CriarPizza />} />
+                    <Route path="/cliente/meus-pedidos" element={<MeusPedidos />} />
+                    <Route path="/cliente/carrinho" element={<Carrinho />} />
+                    <Route path="/cliente/minha-conta" element={<MinhaConta />} />
+                    <Route path="/cliente/finalizar-pedido" element={<FinalizarPedido />} />
 
                     {/*Admin*/}
 
