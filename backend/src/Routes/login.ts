@@ -5,7 +5,7 @@ import { usuarios } from '../Negocio'
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const saltRounds: number = 10;
+const saltRounds: number = process.env.SALT_ROUNDS as unknown as number || 10;
 
 const JWT_SECRET: string | null = process.env.JWT_SECRET || null;
 
@@ -43,8 +43,7 @@ router.post('/',
                 );
                 return res.status(200).json({ token });
             }
-        }
-        );
+        });
     }
 );
 
