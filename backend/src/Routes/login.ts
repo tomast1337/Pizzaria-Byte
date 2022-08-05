@@ -26,15 +26,25 @@ router.post('/',
             return res.status(401).json({ error: "Usuário não cadastrado", });
         }
 
-        const isValid = await bcrypt.compare(password, user.password);
-
-        if (!isValid) {
-            return res.status(401).json({ error: "Senha incorreta", });
+        await bcrypt.compare(password, user.senha, (err: any, result: any) => {
+            if (err) {
+                return res.status(401).json({ error: "Senha inválida", });
+            }
+            if (result) {
+                const token = jwt.sign(
+                    {
+                        id: user._id,
+                        type: user.type,
+                    },
+                    JWT_SECRET,
+                    {
+                        expiresIn: '1h'
+                    }
+                );
+                return res.status(200).json({ token });
+            }
         }
-
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-
-        res.status(200).json({ token });
+        );
     }
 );
 
