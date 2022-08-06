@@ -7,7 +7,7 @@ dotenv.config();
 
 const saltRounds: number = process.env.SALT_ROUNDS as unknown as number || 10;
 
-const JWT_SECRET: string | null = process.env.JWT_SECRET || null;
+const JWT_SECRET: string = process.env.JWT_SECRET || "null";
 
 if (JWT_SECRET === null) {
     console.error('JWT_SECRET is not defined in .env');
@@ -35,6 +35,7 @@ router.post('/',
                     {
                         id: user._id,
                         type: user.type,
+                        email: user.email,
                     },
                     JWT_SECRET,
                     {
@@ -81,6 +82,21 @@ router.post('/register',
             }
             );
         });
+    }
+);
+
+router.post('/verify',
+    async (req: any, res: any) => {
+        const { token } = req.body;
+
+        if (!token) {
+            return res.status(400).json({ error: "Token não informado", });
+        }
+        const decoded = jwt.verify(token, JWT_SECRET);
+        if (!decoded) {
+            return res.status(401).json({ error: "Token inválido", });
+        }
+        return res.status(200).json({ message: "Token válido", });
     }
 );
 
