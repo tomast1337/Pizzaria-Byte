@@ -67,6 +67,9 @@ const LoginSlice = createSlice({
         setSenha: (state, action) => {
             state.senha = action.payload;
         },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: {
         [logar.fulfilled]: (state, action: PayloadAction<LoginData>) => {
@@ -85,6 +88,7 @@ const LoginSlice = createSlice({
 export const {
     setEmail,
     setSenha,
+    setError,
 } = LoginSlice.actions;
 
 

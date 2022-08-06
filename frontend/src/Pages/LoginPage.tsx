@@ -8,6 +8,7 @@ import {
     setSenha,
     logar,
     LoginData,
+    setError,
 } from "../Features/Login/LoginSlice";
 import { Link, useNavigate } from "react-router-dom";
 import LandingPageModel from "../Components/LandingPageModel";
@@ -46,8 +47,14 @@ const LoingPage = () => {
 
         if (token) {
             const user = JSON.parse(atob(token.split(".")[1]));
-            const redirect: string = relation[user.type];
-            navigate(redirect);
+            // verificar se o token ainda é válido
+            if (user.exp > Date.now() / 1000) {
+                const redirect: string = relation[user.type];
+                navigate(redirect);
+            } else {
+                localStorage.removeItem("token");
+                dispatcher(setError("Faça login novamente"));
+            }
         }
     }
 
@@ -61,7 +68,7 @@ const LoingPage = () => {
             dispatcher(logar(loginData));
             setTimeout(() => { // apenas para efeito dramático
                 tokenRedirect();
-            } , 500);
+            }, 500);
         } else {
             return;
         }
