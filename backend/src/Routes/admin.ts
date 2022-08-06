@@ -207,7 +207,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
 });
 
 // Rota para excluir um usuário pelo email
-router.delete('/user/:email', async (req: any, res: any) => {
+router.delete('/del/user/:email', async (req: any, res: any) => {
     const { email } = req.params;
 
     const user = await usuarios.findOne({ email });
@@ -220,7 +220,7 @@ router.delete('/user/:email', async (req: any, res: any) => {
 });
 
 // Rota para excluir um ingrediente pelo id
-router.delete('/ingrediente/:id', async (req: any, res: any) => {
+router.delete('/del/ingrediente/:id', async (req: any, res: any) => {
     const { id } = req.params;
 
     const ingrediente = await ingredientes.findById(id);
@@ -231,7 +231,7 @@ router.delete('/ingrediente/:id', async (req: any, res: any) => {
 });
 
 // Rota para excluir uma pizza pelo id
-router.delete('/pizza/:id', async (req: any, res: any) => {
+router.delete('/del/pizza/:id', async (req: any, res: any) => {
     const { id } = req.params;
 
     const pizza = await pizzas.findById(id);
@@ -245,7 +245,7 @@ router.delete('/pizza/:id', async (req: any, res: any) => {
 });
 
 // Rota para excluir um produto pelo id
-router.delete('/produto/:id', async (req: any, res: any) => {
+router.delete('/del/produto/:id', async (req: any, res: any) => {
     const { id } = req.params;
 
     const produto = await produtos.findById(id);
