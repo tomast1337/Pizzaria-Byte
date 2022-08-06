@@ -6,6 +6,7 @@ dotenv.config();
 export type tokenData = {
     id: string;
     type: string;
+    email: string;
 }
 
 // middleware para verificar se o token é valido
