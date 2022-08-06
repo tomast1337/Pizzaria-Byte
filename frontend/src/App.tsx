@@ -23,6 +23,19 @@ import GerirProdutosPage from "./Pages/Admin/GerirProdutosPage";
 import GerirUserPage from "./Pages/Admin/GerirUserPage";
 
 export default () => {
+    const [token, setToken] = React.useState(null);
+    const [userType, setUserType] = React.useState("");
+
+    React.useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setToken(token);
+            const user = JSON.parse(atob(token.split(".")[1]));
+            setUserType(user.type);
+        }
+    }, []);
+
+
     return (
         <Provider store={store}>
             <BrowserRouter basename={"/"}>
@@ -41,12 +54,14 @@ export default () => {
                         /cliente/minha-conta
                         /cliente/finalizar-pedido
                     */}
+
                     <Route path="/cliente/menu" element={<MenuCliente />} />
                     <Route path="/cliente/criar-pizza" element={<CriarPizza />} />
                     <Route path="/cliente/meus-pedidos" element={<MeusPedidos />} />
                     <Route path="/cliente/carrinho" element={<Carrinho />} />
                     <Route path="/cliente/minha-conta" element={<MinhaConta />} />
                     <Route path="/cliente/finalizar-pedido" element={<FinalizarPedido />} />
+
 
                     {/*Admin*
                         /admin/menu-admin
@@ -55,13 +70,16 @@ export default () => {
                         /admin/gerir-produtos
                         /admin/gerir-usuarios
                     */}
+
                     <Route path="/admin/menu" element={<MenuAdminPage />} />
                     <Route path="/admin/gerir-pizzas" element={<GerirPizzasPage />} />
                     <Route path="/admin/gerir-ingredientes" element={<GerirIngredientesPage />} />
                     <Route path="/admin/gerir-produtos" element={<GerirProdutosPage />} />
                     <Route path="/admin/gerir-usuarios" element={<GerirUserPage />} />
 
+
                     {/*Cozinheiro*/}
+
 
                     {/*Entregador*/}
 

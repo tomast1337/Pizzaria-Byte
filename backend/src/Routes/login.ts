@@ -27,9 +27,6 @@ router.post('/',
         }
 
         await bcrypt.compare(password, user.senha, (err: any, result: any) => {
-            if (err) {
-                return res.status(401).json({ error: "Senha inválida", });
-            }
             if (result) {
                 const token = jwt.sign(
                     {
@@ -43,6 +40,8 @@ router.post('/',
                     }
                 );
                 return res.status(200).json({ token });
+            }else{
+                return res.status(401).json({ error: "Email ou Senha inválidos", });
             }
         });
     }

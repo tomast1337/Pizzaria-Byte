@@ -16,6 +16,9 @@ import {
     setImagem,
     setDescricao,
     setPesoPorcao,
+    IngredienteData,
+    SelectIdSelecionado,
+    submit,
 } from "../../Features/Admin/GerirIngredientesSlice";
 
 const GerirIngredientesPage = () => {
@@ -30,13 +33,21 @@ const GerirIngredientesPage = () => {
     const imagem = useSelector(SelectImagem);
     const descricao = useSelector(SelectDescricao);
     const pesoPorcao = useSelector(SelectPesoPorcao);
+    const _idSelecionado = useSelector(SelectIdSelecionado);
 
-
-    const [imagemPreview,setImagemPreview] = React.useState("");
+    const [imagemPreview, setImagemPreview] = React.useState("");
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        const ingredienteDatar: IngredienteData = {
+            _idSelecionado: _idSelecionado,
+            nome: nome,
+            preco: preco,
+            imagem: imagem,
+            descricao: descricao,
+            pesoPorcao: pesoPorcao,
+        } as IngredienteData;
+        dispatch(submit(ingredienteDatar));
     }
 
     React.useEffect(() => {
@@ -149,7 +160,7 @@ const GerirIngredientesPage = () => {
                             <button type="submit">Alterar</button>
                             <button type="reset">Limpar</button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

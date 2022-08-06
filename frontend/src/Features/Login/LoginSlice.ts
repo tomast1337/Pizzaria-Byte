@@ -30,19 +30,19 @@ export const logar = createAsyncThunk<
             {
                 email: data.email,
                 password: data.senha,
-            });
-        console.log(response);
+            }
+        );
         return response.data;
     }
     catch (error: any) {
         if (error.response) {
-            console.log(error.response.data);
             return rejectWithValue(`${error.response.data.error}`);
         }
         else if (error.request) {
-            return rejectWithValue("Erro no servidor");
+            return rejectWithValue("Erro ao se conectar ao servidor");
         }
         else {
+            console.log(error);
             return rejectWithValue("Erro desconhecido");
         }
     }
@@ -74,10 +74,11 @@ const LoginSlice = createSlice({
     extraReducers: {
         [logar.fulfilled]: (state, action: PayloadAction<LoginData>) => {
             localStorage.setItem("token", action.payload.token);
+            state.email = "";
+            state.senha = "";
         },
         [logar.rejected]: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
-            console.log(state.error);
         },
         [logar.pending]: (state) => {
             state.error = "Carregando...";

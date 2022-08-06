@@ -43,19 +43,21 @@ const LoingPage = () => {
             "entregador": "/entregador/menu",
         };
 
-        const token = localStorage.getItem("token");
+        setTimeout(() => {
+            const token = localStorage.getItem("token");
 
-        if (token) {
-            const user = JSON.parse(atob(token.split(".")[1]));
-            // verificar se o token ainda é válido
-            if (user.exp > Date.now() / 1000) {
-                const redirect: string = relation[user.type];
-                navigate(redirect);
-            } else {
-                localStorage.removeItem("token");
-                dispatcher(setError("Faça login novamente"));
+            if (token) {
+                const user = JSON.parse(atob(token.split(".")[1]));
+                // verificar se o token ainda é válido
+                if (user.exp > Date.now() / 1000) {
+                    const redirect: string = relation[user.type];
+                    navigate(redirect);
+                } else {
+                    localStorage.removeItem("token");
+                    dispatcher(setError("Faça login novamente"));
+                }
             }
-        }
+        }, 1000);
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,9 +68,7 @@ const LoingPage = () => {
         };
         if (erro === "") {
             dispatcher(logar(loginData));
-            setTimeout(() => { // apenas para efeito dramático
-                tokenRedirect();
-            }, 500);
+            tokenRedirect();
         } else {
             return;
         }
