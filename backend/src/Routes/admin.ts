@@ -18,15 +18,14 @@ const upload = formidable({
     uploadDir: './public/uploads',
     multiples: true,
     keepExtensions: true,
-    maxFileSize: 10 * 1024 * 1024,
-    maxfields: 1000,
+    maxFileSize: 10 * 1024 * 1024    
 });
 
 // Rota para o admin ver as informações de um usuário pelo email
 router.get('/user/:email', async (req: any, res: any) => {
     const { email } = req.params;
 
-    const user = await usuarios.findOne({ email });
+    const user:any = await usuarios.findOne({ email });
 
     if (!user) {
         return res.status(401).json({ error: "Usuário não cadastrado", });
@@ -45,9 +44,9 @@ router.get('/pedidos/:email', async (req: any, res: any) => {
         return res.status(401).json({ error: "Usuário não cadastrado", });
     }
 
-    const pedidos = await pedidos.find({ email: user.email });
+    const pedidos_found:any = await pedidos.find({ email: user.email });
 
-    return res.status(200).json(pedidos);
+    return res.status(200).json(pedidos_found);
 });
 
 // Rota para uma admin alterar o tipo de usuário pelo email
@@ -84,7 +83,7 @@ enum tiposPaths {
     produto = "./assets/imgs/produtos/",
 }
 
-const moveFiles = (tipo: tiposPaths, files: any, nome: string) => {
+const moveFiles = (tipo: tiposPaths, imagem: any, nome: string) => {
 
     // verifica se os diretórios existem e cria se não existirem
     if (!fs.existsSync(tipo)) {
@@ -95,7 +94,7 @@ const moveFiles = (tipo: tiposPaths, files: any, nome: string) => {
     const path = tipo.toString();
     let newPath = `${path}${nome}.${imagem.path.split(".").at(-1)}`;
     try {
-        fs.renameSync(files.imagem.path, newPath);
+        fs.renameSync(imagem.path, newPath);
     } catch (error) {
         console.log(error);
     }
@@ -120,9 +119,9 @@ router.post('/ingrediente', upload, async (req: any, res: any) => {
         ingrediente.descricao = descricao;
         ingrediente.pesoPorcao = pesoPorcao;
         if (checkFiles(files)) {
-            ingrediente.imagem = moveFiles(tiposPaths.ingrediente, files, nome);
+            ingrediente.imagem = moveFiles(tiposPaths.ingrediente, files.imagem, nome);
         }
-        await ingredientes.save(ingrediente);
+        await ingrediente.save();
         return res.status(200).json(ingrediente);
     } else {
         // Novo ingrediente
@@ -131,7 +130,7 @@ router.post('/ingrediente', upload, async (req: any, res: any) => {
             preco,
             descricao,
             pesoPorcao,
-            imagem: moveFiles(tiposPaths.ingrediente, files, nome),
+            imagem: moveFiles(tiposPaths.ingrediente, files.imagem, nome)
         });
         await ingredientes.create(novoIngrediente);
         return res.status(200).json(novoIngrediente);
@@ -156,9 +155,9 @@ router.post('/pizza', upload, async (req: any, res: any) => {
         pizza.ingredientes = ingredientes;
 
         if (checkFiles(files)) {
-            pizza.imagem = moveFiles(tiposPaths.pizza, files, nome);
+            pizza.imagem = moveFiles(tiposPaths.pizza, files.imagem, nome);
         }
-        await pizzas.save(pizza);
+        await pizza.save();
         return res.status(200).json(pizza);
     } else {
         // Novo pizza
@@ -166,7 +165,7 @@ router.post('/pizza', upload, async (req: any, res: any) => {
             nome,
             descricao,
             ingredientes,
-            imagem: moveFiles(tiposPaths.pizza, files, nome),
+            imagem: moveFiles(tiposPaths.pizza, files.imagem, nome)
         });
         await pizzas.create(novaPizza);
         return res.status(200).json(novaPizza);
@@ -192,7 +191,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
         if (checkFiles(files)) {
             produto.imagem = moveFiles(tiposPaths.produto, files, nome);
         }
-        await produtos.save(produto);
+        await produto.save();
         return res.status(200).json(produto);
     } else {
         // Novo produto
@@ -264,3 +263,5 @@ router.get('/relatorio/:dataInicio/:dataFim', async (req: any, res: any) => {
     const { dataInicio, dataFim } = req.params;
 
 });
+
+export default router;
