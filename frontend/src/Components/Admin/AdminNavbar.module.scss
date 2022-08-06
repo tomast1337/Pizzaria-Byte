@@ -1,0 +1,129 @@
+@use '../../global-css-vars.scss' as *;
+
+.menuBar {
+    display: flex;
+    
+    align-items: center;
+
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+
+    padding: 0 10px;
+
+    margin: 0 auto;
+
+    background-color: $admin2;
+    border-radius: 0.5rem;
+    
+
+    z-index: 1;
+
+    .logo {
+        h1 {
+            font-size: 5em;
+            font-weight: bold;
+            color: $admin1;
+            font-family: $title;
+            margin-left: 1rem;
+            margin: 0;
+        }
+    }
+
+    .menuButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        margin-left: auto;
+        margin-right: 5rem;
+
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+
+            .menuToggleLine {
+                width: 100%;
+                height: 5px;
+                background-color: $admin1;
+                margin: 8px auto;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+}
+
+.menu {
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    
+    width: fit-content;
+    height: fit-content;
+
+    top: 6em;
+    left: auto;
+    right: 10px;
+    bottom: auto;
+
+
+
+    background-color: $admin2;
+    font-family: $text;
+    font-size: 1.2em;
+    padding: 2rem;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    
+    z-index: 2;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 0.5rem;
+            width: 100%;
+            text-align: center;
+            border: 1px solid $admin1;
+            margin: 0.5rem 0;
+            background-color: $admin1;
+
+            a {
+                text-decoration: none;
+                color: $admin2;
+                font-family: $text-alt;
+                font-size: 4em;
+                font-weight: bold;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    color: $admin3;
+                }
+
+                .quantidadeItensCarrinho {
+                    color: $admin1;
+                    background-color: $admin2;
+                    border-radius: 0.5rem;
+                    font-family: $text;
+                    width: fit-content;
+                    height: fit-content;
+                    padding: 0.3rem 0.5rem;
+                    font-size: .3em;
+                    position: static;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
