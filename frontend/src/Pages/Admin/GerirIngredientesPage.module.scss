@@ -1,0 +1,186 @@
+@use '../../global-css-vars.scss' as *;
+
+.page {
+    width: 100%;
+    height: fit-content;
+    min-height: 100vh;
+    margin: auto auto;
+    padding: 10vh 10px;
+    background-color: $admin1;
+
+    .erro {
+        color: $alert-danger;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        font-family: $text-alt;
+        min-height: 2.5rem;
+    }
+
+    .container {
+        box-shadow: 0 0 .2rem $black;
+        background-color: $white;
+        margin: 10px auto;
+        border-radius: 1rem;
+
+        h1 {
+            font-family: $title;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: $text;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: $text;
+            font-size: 1.5em;
+        }
+
+        p {
+            font-family: $text-alt;
+            font-size: 1.5em;
+        }
+
+        // desktop
+        @media (min-width: 1025px) {
+            width: 80%;
+        }
+    }
+
+    form {
+        font-family: $text;
+        width: 100%;
+        margin: auto;
+
+
+        .form-group {
+            width: 90%;
+            margin: 1rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            input {
+                display: block;
+                width: 90%;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+            }
+
+            input[type="file"] {
+                width: 90%;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+            }
+
+            label {
+                font-size: 1.5rem;
+                display: block;
+                width: 100%;
+                margin-bottom: .5rem;
+            }
+
+            textarea {
+                display: block;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+                width: 90%;
+                height: 200px;
+                resize: none;
+
+                &:focus {
+                    outline: none;
+                    border-color: $brand2;
+                }
+
+                //scrollbar
+                ::-webkit-scrollbar {
+                    width: 10px;
+                }
+
+                ::-webkit-scrollbar-track {
+                    background: $brand1;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: $brand2;
+                }
+            }
+
+            button {
+                border-radius: .5rem;
+                padding: 0.5rem;
+                font-size: 2rem;
+                color: $white;
+                display: block;
+                width: fit-content;
+                margin: 5px auto;
+                font-family: $text  !important;
+                font-weight: bold;
+
+                &[type="submit"] {
+                    border: 1px solid $alert-success;
+                    background-color: $alert-success;
+                }
+
+                &[type="reset"] {
+                    border: 1px solid $alert-danger;
+                    background-color: $alert-danger;
+                }
+            }
+
+            //image preview
+            img {
+                width: 50%;
+                height: auto;
+                border-radius: .5rem;
+                box-shadow: 0 0 .2rem $black;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+            }
+
+            .empty-img {
+                width: 200px;
+                height: 200px;
+                border-radius: .5rem;
+                box-shadow: 0 0 .2rem $black;
+                background-color: $white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5rem;
+
+                h3 {
+                    font-family: $text;
+                    color: $brand1;
+                    text-align: center;
+                }
+            }
+        }
+
+    }
+}
