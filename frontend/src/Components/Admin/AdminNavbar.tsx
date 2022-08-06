@@ -1,19 +1,24 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./AdminNavbar.module.scss";
 
 const AdminNavbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const menuToggle = () => setIsOpen(!isOpen);
+
+    const navigate = useNavigate();
+
     return (
         <>
             <nav className={styles.menuBar}>
                 <div className={styles.logo}>
-                    <h1>Pizzaria ON</h1>
+                    <h1>Pizzaria ON - Admin</h1>
                 </div>
                 <div className={styles.menuButton}>
                     <button onClick={menuToggle}>
+                        <div className={styles.menuToggleLine}></div>
+                        <div className={styles.menuToggleLine}></div>
                         <div className={styles.menuToggleLine}></div>
                         <div className={styles.menuToggleLine}></div>
                         <div className={styles.menuToggleLine}></div>
@@ -41,7 +46,14 @@ const AdminNavbar = () => {
                         <Link to="/admin/gerir-usuarios">Gerir Usuarios</Link>
                     </li>
                     <li>
-                        <Link to="/">Logout</Link>
+                        <button 
+                            onClick={() => {
+                                // remover o token do localStorage
+                                localStorage.removeItem("token");
+                                // redirecionar para a página de login
+                                navigate("/");
+                            }}>
+                            Logout</button>
                     </li>
                 </ul>
             </div>

@@ -2,7 +2,7 @@
 
 .menuBar {
     display: flex;
-    
+
     align-items: center;
 
     position: fixed;
@@ -16,7 +16,7 @@
 
     background-color: $admin2;
     border-radius: 0.5rem;
-    
+
 
     z-index: 1;
 
@@ -25,7 +25,7 @@
             font-size: 5em;
             font-weight: bold;
             color: $admin1;
-            font-family: $title;
+            font-family: $text-alt;
             margin-left: 1rem;
             margin: 0;
         }
@@ -35,8 +35,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 3rem;
-        height: 3rem;
+        width: 5rem;
+        height: 5rem;
         margin-left: auto;
         margin-right: 5rem;
 
@@ -61,7 +61,7 @@
 .menu {
     transition: all 0.3s ease-in-out;
     position: fixed;
-    
+
     width: fit-content;
     height: fit-content;
 
@@ -79,7 +79,7 @@
 
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    
+
     z-index: 2;
 
     ul {
@@ -99,7 +99,8 @@
             margin: 0.5rem 0;
             background-color: $admin1;
 
-            a {
+            a,
+            button {
                 text-decoration: none;
                 color: $admin2;
                 font-family: $text-alt;
@@ -123,6 +124,11 @@
                     position: static;
                     margin-left: 1rem;
                 }
+
+                // remove button decorations
+                background-color: transparent;
+                border: none;
+                outline: none;
             }
         }
     }
