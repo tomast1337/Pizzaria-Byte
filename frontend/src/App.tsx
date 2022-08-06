@@ -55,7 +55,7 @@ export default () => {
                         /admin/gerir-produtos
                         /admin/gerir-usuarios
                     */}
-                    <Route path="/admin/menu-admin" element={<MenuAdminPage />} />
+                    <Route path="/admin/menu" element={<MenuAdminPage />} />
                     <Route path="/admin/gerir-pizzas" element={<GerirPizzasPage />} />
                     <Route path="/admin/gerir-ingredientes" element={<GerirIngredientesPage />} />
                     <Route path="/admin/gerir-produtos" element={<GerirProdutosPage />} />

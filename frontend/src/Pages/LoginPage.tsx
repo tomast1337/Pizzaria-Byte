@@ -6,8 +6,10 @@ import {
     selectError,
     setEmail,
     setSenha,
+    logar,
+    LoginData,
 } from "../Features/Login/LoginSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LandingPageModel from "../Components/LandingPageModel";
 import styles from "./CriarContaPage.module.scss";
 
@@ -19,16 +21,56 @@ const LoingPage = () => {
     const erro = useSelector(selectError);
 
     const dispatcher = useDispatch();
-
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         document.title = "Pizzaria ON - Login";
     }, []);
 
-    const handleSubmit = () => {
+    const tokenRedirect = () => {
+        /*
+           redirecionar para a pagina dependendo do tipo de usuário
+           admin = /admin/menu
+           user = /cliente/menu
+           cozinheiro = /cozinheiro/menu
+           entregador = /entregador/menu
+        */
+        const relation: Record<string, string> = {
+            "admin": "/admin/menu",
+            "user": "/cliente/menu",
+            "cozinheiro": "/cozinheiro/menu",
+            "entregador": "/entregador/menu",
+        };
 
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            const user = JSON.parse(atob(token.split(".")[1]));
+            const redirect: string = relation[user.type];
+            navigate(redirect);
+        }
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const loginData: LoginData = {
+            email,
+            senha,
+        };
+        if (erro === "") {
+            dispatcher(logar(loginData));
+            // sleep for half a second
+            setTimeout(() => {
+                tokenRedirect();
+            } , 500);
+        } else {
+            return;
+        }
+    }
+    React.useEffect(() => {
+        // caso o usuário já tenha feito o login, redirecionar para a página correta
+        tokenRedirect();
+    }, []);
     return (
         <div className={styles.page}>
             <div className={styles.logo}>
@@ -67,7 +109,9 @@ const LoingPage = () => {
                         />
                     </div>
                     <div className={styles["form-group"]}>
-                        <button type="submit">Entrar</button>
+                        <button
+                            onClick={handleSubmit}
+                            type="submit">Entrar</button>
                     </div>
                     <div className={styles["form-group"]}>
                         <Link to="/criar-conta">Criar Conta</Link>
