@@ -15,6 +15,10 @@ const ingredientesSchema: Schema = new Schema({
         type: Number,
         required: true,
     },
+    imagem: {
+        type: String,
+        required: true,
+    },
     descricao: {
         type: String,
         required: true,

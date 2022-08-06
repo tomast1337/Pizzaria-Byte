@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 
-
 const usuariosSchema: Schema = new Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
