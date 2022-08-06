@@ -59,8 +59,7 @@ const LoingPage = () => {
         };
         if (erro === "") {
             dispatcher(logar(loginData));
-            // sleep for half a second
-            setTimeout(() => {
+            setTimeout(() => { // apenas para efeito dramático
                 tokenRedirect();
             } , 500);
         } else {

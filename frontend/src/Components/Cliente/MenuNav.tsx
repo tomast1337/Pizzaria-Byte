@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./MenuNav.module.scss";
 
 const MenuNav = () => {
@@ -8,6 +8,7 @@ const MenuNav = () => {
 
     const [isOpen, setIsOpen] = React.useState(false);
     const menuToggle = () => setIsOpen(!isOpen);
+    const navigate = useNavigate();
 
     return (
         <>
@@ -45,21 +46,28 @@ const MenuNav = () => {
                             Carrinho
                             {
                                 QuantidadeItensCarrinho > 0 ?
-                                    <span 
-                                    className={styles.quantidadeItensCarrinho}>
+                                    <span
+                                        className={styles.quantidadeItensCarrinho}>
                                         {QuantidadeItensCarrinho} {
                                             QuantidadeItensCarrinho > 1 ?
                                                 "itens" : "item"
                                         }
-                                        </span>
-                                         :
+                                    </span>
+                                    :
                                     null
 
                             }
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">Logout</Link>
+                        <button 
+                            onClick={() => {
+                                // remover o token do localStorage
+                                localStorage.removeItem("token");
+                                // redirecionar para a página de login
+                                navigate("/");
+                            }}>
+                            Logout</button>
                     </li>
                 </ul>
             </div>

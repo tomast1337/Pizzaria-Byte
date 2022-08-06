@@ -2,7 +2,7 @@
 
 .menuBar {
     display: flex;
-    
+
     align-items: center;
 
     position: fixed;
@@ -16,7 +16,7 @@
 
     background-color: $brand2;
     border-radius: 0.5rem;
-    
+
 
     z-index: 1;
 
@@ -61,7 +61,7 @@
 .menu {
     transition: all 0.3s ease-in-out;
     position: fixed;
-    
+
     width: fit-content;
     height: fit-content;
 
@@ -79,7 +79,7 @@
 
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    
+
     z-index: 2;
 
     ul {
@@ -99,7 +99,8 @@
             margin: 0.5rem 0;
             background-color: $brand1;
 
-            a {
+            a,
+            button {
                 text-decoration: none;
                 color: $brand2;
                 font-family: $text-alt;
@@ -123,6 +124,12 @@
                     position: static;
                     margin-left: 1rem;
                 }
+
+                // remove button decorations
+                background-color: transparent;
+                border: none;
+                outline: none;
+
             }
         }
     }
