@@ -1,4 +1,4 @@
-# Pizzaria-On
+# Pizzaria-Byte
 
 Esse repositório é uma reescrita do projeto feito para a disciplina Projeto software Web em 2022.1 localizado aqui: https://github.com/dsm-cefet-rj/ti-2022-1-grupo_8
 
