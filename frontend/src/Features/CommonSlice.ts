@@ -3,16 +3,16 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { BACKEND_URL } from '../variables';
 
-export type ingredienteData = {
+export type IngredienteType = {
     _id: string;
     nome: string;
     preco: number;
-    imagem: File;
+    imagem: string;
     descricao: string;
     pesoPorcao: number;
 };
 
-export type pizzaData = {
+export type PizzaType = {
     _id: string;
     nome: string;
     descricao: string;
@@ -20,7 +20,7 @@ export type pizzaData = {
     ingredientes: string[];
 };
 
-export type produtoData = {
+export type ProdutoType = {
     _id: string;
     nome: string;
     descricao: string;
@@ -29,7 +29,7 @@ export type produtoData = {
 };
 
 export const fetchIngredientes = createAsyncThunk<
-    ingredienteData[],
+    IngredienteType[],
     undefined,
     {
         rejectValue: string;
@@ -57,7 +57,7 @@ export const fetchIngredientes = createAsyncThunk<
 });
 
 export const fetchPizzas = createAsyncThunk<
-    pizzaData[],
+    PizzaType[],
     undefined,
     {
         rejectValue: string;
@@ -85,7 +85,7 @@ export const fetchPizzas = createAsyncThunk<
 });
 
 export const fetchProdutos = createAsyncThunk<
-    produtoData[],
+    ProdutoType[],
     undefined,
     {
         rejectValue: string;
@@ -115,11 +115,11 @@ export const fetchProdutos = createAsyncThunk<
 const CommonSlice = createSlice({
     name: 'common',
     initialState: {
-        ingredientes: [] as ingredienteData[],
+        ingredientes: [] as IngredienteType[],
         carregandoIngredientes: true,
-        pizzas: [] as pizzaData[],
+        pizzas: [] as PizzaType[],
         carregandoPizzas: true,
-        produtos: [] as produtoData[],
+        produtos: [] as ProdutoType[],
         carregandoProdutos: true,
         erro: '' as string
     },
@@ -132,7 +132,7 @@ const CommonSlice = createSlice({
         /*------------------------------------fetchIngredientes------------------------------------*/
         [fetchIngredientes.fulfilled]: (
             state,
-            action: PayloadAction<ingredienteData[]>
+            action: PayloadAction<IngredienteType[]>
         ) => {
             state.ingredientes = action.payload;
             state.carregandoIngredientes = false;
@@ -149,7 +149,7 @@ const CommonSlice = createSlice({
         /*------------------------------------fetchPizzas------------------------------------*/
         [fetchPizzas.fulfilled]: (
             state,
-            action: PayloadAction<pizzaData[]>
+            action: PayloadAction<PizzaType[]>
         ) => {
             state.pizzas = action.payload;
             state.carregandoPizzas = false;
@@ -163,7 +163,7 @@ const CommonSlice = createSlice({
         /*------------------------------------fetchProdutos------------------------------------*/
         [fetchProdutos.fulfilled]: (
             state,
-            action: PayloadAction<produtoData[]>
+            action: PayloadAction<ProdutoType[]>
         ) => {
             state.produtos = action.payload;
             state.carregandoProdutos = false;
@@ -177,9 +177,14 @@ const CommonSlice = createSlice({
     }
 });
 
-export const selectIngredientes = (state: RootState) =>
+export const SelectIngredientes = (state: RootState) =>
     state.common.ingredientes;
-export const selectPizzas = (state: RootState) => state.common.pizzas;
-export const selectProdutos = (state: RootState) => state.common.produtos;
+export const SelectPizzas = (state: RootState) => state.common.pizzas;
+export const SelectProdutos = (state: RootState) => state.common.produtos;
+
+export const SelectCarregandoIngredientes = (state: RootState) => state.common.carregandoIngredientes;
+export const SelectCarregandoPizzas = (state: RootState) => state.common.carregandoPizzas;
+export const SelectCarregandoProdutos = (state: RootState) => state.common.carregandoProdutos;
+
 
 export default CommonSlice.reducer;

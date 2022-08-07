@@ -74,8 +74,6 @@ const GerirIngredientes = createSlice({
     name: 'gerirIngredientes',
     initialState: {
         isEditando: false,
-        carregando: true,
-        ingredientes: [],
         _idSelecionado: '',
         erro: '',
         nome: '',
@@ -85,7 +83,7 @@ const GerirIngredientes = createSlice({
         pesoPorcao: 75.4
     },
     reducers: {
-        set_idSelecionado: (state, action) => {
+        setidSelecionado: (state, action) => {
             state._idSelecionado = action.payload;
         },
         setNome: (state, action) => {
@@ -117,14 +115,10 @@ const GerirIngredientes = createSlice({
     }
 });
 
-export const { setNome, setPreco, setImagem, setDescricao, setPesoPorcao } =
+export const { setNome, setPreco, setImagem, setDescricao, setPesoPorcao , setidSelecionado } =
     GerirIngredientes.actions;
 
-export const SelectCarregando = (state: RootState) =>
-    state.gerirIngredientes.carregando;
 export const SelectErro = (state: RootState) => state.gerirIngredientes.erro;
-export const SelectIngredientes = (state: RootState) =>
-    state.gerirIngredientes.ingredientes;
 export const SelectIdSelecionado = (state: RootState) =>
     state.gerirIngredientes._idSelecionado;
 export const SelectNome = (state: RootState) => state.gerirIngredientes.nome;

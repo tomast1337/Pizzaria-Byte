@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './GerirIngredientesPage.module.scss';
 import MenuNav from '../../Components/Admin/AdminNavbar';
 import {
-    SelectCarregando,
     SelectErro,
-    SelectIngredientes,
     SelectNome,
     SelectPreco,
     SelectImagem,
@@ -18,22 +16,104 @@ import {
     setPesoPorcao,
     IngredienteData,
     SelectIdSelecionado,
+    setidSelecionado,
     submit
 } from '../../Features/Admin/GerirIngredientesSlice';
+import { fetchIngredientes, SelectCarregandoIngredientes, SelectIngredientes, IngredienteType } from '../../Features/CommonSlice';
+import { BACKEND_URL_NO_API } from '../../variables';
+
+const Ingreditente = (prop: IngredienteType) => {
+
+    const dispatcher = useDispatch();
+
+    const selecionado = useSelector(SelectIdSelecionado);
+
+    const selecionar = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        if (selecionado === prop._id) { // desselecionar
+            dispatcher(setidSelecionado(''));
+            dispatcher(setNome(''));
+            dispatcher(setPreco(''));
+            dispatcher(setDescricao(''));
+            dispatcher(setPesoPorcao(''));
+
+        } else { // selecionar
+            dispatcher(setidSelecionado(prop._id));
+            dispatcher(setNome(prop.nome));
+            dispatcher(setPreco(prop.preco));
+            dispatcher(setDescricao('descricao'));
+            dispatcher(setPesoPorcao(prop.pesoPorcao));
+        }
+    }
+
+    return (
+        <div className={styles.ingrediente}>
+            <div className={styles.nome}>
+                {prop.nome}
+            </div>
+            <div className={styles.filed}>
+                <span>
+                    Preço R$.{prop.preco}
+                </span>
+                <span>
+                    Peso {prop.pesoPorcao} g
+                </span>
+            </div>
+            <div className={styles.imagem}>
+
+                <img src={
+                    BACKEND_URL_NO_API + prop.imagem.replace('.', '')
+                } alt={prop.nome} />
+            </div>
+            <button className={styles.selecionar} onClick={selecionar}>
+                {
+                    selecionado === prop._id ? 'Desselecionar' : 'Selecionar'
+                }
+            </button>
+        </div>
+    );
+}
+
+const IngredientesList = () => {
+    const dispatcher = useDispatch();
+    const ingredientes = useSelector(SelectIngredientes);
+    const carregando = useSelector(SelectCarregandoIngredientes);
+
+    React.useEffect(() => {
+        // set window title
+        dispatcher(fetchIngredientes());
+    }, []);
+
+    return <>
+        {carregando ? (
+            <>
+                <h2>Carregando...</h2>
+            </>
+        ) : (
+            ingredientes.length > 0 ? (
+                <div className={styles.ingredienteList}>
+                    {
+                        ingredientes.map((ingrediente: IngredienteType, index: number) => {
+                            return <Ingreditente key={index} {...ingrediente} />;
+                        })
+                    }
+                </div>
+            ) : (<><h2>Nenhum ingrediente cadastrado</h2></>)
+        )}
+    </>
+}
+
 
 const GerirIngredientesPage = () => {
-    const dispatch = useDispatch();
+    const dispatcher = useDispatch();
 
-    const carregando = useSelector(SelectCarregando);
     const erro = useSelector(SelectErro);
-    const ingredientes = useSelector(SelectIngredientes);
     const nome = useSelector(SelectNome);
     const preco = useSelector(SelectPreco);
     const imagem = useSelector(SelectImagem);
     const descricao = useSelector(SelectDescricao);
     const pesoPorcao = useSelector(SelectPesoPorcao);
     const _idSelecionado = useSelector(SelectIdSelecionado);
-
     const [imagemPreview, setImagemPreview] = React.useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,16 +128,15 @@ const GerirIngredientesPage = () => {
             descricao: descricao,
             pesoPorcao: pesoPorcao
         } as IngredienteData;
-        dispatch(submit(ingredienteDatar));
+        dispatcher(submit(ingredienteDatar));
     };
 
     const resetFields = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(setNome(''));
-        dispatch(setPreco(''));
-        dispatch(setImagem(''));
-        dispatch(setDescricao(''));
-        dispatch(setPesoPorcao(''));
+        dispatcher(setNome(''));
+        dispatcher(setPreco(''));
+        dispatcher(setDescricao(''));
+        dispatcher(setPesoPorcao(''));
         setImagemPreview('');
     };
 
@@ -76,13 +155,7 @@ const GerirIngredientesPage = () => {
                 {/* Lista de Ingredientes cadastrados */}
                 <div className={styles.container}>
                     <h2>Ingredientes Disponíveis</h2>
-                    {carregando ? (
-                        <>
-                            <h2>Carregando...</h2>
-                        </>
-                    ) : (
-                        <></>
-                    )}
+                    <IngredientesList />
                 </div>
                 {/* Formulário para alterar ingrediente
                     campos:
@@ -105,7 +178,7 @@ const GerirIngredientesPage = () => {
                                 id="nome"
                                 value={nome}
                                 onChange={(e) =>
-                                    dispatch(setNome(e.target.value))
+                                    dispatcher(setNome(e.target.value))
                                 }
                                 placeholder="Nome do ingrediente"
                             />
@@ -118,7 +191,7 @@ const GerirIngredientesPage = () => {
                                 step="0.01"
                                 value={preco}
                                 onChange={(e) =>
-                                    dispatch(setPreco(e.target.value))
+                                    dispatcher(setPreco(e.target.value))
                                 }
                                 placeholder="Preço do ingrediente"
                             />
@@ -145,7 +218,7 @@ const GerirIngredientesPage = () => {
                                     setImagemPreview(
                                         URL.createObjectURL(e.target.files[0])
                                     );
-                                    dispatch(setImagem(e.target.value));
+                                    dispatcher(setImagem(e.target.value));
                                 }}
                                 accept="image/*"
                             />
@@ -157,7 +230,7 @@ const GerirIngredientesPage = () => {
                                 rows={5}
                                 value={descricao}
                                 onChange={(e) =>
-                                    dispatch(setDescricao(e.target.value))
+                                    dispatcher(setDescricao(e.target.value))
                                 }
                                 placeholder="Descrição do ingrediente"
                             />
@@ -170,7 +243,7 @@ const GerirIngredientesPage = () => {
                                 step="0.01"
                                 value={pesoPorcao}
                                 onChange={(e) =>
-                                    dispatch(setPesoPorcao(e.target.value))
+                                    dispatcher(setPesoPorcao(e.target.value))
                                 }
                                 placeholder="Peso por Porção"
                             />
