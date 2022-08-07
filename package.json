@@ -4,8 +4,9 @@
   "description": "Esse repositório é uma reescrita do projeto feito para a disciplina Projeto software Web em 2022.1 localizado aqui: https://github.com/dsm-cefet-rj/ti-2022-1-grupo_8",
   "main": "index.js",
   "scripts": {
-    "dev" : "concurrently --prefix \"{name} -- \" --kill-others --names \"BACKEND⚙️⚙️ ,FRONTEND📱\" \"cd backend && npm run start\" \" cd frontend && npm run start\"",
-    "setup": "((npm i) & (cd backend && npm i) & (cd frontend && npm i)) && exit 0"
+    "dev": "concurrently --prefix \"{name} -- \" --kill-others --names \"BACKEND⚙️⚙️ ,FRONTEND📱\" \"cd backend && npm run start\" \" cd frontend && npm run start\"",
+    "setup": "((npm i) & (cd backend && npm i) & (cd frontend && npm i)) && exit 0",
+    "format": "prettier --write 'frontend/src/**/*.{ts,tsx,scss}' 'backend/src/**/*.{ts}' --parser babel --print-width 80 --tab-width 4"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/tomast1337/Pizzaria-On#readme",
   "devDependencies": {
-    "concurrently": "^7.3.0"
+    "concurrently": "^7.3.0",
+    "prettier": "^2.7.1"
   }
 }
