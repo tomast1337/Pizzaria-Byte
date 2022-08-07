@@ -21,7 +21,7 @@ export const submit = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->('admin/submit', async (data: IngredienteData, { rejectWithValue }: any) => {
+>('gerirIngredientes/submit', async (data: IngredienteData, { rejectWithValue }: any) => {
     // checar se algum campo está vazio
     if (
         data.nome === '' ||
@@ -76,7 +76,7 @@ export const deleteIngrediente = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->('admin/deleteIngrediente', async (id: string, { rejectWithValue }: any) => {
+>('gerirIngredientes/deleteIngrediente', async (id: string, { rejectWithValue }: any) => {
     try {
         const token = localStorage.getItem('token') || '';
         const response = await axios({

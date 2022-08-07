@@ -29,12 +29,12 @@ import {
 } from '../../Features/CommonSlice';
 import { BACKEND_URL_NO_API } from '../../variables';
 
-const Ingreditente = (prop: IngredienteType) => {
+const Ingrediente = (prop: IngredienteType) => {
     const dispatcher = useDispatch();
 
     const selecionado = useSelector(SelectIdSelecionado);
 
-    const selecionar = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const selecionarButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         if (selecionado === prop._id) {
             // desselecionar
@@ -66,7 +66,7 @@ const Ingreditente = (prop: IngredienteType) => {
                     alt={prop.nome}
                 />
             </div>
-            <button className={styles.selecionar} onClick={selecionar}>
+            <button className={styles.selecionar} onClick={selecionarButton}>
                 {selecionado === prop._id ? 'Desselecionar' : 'Selecionar'}
             </button>
         </div>
@@ -81,7 +81,7 @@ const IngredientesList = () => {
     React.useEffect(() => {
         // set window title
         dispatcher(fetchIngredientes());
-    }, []);
+    }, [dispatcher]);
 
     return (
         <>
@@ -93,9 +93,7 @@ const IngredientesList = () => {
                 <div className={styles.ingredienteList}>
                     {ingredientes.map(
                         (ingrediente: IngredienteType, index: number) => {
-                            return (
-                                <Ingreditente key={index} {...ingrediente} />
-                            );
+                            return <Ingrediente key={index} {...ingrediente} />;
                         }
                     )}
                 </div>
@@ -122,9 +120,9 @@ const GerirIngredientesPage = () => {
 
     const scrollToTop = () => {
         //scroll to id = "Ingredientes"
-        const erro = document.getElementById('Ingredientes');
-        if (erro) {
-            erro.scrollIntoView({ behavior: 'smooth' });
+        const elem = document.getElementById('Ingredientes');
+        if (elem) {
+            elem.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -188,7 +186,7 @@ const GerirIngredientesPage = () => {
                     pesoPorcao: number
                 */}
                 <div className={styles.container}>
-                    <h2>Alterar Ingrediente</h2>
+                    <h2>Editar Ingrediente</h2>
                     <div className={styles.erro}>
                         <h3>{erro}</h3>
                     </div>
