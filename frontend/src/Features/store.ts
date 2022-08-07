@@ -19,7 +19,7 @@ export const store = configureStore({
         // Admin
         gerirIngredientes: GerirIngredientesSlice,
         gerirProdutos: GerirProdutosSlice
-        
+
         // Cozinheiro
 
         // Entregador

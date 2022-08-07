@@ -34,7 +34,9 @@ const Ingrediente = (prop: IngredienteType) => {
 
     const selecionado = useSelector(SelectIdSelecionado);
 
-    const selecionarButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const selecionarButton = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
         if (selecionado === prop._id) {
             // desselecionar

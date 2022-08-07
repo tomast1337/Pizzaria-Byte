@@ -20,47 +20,50 @@ export const submit = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->('gerirProdutos/submit', async (data: ProdutoData, { rejectWithValue }: any) => {
-    // checar se algum campo está vazio
-    if (
-        data.nome === '' ||
-        data.descricao === '' ||
-        data.imagem === '' ||
-        data.preco === ''
-    ) {
-        rejectWithValue('Preencha todos os campos');
-        return;
-    }
-    try {
-        const fromData = new FormData();
-        if (data._idSelecionado !== '')
-            fromData.append('_id', data._idSelecionado);
-        if (data.imagem) fromData.append('imagem', data.imagem);
+>(
+    'gerirProdutos/submit',
+    async (data: ProdutoData, { rejectWithValue }: any) => {
+        // checar se algum campo está vazio
+        if (
+            data.nome === '' ||
+            data.descricao === '' ||
+            data.imagem === '' ||
+            data.preco === ''
+        ) {
+            rejectWithValue('Preencha todos os campos');
+            return;
+        }
+        try {
+            const fromData = new FormData();
+            if (data._idSelecionado !== '')
+                fromData.append('_id', data._idSelecionado);
+            if (data.imagem) fromData.append('imagem', data.imagem);
 
-        fromData.append('nome', data.nome);
-        fromData.append('descricao', data.descricao);
-        fromData.append('preco', data.preco.toString());
+            fromData.append('nome', data.nome);
+            fromData.append('descricao', data.descricao);
+            fromData.append('preco', data.preco.toString());
 
-        const token = localStorage.getItem('token') || '';
+            const token = localStorage.getItem('token') || '';
 
-        const response = await axios.post(
-            `${BACKEND_URL}admin/produto`,
-            fromData,
-            {
-                headers: {
-                    'x-auth-token': token
+            const response = await axios.post(
+                `${BACKEND_URL}admin/produto`,
+                fromData,
+                {
+                    headers: {
+                        'x-auth-token': token
+                    }
                 }
+            );
+            return response.data;
+        } catch (error: any) {
+            if (error.response) {
+                rejectWithValue(error.response.data);
+            } else {
+                rejectWithValue('Erro de conexão');
             }
-        );
-        return response.data;
-    } catch (error: any) {
-        if (error.response) {
-            rejectWithValue(error.response.data);
-        } else {
-            rejectWithValue('Erro de conexão');
         }
     }
-});
+);
 
 export const deleteProduto = createAsyncThunk<
     string,
@@ -101,7 +104,7 @@ const GerirProdutosSlice = createSlice({
         descricao: '',
         imagem: '',
         preco: 5,
-        erro: '',
+        erro: ''
     },
     reducers: {
         setidSelecionado: (state, action) => {
@@ -145,7 +148,7 @@ const GerirProdutosSlice = createSlice({
             state.erro = 'Excluindo...';
         },
         [deleteProduto.rejected]: (state, action: PayloadAction<string>) => {
-            state.erro = "Erro ao remover produto";
+            state.erro = 'Erro ao remover produto';
         }
     }
 });
@@ -159,11 +162,13 @@ export const {
     setErro
 } = GerirProdutosSlice.actions;
 
-export const selectIdSelecionado = (state:RootState) => state.gerirProdutos._idSelecionado;
-export const selectNome = (state:RootState) => state.gerirProdutos.nome;
-export const selectDescricao = (state:RootState) => state.gerirProdutos.descricao;
-export const selectImagem = (state:RootState) => state.gerirProdutos.imagem;
-export const selectPreco = (state:RootState) => state.gerirProdutos.preco;
-export const selectErro = (state:RootState) => state.gerirProdutos.erro;
+export const selectIdSelecionado = (state: RootState) =>
+    state.gerirProdutos._idSelecionado;
+export const selectNome = (state: RootState) => state.gerirProdutos.nome;
+export const selectDescricao = (state: RootState) =>
+    state.gerirProdutos.descricao;
+export const selectImagem = (state: RootState) => state.gerirProdutos.imagem;
+export const selectPreco = (state: RootState) => state.gerirProdutos.preco;
+export const selectErro = (state: RootState) => state.gerirProdutos.erro;
 
 export default GerirProdutosSlice.reducer;

@@ -21,51 +21,54 @@ export const submit = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->('gerirIngredientes/submit', async (data: IngredienteData, { rejectWithValue }: any) => {
-    // checar se algum campo está vazio
-    if (
-        data.nome === '' ||
-        data.preco === '' ||
-        data.imagem === '' ||
-        data.descricao === '' ||
-        data.pesoPorcao === ''
-    ) {
-        rejectWithValue('Preencha todos os campos');
-        return;
-    }
-    try {
-        const fromData = new FormData();
-        if (data._idSelecionado !== '')
-            fromData.append('_id', data._idSelecionado);
-        if (data.imagem) fromData.append('imagem', data.imagem);
+>(
+    'gerirIngredientes/submit',
+    async (data: IngredienteData, { rejectWithValue }: any) => {
+        // checar se algum campo está vazio
+        if (
+            data.nome === '' ||
+            data.preco === '' ||
+            data.imagem === '' ||
+            data.descricao === '' ||
+            data.pesoPorcao === ''
+        ) {
+            rejectWithValue('Preencha todos os campos');
+            return;
+        }
+        try {
+            const fromData = new FormData();
+            if (data._idSelecionado !== '')
+                fromData.append('_id', data._idSelecionado);
+            if (data.imagem) fromData.append('imagem', data.imagem);
 
-        fromData.append('nome', data.nome);
-        fromData.append('preco', data.preco.toString());
-        fromData.append('descricao', data.descricao);
-        fromData.append('pesoPorcao', data.pesoPorcao.toString());
+            fromData.append('nome', data.nome);
+            fromData.append('preco', data.preco.toString());
+            fromData.append('descricao', data.descricao);
+            fromData.append('pesoPorcao', data.pesoPorcao.toString());
 
-        const token = localStorage.getItem('token') || '';
+            const token = localStorage.getItem('token') || '';
 
-        const response = await axios.post(
-            `${BACKEND_URL}admin/ingrediente`,
-            fromData,
-            {
-                headers: {
-                    'x-auth-token': token
+            const response = await axios.post(
+                `${BACKEND_URL}admin/ingrediente`,
+                fromData,
+                {
+                    headers: {
+                        'x-auth-token': token
+                    }
                 }
+            );
+            return response.data;
+        } catch (error: any) {
+            if (error.response) {
+                return rejectWithValue(`${error.response.data.error}`);
+            } else if (error.request) {
+                return rejectWithValue('Erro no servidor');
+            } else {
+                return rejectWithValue('Erro desconhecido');
             }
-        );
-        return response.data;
-    } catch (error: any) {
-        if (error.response) {
-            return rejectWithValue(`${error.response.data.error}`);
-        } else if (error.request) {
-            return rejectWithValue('Erro no servidor');
-        } else {
-            return rejectWithValue('Erro desconhecido');
         }
     }
-});
+);
 
 export const deleteIngrediente = createAsyncThunk<
     string,
@@ -76,27 +79,30 @@ export const deleteIngrediente = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->('gerirIngredientes/deleteIngrediente', async (id: string, { rejectWithValue }: any) => {
-    try {
-        const token = localStorage.getItem('token') || '';
-        const response = await axios({
-            method: 'delete',
-            url: `${BACKEND_URL}admin/del/ingrediente/${id}`,
-            headers: {
-                'x-auth-token': token
+>(
+    'gerirIngredientes/deleteIngrediente',
+    async (id: string, { rejectWithValue }: any) => {
+        try {
+            const token = localStorage.getItem('token') || '';
+            const response = await axios({
+                method: 'delete',
+                url: `${BACKEND_URL}admin/del/ingrediente/${id}`,
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            return response.data;
+        } catch (error: any) {
+            if (error.response) {
+                return rejectWithValue(`${error.response.data.error}`);
+            } else if (error.request) {
+                return rejectWithValue('Erro no servidor');
+            } else {
+                return rejectWithValue('Erro desconhecido');
             }
-        });
-        return response.data;
-    } catch (error: any) {
-        if (error.response) {
-            return rejectWithValue(`${error.response.data.error}`);
-        } else if (error.request) {
-            return rejectWithValue('Erro no servidor');
-        } else {
-            return rejectWithValue('Erro desconhecido');
         }
     }
-});
+);
 
 const GerirIngredientes = createSlice({
     name: 'gerirIngredientes',

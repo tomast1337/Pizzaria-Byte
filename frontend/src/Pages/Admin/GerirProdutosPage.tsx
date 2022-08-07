@@ -2,7 +2,12 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './GerirProdutosPage.module.scss';
 import MenuNav from '../../Components/Admin/AdminNavbar';
-import { fetchProdutos, ProdutoType, SelectCarregandoProdutos, SelectProdutos } from '../../Features/CommonSlice';
+import {
+    fetchProdutos,
+    ProdutoType,
+    SelectCarregandoProdutos,
+    SelectProdutos
+} from '../../Features/CommonSlice';
 import {
     setidSelecionado,
     setNome,
@@ -26,7 +31,9 @@ const Produto = (prop: ProdutoType) => {
     const dispatcher = useDispatch();
     const selecionado = useSelector(selectIdSelecionado);
 
-    const selecionarButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const selecionarButton = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
         if (selecionado === prop.id) {
             // desselecionar
@@ -62,7 +69,7 @@ const Produto = (prop: ProdutoType) => {
             </button>
         </div>
     );
-}
+};
 
 const ProdutoList = () => {
     const dispatcher = useDispatch();
@@ -82,8 +89,7 @@ const ProdutoList = () => {
                 <div className={styles.produtosList}>
                     {ingredientes.map((produto: ProdutoType, index: number) => {
                         return <Produto key={index} {...produto} />;
-                    }
-                    )}
+                    })}
                 </div>
             ) : (
                 <>
@@ -92,7 +98,7 @@ const ProdutoList = () => {
             )}
         </>
     );
-}
+};
 
 const GerirProdutosPage = () => {
     const dispatcher = useDispatch();
@@ -131,8 +137,10 @@ const GerirProdutosPage = () => {
             dispatcher(setErro(''));
         }, 5000);
         scrollToTop();
-    }
-    const resetFields = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    };
+    const resetFields = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
         dispatcher(setidSelecionado(''));
         dispatcher(setNome(''));
@@ -141,7 +149,7 @@ const GerirProdutosPage = () => {
         dispatcher(setPreco(0));
         setImagemPreview('');
         scrollToTop();
-    }
+    };
 
     React.useEffect(() => {
         //set window title
@@ -158,7 +166,7 @@ const GerirProdutosPage = () => {
                 {/* Lista de Produtos cadastrados */}
                 <div className={styles.container} id="Ingredientes">
                     <h2>Produtos Disponíveis</h2>
-                    < ProdutoList />
+                    <ProdutoList />
                 </div>
                 {/* Formulário para alterar ingrediente
                     campos:
@@ -180,7 +188,9 @@ const GerirProdutosPage = () => {
                                 type="text"
                                 id="nome"
                                 value={nome}
-                                onChange={(e) => dispatcher(setNome(e.target.value))}
+                                onChange={(e) =>
+                                    dispatcher(setNome(e.target.value))
+                                }
                             />
                         </div>
                         <div className={styles['form-group']}>
@@ -188,7 +198,9 @@ const GerirProdutosPage = () => {
                             <textarea
                                 id="descricao"
                                 value={descricao}
-                                onChange={(e) => dispatcher(setDescricao(e.target.value))}
+                                onChange={(e) =>
+                                    dispatcher(setDescricao(e.target.value))
+                                }
                             />
                         </div>
                         <div className={styles['form-group']}>
@@ -197,7 +209,11 @@ const GerirProdutosPage = () => {
                                 type="number"
                                 id="preco"
                                 value={preco}
-                                onChange={(e) => dispatcher(setPreco(parseInt(e.target.value)))}
+                                onChange={(e) =>
+                                    dispatcher(
+                                        setPreco(parseInt(e.target.value))
+                                    )
+                                }
                             />
                         </div>
                         <div className={styles['form-group']}>
@@ -216,7 +232,9 @@ const GerirProdutosPage = () => {
                                 type="file"
                                 id="imagem"
                                 onChange={(e) => {
-                                    setImagemPreview(URL.createObjectURL(e.target.files[0]));
+                                    setImagemPreview(
+                                        URL.createObjectURL(e.target.files[0])
+                                    );
                                     dispatcher(setImagem(e.target.value));
                                 }}
                             />
@@ -256,7 +274,6 @@ const GerirProdutosPage = () => {
                         </div>
                     </form>
                 </div>
-
             </div>
         </>
     );
