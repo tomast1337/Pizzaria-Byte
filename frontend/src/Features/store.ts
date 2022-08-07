@@ -3,6 +3,7 @@ import CriarContaSlice from './Login/CriarContaSlice';
 import LoginSlice from './Login/LoginSlice';
 import GerirIngredientesSlice from './Admin/GerirIngredientesSlice';
 import CommonSlice from './CommonSlice';
+import GerirProdutosSlice from './Admin/GerirProdutosSlice';
 
 export const store = configureStore({
     reducer: {
@@ -16,8 +17,9 @@ export const store = configureStore({
         // Cliente
 
         // Admin
-        gerirIngredientes: GerirIngredientesSlice
-
+        gerirIngredientes: GerirIngredientesSlice,
+        gerirProdutos: GerirProdutosSlice
+        
         // Cozinheiro
 
         // Entregador

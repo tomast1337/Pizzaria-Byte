@@ -1,0 +1,335 @@
+@use '../../global-css-vars.scss' as *;
+
+.page {
+    width: 100%;
+    height: fit-content;
+    min-height: 100vh;
+    margin: auto auto;
+    padding: 10vh 10px;
+    background-color: $admin1;
+
+    .erro {
+        color: $alert-danger;
+        font-size: 1.5rem;
+        min-height: 1.5rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        font-family: $text-alt;
+        min-height: 2.5rem;
+        text-align: center;
+
+        // desktop
+        //Desktop
+        @media (min-width: 1025px) {
+            font-size: 1rem;
+            min-height: 1rem;
+        }
+    }
+
+    .container {
+        box-shadow: 0 0 .2rem $black;
+        background-color: $white;
+        margin: 10px auto;
+        border-radius: 1rem;
+
+        h1 {
+            font-family: $title;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: $text;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: $text;
+            font-size: 1.5em;
+        }
+
+        p {
+            font-family: $text-alt;
+            font-size: 1.5em;
+        }
+
+        // desktop
+        //Desktop
+        @media (min-width: 1025px) {
+            width: 80%;
+        }
+    }
+
+    form {
+        font-family: $text;
+        width: 100%;
+        margin: auto;
+
+        //Desktop
+        @media (min-width: 1025px) {
+            margin: 5px auto;
+            width: 70%;
+        }
+
+        .form-group {
+            width: 90%;
+            margin: 1rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+
+            input {
+                display: block;
+                width: 90%;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
+            }
+
+            input[type="file"] {
+                width: 90%;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
+            }
+
+            label {
+                font-size: 1.5rem;
+                display: block;
+                width: 100%;
+                margin-bottom: .5rem;
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
+            }
+
+            textarea {
+                display: block;
+                border-radius: .5rem;
+                border: 1px solid $brand1;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+                width: 90%;
+                height: 200px;
+                resize: none;
+
+                &:focus {
+                    outline: none;
+                    border-color: $brand2;
+                }
+
+                //scrollbar
+                ::-webkit-scrollbar {
+                    width: 10px;
+                }
+
+                ::-webkit-scrollbar-track {
+                    background: $brand1;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: $brand2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
+            }
+
+            button {
+                border-radius: .5rem;
+                padding: 0.5rem;
+                font-size: 2rem;
+                color: $white;
+                display: block;
+                width: fit-content;
+                margin: 1rem auto;
+                font-family: $text  !important;
+                font-weight: bold;
+                min-width: 250px;
+
+                &[type="submit"] {
+                    border: 1px solid $alert-success;
+                    background-color: $alert-success;
+                }
+
+                &[type="reset"] {
+                    border: 1px solid $alert-warning;
+                    background-color: $alert-warning;
+                }
+                &.delete-button{
+                    background-color: $alert-danger;
+                    border: 1px solid $alert-danger;
+                }
+            }
+
+            //image preview
+            img {
+                object-fit: cover;
+                width: 50%;
+                height: auto;
+                aspect-ratio: 1/1;
+                border-radius: .5rem;
+                box-shadow: 0 0 .2rem $black;
+
+                &:focus {
+                    outline: none;
+                    border-color: $admin2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    width: 25%;
+                }
+            }
+
+            .empty-img {
+                width: 200px;
+                height: 200px;
+                border-radius: .5rem;
+                box-shadow: 0 0 .2rem $black;
+                background-color: $white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5rem;
+
+                h3 {
+                    font-family: $text;
+                    color: $brand1;
+                    text-align: center;
+                }
+            }
+        }
+
+    }
+}
+
+div.produtoList {
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background: $white;
+        background-blend-mode: lighten;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $admin2;
+        border-radius: 0px;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        border-radius: 10px;
+    }
+}
+
+.produto {
+    width: 20vw;
+    height: fit-content;
+    margin: .5em 1em;
+    padding: .5em;
+    border-radius: .5rem;
+    background-color: $admin2;
+
+    .nome {
+        font-family: $title;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-top: .1rem;
+    }
+
+    .filed {
+        font-family: $text;
+        font-size: 1rem;
+        text-align: center;
+        margin-top: .1rem;
+        display: block;
+
+        span {
+            font-family: $text-alt;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+    }
+
+    .imagem {
+        width: 100%;
+        height: auto;
+        border-radius: .5rem;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1;
+            height: auto;
+            border-radius: .5rem;
+            box-shadow: 0 0 .2rem $black;
+            object-fit: cover;
+        }
+    }
+
+    button {
+        border-radius: .5rem;
+        font-size: 1.5rem;
+        color: $white;
+        background-color: $alert-info;
+        display: block;
+        width: fit-content;
+        margin: .3rem auto;
+        height: fit-content;
+        font-family: $text  !important;
+    }
+
+}
