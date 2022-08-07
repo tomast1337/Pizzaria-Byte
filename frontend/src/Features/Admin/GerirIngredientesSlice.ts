@@ -79,15 +79,13 @@ export const deleteIngrediente = createAsyncThunk<
 >('admin/deleteIngrediente', async (id: string, { rejectWithValue }: any) => {
     try {
         const token = localStorage.getItem('token') || '';
-        const response = await axios(
-            {
-                method: 'delete',
-                url: `${BACKEND_URL}admin/del/ingrediente/${id}`,
-                headers: {
-                    'x-auth-token': token
-                }
+        const response = await axios({
+            method: 'delete',
+            url: `${BACKEND_URL}admin/del/ingrediente/${id}`,
+            headers: {
+                'x-auth-token': token
             }
-        );
+        });
         return response.data;
     } catch (error: any) {
         if (error.response) {
@@ -110,7 +108,7 @@ const GerirIngredientes = createSlice({
         preco: 1,
         imagem: '',
         descricao: '',
-        pesoPorcao: 10,
+        pesoPorcao: 10
     },
     reducers: {
         setidSelecionado: (state, action) => {
@@ -145,7 +143,10 @@ const GerirIngredientes = createSlice({
         [submit.pending]: (state) => {
             state.erro = 'Carregando...';
         },
-        [deleteIngrediente.fulfilled]: (state, action: PayloadAction<string>) => {
+        [deleteIngrediente.fulfilled]: (
+            state,
+            action: PayloadAction<string>
+        ) => {
             state.erro = 'Ingrediente removido com sucesso';
             state._idSelecionado = '';
             state.erro = '';
@@ -155,8 +156,11 @@ const GerirIngredientes = createSlice({
             state.descricao = '';
             state.pesoPorcao = 10;
         },
-        [deleteIngrediente.rejected]: (state, action: PayloadAction<string>) => {
-            state.erro = "Erro ao remover ingrediente";
+        [deleteIngrediente.rejected]: (
+            state,
+            action: PayloadAction<string>
+        ) => {
+            state.erro = 'Erro ao remover ingrediente';
         },
         [deleteIngrediente.pending]: (state) => {
             state.erro = 'Excluindo...';

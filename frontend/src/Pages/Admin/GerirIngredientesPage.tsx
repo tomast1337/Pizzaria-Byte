@@ -126,7 +126,7 @@ const GerirIngredientesPage = () => {
         if (erro) {
             erro.scrollIntoView({ behavior: 'smooth' });
         }
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -283,9 +283,13 @@ const GerirIngredientesPage = () => {
                             {_idSelecionado !== '' && (
                                 <button
                                     className={styles['delete-button']}
-                                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                                    onClick={(
+                                        e: React.MouseEvent<HTMLButtonElement>
+                                    ) => {
                                         e.preventDefault();
-                                        dispatcher(deleteIngrediente(_idSelecionado))
+                                        dispatcher(
+                                            deleteIngrediente(_idSelecionado)
+                                        );
                                         setTimeout(() => {
                                             dispatcher(fetchIngredientes());
                                         }, 1000);
@@ -293,7 +297,8 @@ const GerirIngredientesPage = () => {
                                             dispatcher(setErro(''));
                                         }, 5000);
                                         scrollToTop();
-                                    }}>
+                                    }}
+                                >
                                     Excluir
                                 </button>
                             )}
