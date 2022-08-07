@@ -9,10 +9,10 @@ export const store = configureStore({
         // Login / Criar Conta
         criarConta: CriarContaSlice,
         login: LoginSlice,
-        
+
         // Common
         common: CommonSlice,
-        
+
         // Cliente
 
         // Admin

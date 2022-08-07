@@ -19,60 +19,57 @@ import {
     setidSelecionado,
     submit
 } from '../../Features/Admin/GerirIngredientesSlice';
-import { fetchIngredientes, SelectCarregandoIngredientes, SelectIngredientes, IngredienteType } from '../../Features/CommonSlice';
+import {
+    fetchIngredientes,
+    SelectCarregandoIngredientes,
+    SelectIngredientes,
+    IngredienteType
+} from '../../Features/CommonSlice';
 import { BACKEND_URL_NO_API } from '../../variables';
 
 const Ingreditente = (prop: IngredienteType) => {
-
     const dispatcher = useDispatch();
 
     const selecionado = useSelector(SelectIdSelecionado);
 
     const selecionar = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        if (selecionado === prop._id) { // desselecionar
+        if (selecionado === prop._id) {
+            // desselecionar
             dispatcher(setidSelecionado(''));
             dispatcher(setNome(''));
             dispatcher(setPreco(''));
             dispatcher(setDescricao(''));
             dispatcher(setPesoPorcao(''));
-
-        } else { // selecionar
+        } else {
+            // selecionar
             dispatcher(setidSelecionado(prop._id));
             dispatcher(setNome(prop.nome));
             dispatcher(setPreco(prop.preco));
             dispatcher(setDescricao('descricao'));
             dispatcher(setPesoPorcao(prop.pesoPorcao));
         }
-    }
+    };
 
     return (
         <div className={styles.ingrediente}>
-            <div className={styles.nome}>
-                {prop.nome}
-            </div>
+            <div className={styles.nome}>{prop.nome}</div>
             <div className={styles.filed}>
-                <span>
-                    Preço R$.{prop.preco}
-                </span>
-                <span>
-                    Peso {prop.pesoPorcao} g
-                </span>
+                <span>Preço R$.{prop.preco}</span>
+                <span>Peso {prop.pesoPorcao} g</span>
             </div>
             <div className={styles.imagem}>
-
-                <img src={
-                    BACKEND_URL_NO_API + prop.imagem.replace('.', '')
-                } alt={prop.nome} />
+                <img
+                    src={BACKEND_URL_NO_API + prop.imagem.replace('.', '')}
+                    alt={prop.nome}
+                />
             </div>
             <button className={styles.selecionar} onClick={selecionar}>
-                {
-                    selecionado === prop._id ? 'Desselecionar' : 'Selecionar'
-                }
+                {selecionado === prop._id ? 'Desselecionar' : 'Selecionar'}
             </button>
         </div>
     );
-}
+};
 
 const IngredientesList = () => {
     const dispatcher = useDispatch();
@@ -84,25 +81,30 @@ const IngredientesList = () => {
         dispatcher(fetchIngredientes());
     }, []);
 
-    return <>
-        {carregando ? (
-            <>
-                <h2>Carregando...</h2>
-            </>
-        ) : (
-            ingredientes.length > 0 ? (
+    return (
+        <>
+            {carregando ? (
+                <>
+                    <h2>Carregando...</h2>
+                </>
+            ) : ingredientes.length > 0 ? (
                 <div className={styles.ingredienteList}>
-                    {
-                        ingredientes.map((ingrediente: IngredienteType, index: number) => {
-                            return <Ingreditente key={index} {...ingrediente} />;
-                        })
-                    }
+                    {ingredientes.map(
+                        (ingrediente: IngredienteType, index: number) => {
+                            return (
+                                <Ingreditente key={index} {...ingrediente} />
+                            );
+                        }
+                    )}
                 </div>
-            ) : (<><h2>Nenhum ingrediente cadastrado</h2></>)
-        )}
-    </>
-}
-
+            ) : (
+                <>
+                    <h2>Nenhum ingrediente cadastrado</h2>
+                </>
+            )}
+        </>
+    );
+};
 
 const GerirIngredientesPage = () => {
     const dispatcher = useDispatch();

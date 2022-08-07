@@ -182,9 +182,11 @@ export const SelectIngredientes = (state: RootState) =>
 export const SelectPizzas = (state: RootState) => state.common.pizzas;
 export const SelectProdutos = (state: RootState) => state.common.produtos;
 
-export const SelectCarregandoIngredientes = (state: RootState) => state.common.carregandoIngredientes;
-export const SelectCarregandoPizzas = (state: RootState) => state.common.carregandoPizzas;
-export const SelectCarregandoProdutos = (state: RootState) => state.common.carregandoProdutos;
-
+export const SelectCarregandoIngredientes = (state: RootState) =>
+    state.common.carregandoIngredientes;
+export const SelectCarregandoPizzas = (state: RootState) =>
+    state.common.carregandoPizzas;
+export const SelectCarregandoProdutos = (state: RootState) =>
+    state.common.carregandoProdutos;
 
 export default CommonSlice.reducer;

@@ -115,8 +115,14 @@ const GerirIngredientes = createSlice({
     }
 });
 
-export const { setNome, setPreco, setImagem, setDescricao, setPesoPorcao , setidSelecionado } =
-    GerirIngredientes.actions;
+export const {
+    setNome,
+    setPreco,
+    setImagem,
+    setDescricao,
+    setPesoPorcao,
+    setidSelecionado
+} = GerirIngredientes.actions;
 
 export const SelectErro = (state: RootState) => state.gerirIngredientes.erro;
 export const SelectIdSelecionado = (state: RootState) =>
