@@ -3,6 +3,7 @@ import rotas from './Routes';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import getConnection from './DataBase';
+import fs from 'fs';
 
 const main = async () => {
     dotenv.config();
@@ -16,6 +17,16 @@ const main = async () => {
         console.error(error);
         process.exit(1);
     }
+
+    // criar pasta assets caso não exista
+    if (!fs.existsSync('./assets')) fs.mkdirSync('./assets');
+    //servir arquivos estáticos na pasta assets
+    server.use('/assets',express.static('assets'));
+    
+    //criar pasta public caso não exista
+    if (!fs.existsSync('./public')) fs.mkdirSync('./public');
+    //servir arquivos estáticos na pasta public
+    server.use('/',express.static('public'));
 
     // Cors middleware
     server.use(cors());
