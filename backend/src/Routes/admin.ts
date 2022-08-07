@@ -96,7 +96,6 @@ const moveFiles = (tipo: tiposPaths, imagem: any, nome: string) => {
             }
         }
     }
-
     const path = tipo.toString();
     let newPath = `${path}${nome}.${imagem.path.split('.').at(-1)}`;
     try {
@@ -187,7 +186,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
     const files = req.files;
     const { _id, nome, descricao, preco } = req.fields;
 
-    if (!(nome || descricao || preco) || !(files && _id)) {
+    if (!(nome || descricao || preco)) {
         return res.status(400).json({ error: 'Preencha todos os campos' });
     }
 
@@ -199,7 +198,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
         produto.descricao = descricao;
         produto.preco = preco;
         if (checkFiles(files)) {
-            produto.imagem = moveFiles(tiposPaths.produto, files, nome);
+            produto.imagem = moveFiles(tiposPaths.produto, files.imagem, nome);
         }
         await produto.save();
         return res.status(200).json(produto);
@@ -209,7 +208,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
             nome,
             descricao,
             preco,
-            imagem: moveFiles(tiposPaths.produto, files, nome)
+            imagem: moveFiles(tiposPaths.produto, files.imagem, nome)
         });
         await produtos.create(novoProduto);
         return res.status(200).json(novoProduto);
@@ -238,7 +237,11 @@ router.delete('/del/ingrediente/:id', async (req: any, res: any) => {
         return res.status(401).json({ error: 'Ingrediente não cadastrado' });
     } else {
         const image_to_delete = ingrediente.imagem;
-        fs.unlinkSync(image_to_delete);
+        try {
+            fs.unlinkSync(image_to_delete);
+        } catch (error) {
+            console.log(error);
+        }
         await ingrediente.remove();
         console.log(`O ingrediente ${ingrediente.nome} foi excluído`);
         return res.status(200).json(ingrediente);
@@ -254,6 +257,12 @@ router.delete('/del/pizza/:id', async (req: any, res: any) => {
     if (!pizza) {
         return res.status(401).json({ error: 'Pizza não cadastrada' });
     } else {
+        const image_to_delete = pizza.imagem;
+        try {
+            fs.unlinkSync(image_to_delete);
+        } catch (error) {
+            console.log(error);
+        }
         await pizza.remove();
         return res.status(200).json(pizza);
     }
@@ -263,12 +272,21 @@ router.delete('/del/pizza/:id', async (req: any, res: any) => {
 router.delete('/del/produto/:id', async (req: any, res: any) => {
     const { id } = req.params;
 
+    console.log(id);
+
     const produto = await produtos.findById(id);
 
     if (!produto) {
         return res.status(401).json({ error: 'Produto não cadastrado' });
     } else {
+        const image_to_delete = produto.imagem;
+        try {
+            fs.unlinkSync(image_to_delete);
+        } catch (error) {
+            console.log(error);
+        }
         await produto.remove();
+        console.log(`O produto ${produto.nome} foi excluído`);
         return res.status(200).json(produto);
     }
 });

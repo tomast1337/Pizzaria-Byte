@@ -35,9 +35,11 @@ export const submit = createAsyncThunk<
         }
         try {
             const fromData = new FormData();
+            console.log(data._idSelecionado);
             if (data._idSelecionado !== '')
                 fromData.append('_id', data._idSelecionado);
-            if (data.imagem) fromData.append('imagem', data.imagem);
+            if (data.imagem) 
+            fromData.append('imagem', data.imagem);
 
             fromData.append('nome', data.nome);
             fromData.append('descricao', data.descricao);
@@ -99,12 +101,12 @@ export const deleteProduto = createAsyncThunk<
 const GerirProdutosSlice = createSlice({
     name: 'gerirProdutos',
     initialState: {
-        _idSelecionado: '',
-        nome: '',
-        descricao: '',
-        imagem: '',
-        preco: 5,
-        erro: ''
+        _idSelecionado: '' as string,
+        nome: '' as string,
+        descricao: '' as string,
+        imagem: '' as string,
+        preco: 5 as number,
+        erro: '' as string,
     },
     reducers: {
         setidSelecionado: (state, action) => {

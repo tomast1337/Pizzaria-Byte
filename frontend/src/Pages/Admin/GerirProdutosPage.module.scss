@@ -234,7 +234,7 @@
     }
 }
 
-div.produtoList {
+div.produtosList {
     overflow: auto;
     white-space: nowrap;
     display: flex;
@@ -306,19 +306,20 @@ div.produtoList {
     }
 
     .imagem {
-        width: 100%;
-        height: auto;
+        width: 90%;
+        height: fit-content;
         border-radius: .5rem;
-
         img {
             width: 100%;
-            aspect-ratio: 1;
+            aspect-ratio: 1/1;
             height: auto;
             border-radius: .5rem;
             box-shadow: 0 0 .2rem $black;
             object-fit: cover;
         }
     }
+
+    
 
     button {
         border-radius: .5rem;

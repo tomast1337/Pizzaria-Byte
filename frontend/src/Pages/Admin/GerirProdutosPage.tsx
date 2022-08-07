@@ -41,10 +41,10 @@ const Produto = (prop: ProdutoType) => {
             dispatcher(setNome(''));
             dispatcher(setDescricao(''));
             dispatcher(setImagem(''));
-            dispatcher(setPreco(0));
+            dispatcher(setPreco(5));
         } else {
             // selecionar
-            dispatcher(setidSelecionado(prop.id));
+            dispatcher(setidSelecionado(prop._id));
             dispatcher(setNome(prop.nome));
             dispatcher(setDescricao(prop.descricao));
             dispatcher(setImagem(prop.imagem));
@@ -56,7 +56,6 @@ const Produto = (prop: ProdutoType) => {
             <div className={styles.nome}>{prop.nome}</div>
             <div className={styles.filed}>
                 <span>Preço R$.{prop.preco}</span>
-                <span>Peso {prop.pesoPorcao} g</span>
             </div>
             <div className={styles.imagem}>
                 <img
@@ -123,6 +122,7 @@ const GerirProdutosPage = () => {
         const imageFile = document.getElementById('imagem') as HTMLInputElement;
         const file = imageFile.files[0];
         const produtoData = {
+            _idSelecionado: _idSelecionado,
             nome: nome,
             descricao: descricao,
             imagem: file,
@@ -146,7 +146,7 @@ const GerirProdutosPage = () => {
         dispatcher(setNome(''));
         dispatcher(setDescricao(''));
         dispatcher(setImagem(''));
-        dispatcher(setPreco(0));
+        dispatcher(setPreco(5));
         setImagemPreview('');
         scrollToTop();
     };
@@ -164,7 +164,7 @@ const GerirProdutosPage = () => {
                     <h1>Gerir Produtos</h1>
                 </div>
                 {/* Lista de Produtos cadastrados */}
-                <div className={styles.container} id="Ingredientes">
+                <div className={styles.container} id="Produtos">
                     <h2>Produtos Disponíveis</h2>
                     <ProdutoList />
                 </div>
@@ -255,6 +255,7 @@ const GerirProdutosPage = () => {
                                     onClick={(
                                         e: React.MouseEvent<HTMLButtonElement>
                                     ) => {
+                                        console.log(_idSelecionado);
                                         e.preventDefault();
                                         dispatcher(
                                             deleteProduto(_idSelecionado)
