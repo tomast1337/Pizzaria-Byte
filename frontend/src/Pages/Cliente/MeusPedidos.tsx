@@ -1,8 +1,8 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./Menu.module.scss";
-import stylesBase from "./clienteBase.module.scss";
-import MenuNav from "../../Components/Cliente/MenuNav";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './Menu.module.scss';
+import stylesBase from './clienteBase.module.scss';
+import MenuNav from '../../Components/Cliente/MenuNav';
 
 const MeusPedidos = () => {
     const pizzas = {};
@@ -18,7 +18,7 @@ const MeusPedidos = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default MeusPedidos;

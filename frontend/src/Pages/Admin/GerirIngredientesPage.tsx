@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./GerirIngredientesPage.module.scss";
-import MenuNav from "../../Components/Admin/AdminNavbar";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './GerirIngredientesPage.module.scss';
+import MenuNav from '../../Components/Admin/AdminNavbar';
 import {
     SelectCarregando,
     SelectErro,
@@ -18,12 +18,11 @@ import {
     setPesoPorcao,
     IngredienteData,
     SelectIdSelecionado,
-    submit,
-} from "../../Features/Admin/GerirIngredientesSlice";
+    submit
+} from '../../Features/Admin/GerirIngredientesSlice';
 
 const GerirIngredientesPage = () => {
     const dispatch = useDispatch();
-
 
     const carregando = useSelector(SelectCarregando);
     const erro = useSelector(SelectErro);
@@ -35,13 +34,11 @@ const GerirIngredientesPage = () => {
     const pesoPorcao = useSelector(SelectPesoPorcao);
     const _idSelecionado = useSelector(SelectIdSelecionado);
 
-    const [imagemPreview, setImagemPreview] = React.useState("");
+    const [imagemPreview, setImagemPreview] = React.useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-
-        const imageFile = document.getElementById("imagem") as HTMLInputElement;
+        const imageFile = document.getElementById('imagem') as HTMLInputElement;
         const file = imageFile.files[0];
         const ingredienteDatar: IngredienteData = {
             _idSelecionado: _idSelecionado,
@@ -49,24 +46,24 @@ const GerirIngredientesPage = () => {
             preco: preco,
             imagem: file,
             descricao: descricao,
-            pesoPorcao: pesoPorcao,
+            pesoPorcao: pesoPorcao
         } as IngredienteData;
         dispatch(submit(ingredienteDatar));
-    }
+    };
 
     const resetFields = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(setNome(""));
-        dispatch(setPreco(""));
-        dispatch(setImagem(""));
-        dispatch(setDescricao(""));
-        dispatch(setPesoPorcao(""));
-        setImagemPreview("");
-    }
+        dispatch(setNome(''));
+        dispatch(setPreco(''));
+        dispatch(setImagem(''));
+        dispatch(setDescricao(''));
+        dispatch(setPesoPorcao(''));
+        setImagemPreview('');
+    };
 
     React.useEffect(() => {
         // set window title
-        document.title = "Gerir Ingredientes";
+        document.title = 'Gerir Ingredientes';
     }, []);
 
     return (
@@ -79,16 +76,13 @@ const GerirIngredientesPage = () => {
                 {/* Lista de Ingredientes cadastrados */}
                 <div className={styles.container}>
                     <h2>Ingredientes Disponíveis</h2>
-                    {
-                        carregando ? (
-                            <>
-                                <h2>Carregando...</h2>
-                            </>
-                        ) : (
-                            <>
-                            </>
-                        )
-                    }
+                    {carregando ? (
+                        <>
+                            <h2>Carregando...</h2>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 {/* Formulário para alterar ingrediente
                     campos:
@@ -104,87 +98,98 @@ const GerirIngredientesPage = () => {
                         <h3>{erro}</h3>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="nome">Nome</label>
                             <input
                                 type="text"
                                 id="nome"
                                 value={nome}
-                                onChange={(e) => dispatch(setNome(e.target.value))}
+                                onChange={(e) =>
+                                    dispatch(setNome(e.target.value))
+                                }
                                 placeholder="Nome do ingrediente"
                             />
                         </div>
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="preco">Preço</label>
                             <input
                                 type="number"
                                 id="preco"
                                 step="0.01"
                                 value={preco}
-                                onChange={(e) => dispatch(setPreco(e.target.value))}
+                                onChange={(e) =>
+                                    dispatch(setPreco(e.target.value))
+                                }
                                 placeholder="Preço do ingrediente"
                             />
                         </div>
 
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="imagem">Imagem Preview</label>
-                            {
-                                imagemPreview !== "" ? (
-                                    <img src={imagemPreview} alt="Imagem Preview" />
-                                ) : (
-                                    <div className={styles["empty-img"]}>
-                                        <h3>Nenhuma imagem selecionada</h3>
-                                    </div>
-                                )
-                            }
+                            {imagemPreview !== '' ? (
+                                <img src={imagemPreview} alt="Imagem Preview" />
+                            ) : (
+                                <div className={styles['empty-img']}>
+                                    <h3>Nenhuma imagem selecionada</h3>
+                                </div>
+                            )}
                         </div>
 
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="imagem">Imagem</label>
                             <input
                                 type="file"
                                 id="imagem"
                                 value={imagem}
                                 onChange={(e) => {
-                                    setImagemPreview(URL.createObjectURL(e.target.files[0]))
+                                    setImagemPreview(
+                                        URL.createObjectURL(e.target.files[0])
+                                    );
                                     dispatch(setImagem(e.target.value));
                                 }}
                                 accept="image/*"
                             />
                         </div>
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="descricao">Descrição</label>
                             <textarea
                                 id="descricao"
                                 rows={5}
                                 value={descricao}
-                                onChange={(e) => dispatch(setDescricao(e.target.value))}
+                                onChange={(e) =>
+                                    dispatch(setDescricao(e.target.value))
+                                }
                                 placeholder="Descrição do ingrediente"
                             />
                         </div>
-                        <div className={styles["form-group"]}>
+                        <div className={styles['form-group']}>
                             <label htmlFor="pesoPorcao">Peso por Porção</label>
                             <input
                                 type="number"
                                 id="pesoPorcao"
                                 step="0.01"
                                 value={pesoPorcao}
-                                onChange={(e) => dispatch(setPesoPorcao(e.target.value))}
+                                onChange={(e) =>
+                                    dispatch(setPesoPorcao(e.target.value))
+                                }
                                 placeholder="Peso por Porção"
                             />
                         </div>
-                        <div className={styles["form-group"]}>
-                            <button type="submit">{
-                                _idSelecionado === "" ? "Cadastrar" : "Atualizar"
-                            }</button>
-                            <button type="reset" onClick={resetFields}>Limpar</button>
+                        <div className={styles['form-group']}>
+                            <button type="submit">
+                                {_idSelecionado === ''
+                                    ? 'Cadastrar'
+                                    : 'Atualizar'}
+                            </button>
+                            <button type="reset" onClick={resetFields}>
+                                Limpar
+                            </button>
                         </div>
-
                     </form>
                 </div>
             </div>
         </>
     );
-}
+};
 
 export default GerirIngredientesPage;

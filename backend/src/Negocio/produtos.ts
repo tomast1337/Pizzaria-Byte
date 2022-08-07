@@ -1,29 +1,28 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 
-
 const produtosSchema: Schema = new Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        auto: true,
+        auto: true
     },
     nome: {
         type: String,
-        required: true,
+        required: true
     },
     descricao: {
         type: String,
-        required: true,
+        required: true
     },
     imagem: {
         type: String,
-        required: true,
+        required: true
     },
     preco: {
         type: Number,
-        required: true,
-    },
+        required: true
+    }
 });
 
 export default produtosSchema;

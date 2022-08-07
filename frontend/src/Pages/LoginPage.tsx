@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     selectEmail,
     selectSenha,
@@ -8,13 +8,11 @@ import {
     setSenha,
     logar,
     LoginData,
-    setError,
-} from "../Features/Login/LoginSlice";
-import { Link, useNavigate } from "react-router-dom";
-import LandingPageModel from "../Components/LandingPageModel";
-import styles from "./CriarContaPage.module.scss";
-
-
+    setError
+} from '../Features/Login/LoginSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import LandingPageModel from '../Components/LandingPageModel';
+import styles from './CriarContaPage.module.scss';
 
 const LoingPage = () => {
     const email = useSelector(selectEmail);
@@ -25,7 +23,7 @@ const LoingPage = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        document.title = "Pizzaria ON - Login";
+        document.title = 'Pizzaria ON - Login';
     }, []);
 
     const tokenRedirect = () => {
@@ -37,42 +35,42 @@ const LoingPage = () => {
            entregador = /entregador/menu
         */
         const relation: Record<string, string> = {
-            "admin": "/admin/menu",
-            "user": "/cliente/menu",
-            "cozinheiro": "/cozinheiro/menu",
-            "entregador": "/entregador/menu",
+            admin: '/admin/menu',
+            user: '/cliente/menu',
+            cozinheiro: '/cozinheiro/menu',
+            entregador: '/entregador/menu'
         };
 
         setTimeout(() => {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem('token');
 
             if (token) {
-                const user = JSON.parse(atob(token.split(".")[1]));
+                const user = JSON.parse(atob(token.split('.')[1]));
                 // verificar se o token ainda é válido
                 if (user.exp > Date.now() / 1000) {
                     const redirect: string = relation[user.type];
                     navigate(redirect);
                 } else {
-                    localStorage.removeItem("token");
-                    dispatcher(setError("Faça login novamente"));
+                    localStorage.removeItem('token');
+                    dispatcher(setError('Faça login novamente'));
                 }
             }
         }, 1000);
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const loginData: LoginData = {
             email,
-            senha,
+            senha
         };
-        if (erro === "") {
+        if (erro === '') {
             dispatcher(logar(loginData));
             tokenRedirect();
         } else {
             return;
         }
-    }
+    };
     React.useEffect(() => {
         // caso o usuário já tenha feito o login, redirecionar para a página correta
         tokenRedirect();
@@ -85,12 +83,10 @@ const LoingPage = () => {
             </div>
             <div>
                 <div className={styles.erro}>
-                    <h3>
-                        {erro}
-                    </h3>
+                    <h3>{erro}</h3>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="email">Email</label>
                         <input
                             id="email"
@@ -102,7 +98,7 @@ const LoingPage = () => {
                             autoComplete="on"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="senha">Senha</label>
                         <input
                             id="senha"
@@ -114,12 +110,12 @@ const LoingPage = () => {
                             autoComplete="off"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
-                        <button
-                            onClick={handleSubmit}
-                            type="submit">Entrar</button>
+                    <div className={styles['form-group']}>
+                        <button onClick={handleSubmit} type="submit">
+                            Entrar
+                        </button>
                     </div>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <Link to="/criar-conta">Criar Conta</Link>
                     </div>
                 </form>
@@ -129,8 +125,7 @@ const LoingPage = () => {
 };
 
 export default () => (
-
     <LandingPageModel>
         <LoingPage />
     </LandingPageModel>
-)
+);

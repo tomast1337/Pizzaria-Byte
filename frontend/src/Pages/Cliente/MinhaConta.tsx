@@ -1,16 +1,15 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./MinhaConta.module.scss";
-import stylesBase from "./clienteBase.module.scss";
-import MenuNav from "../../Components/Cliente/MenuNav";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './MinhaConta.module.scss';
+import stylesBase from './clienteBase.module.scss';
+import MenuNav from '../../Components/Cliente/MenuNav';
 
 const MinhaConta = () => {
-    const nome = "Nome Teste";
-    const email = "test@testmail.com";
-    const endereçoUltimaEntrega = "Rua Teste, 123";
-    const dataUltimaEntrega = "01/01/2020";
-    const numeroPedido = "12345";
-
+    const nome = 'Nome Teste';
+    const email = 'test@testmail.com';
+    const endereçoUltimaEntrega = 'Rua Teste, 123';
+    const dataUltimaEntrega = '01/01/2020';
+    const numeroPedido = '12345';
 
     return (
         <>
@@ -37,7 +36,7 @@ const MinhaConta = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default MinhaConta;

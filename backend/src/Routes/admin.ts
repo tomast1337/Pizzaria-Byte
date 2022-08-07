@@ -1,13 +1,7 @@
 import express from 'express';
 import formidable from 'express-formidable';
 import fs from 'fs';
-import {
-    ingredientes,
-    pedidos,
-    pizzas,
-    produtos,
-    usuarios
-} from '../Negocio';
+import { ingredientes, pedidos, pizzas, produtos, usuarios } from '../Negocio';
 
 const router: express.Router = express.Router();
 
@@ -23,17 +17,17 @@ const upload = formidable({
     uploadDir: './public/uploads',
     multiples: true,
     keepExtensions: true,
-    maxFileSize: 10 * 1024 * 1024    
+    maxFileSize: 10 * 1024 * 1024
 });
 
 // Rota para o admin ver as informações de um usuário pelo email
 router.get('/user/:email', async (req: any, res: any) => {
     const { email } = req.params;
 
-    const user:any = await usuarios.findOne({ email });
+    const user: any = await usuarios.findOne({ email });
 
     if (!user) {
-        return res.status(401).json({ error: "Usuário não cadastrado", });
+        return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
 
     return res.status(200).json(user);
@@ -46,10 +40,10 @@ router.get('/pedidos/:email', async (req: any, res: any) => {
     const user = await usuarios.findOne({ email });
 
     if (!user) {
-        return res.status(401).json({ error: "Usuário não cadastrado", });
+        return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
 
-    const pedidos_found:any = await pedidos.find({ email: user.email });
+    const pedidos_found: any = await pedidos.find({ email: user.email });
 
     return res.status(200).json(pedidos_found);
 });
@@ -62,11 +56,11 @@ router.post('/promover/:email', async (req: any, res: any) => {
     const user = await usuarios.findOne({ email });
 
     if (!user) {
-        return res.status(401).json({ error: "Usuário não cadastrado", });
+        return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
     const validType = ['admin', 'user', 'cozinheiro', 'entregador'];
     if (!validType.includes(type)) {
-        return res.status(400).json({ error: "Tipo de usuário inválido", });
+        return res.status(400).json({ error: 'Tipo de usuário inválido' });
     } else {
         user.type = type;
         await user.save();
@@ -76,20 +70,19 @@ router.post('/promover/:email', async (req: any, res: any) => {
 
 const checkFiles = (files: any) => {
     if (!files.imagem) {
-        console.log("Não foi enviado nenhuma imagem");
+        console.log('Não foi enviado nenhuma imagem');
         return false;
     }
     return true;
-}
+};
 
 enum tiposPaths {
-    ingrediente = "./assets/imgs/ingredientes/",
-    pizza = "./assets/imgs/pizzas/",
-    produto = "./assets/imgs/produtos/",
+    ingrediente = './assets/imgs/ingredientes/',
+    pizza = './assets/imgs/pizzas/',
+    produto = './assets/imgs/produtos/'
 }
 
 const moveFiles = (tipo: tiposPaths, imagem: any, nome: string) => {
-
     // verifica se os diretórios existem e cria se não existirem
     if (!fs.existsSync(tipo)) {
         // remove de dot and split by /
@@ -105,14 +98,14 @@ const moveFiles = (tipo: tiposPaths, imagem: any, nome: string) => {
     }
 
     const path = tipo.toString();
-    let newPath = `${path}${nome}.${imagem.path.split(".").at(-1)}`;
+    let newPath = `${path}${nome}.${imagem.path.split('.').at(-1)}`;
     try {
         fs.renameSync(imagem.path, newPath);
     } catch (error) {
         console.log(error);
     }
     return newPath;
-}
+};
 
 // Rota para adicionar ou editar um ingrediente
 router.post('/ingrediente', upload, async (req: any, res: any) => {
@@ -120,7 +113,7 @@ router.post('/ingrediente', upload, async (req: any, res: any) => {
     const { _id, nome, preco, descricao, pesoPorcao } = req.fields;
 
     if (!(nome || preco || descricao || pesoPorcao)) {
-        return res.status(400).json({ error: "Preencha todos os campos", });
+        return res.status(400).json({ error: 'Preencha todos os campos' });
     }
 
     const ingrediente = await ingredientes.findOne({ _id });
@@ -132,7 +125,11 @@ router.post('/ingrediente', upload, async (req: any, res: any) => {
         ingrediente.descricao = descricao;
         ingrediente.pesoPorcao = pesoPorcao;
         if (checkFiles(files)) {
-            ingrediente.imagem = moveFiles(tiposPaths.ingrediente, files.imagem, nome);
+            ingrediente.imagem = moveFiles(
+                tiposPaths.ingrediente,
+                files.imagem,
+                nome
+            );
         }
         await ingrediente.save();
         return res.status(200).json(ingrediente);
@@ -156,7 +153,7 @@ router.post('/pizza', upload, async (req: any, res: any) => {
     const { _id, nome, descricao, ingredientes } = req.fields;
 
     if (!(nome || descricao || ingredientes) || !(files && _id)) {
-        return res.status(400).json({ error: "Preencha todos os campos", });
+        return res.status(400).json({ error: 'Preencha todos os campos' });
     }
 
     const pizza = await pizzas.findOne({ _id });
@@ -191,11 +188,11 @@ router.post('/produto', upload, async (req: any, res: any) => {
     const { _id, nome, descricao, preco } = req.fields;
 
     if (!(nome || descricao || preco) || !(files && _id)) {
-        return res.status(400).json({ error: "Preencha todos os campos", });
+        return res.status(400).json({ error: 'Preencha todos os campos' });
     }
 
     const produto = await produtos.findOne({ _id });
-    
+
     if (produto) {
         // Editar produto
         produto.nome = nome;
@@ -212,7 +209,7 @@ router.post('/produto', upload, async (req: any, res: any) => {
             nome,
             descricao,
             preco,
-            imagem: moveFiles(tiposPaths.produto, files, nome),
+            imagem: moveFiles(tiposPaths.produto, files, nome)
         });
         await produtos.create(novoProduto);
         return res.status(200).json(novoProduto);
@@ -226,7 +223,7 @@ router.delete('/del/user/:email', async (req: any, res: any) => {
     const user = await usuarios.findOne({ email });
 
     if (!user) {
-        return res.status(401).json({ error: "Usuário não cadastrado", });
+        return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
     await user.remove();
     return res.status(200).json(user);
@@ -239,7 +236,7 @@ router.delete('/del/ingrediente/:id', async (req: any, res: any) => {
     const ingrediente = await ingredientes.findById(id);
 
     if (!ingrediente) {
-        return res.status(401).json({ error: "Ingrediente não cadastrado", });
+        return res.status(401).json({ error: 'Ingrediente não cadastrado' });
     }
 });
 
@@ -250,7 +247,7 @@ router.delete('/del/pizza/:id', async (req: any, res: any) => {
     const pizza = await pizzas.findById(id);
 
     if (!pizza) {
-        return res.status(401).json({ error: "Pizza não cadastrada", });
+        return res.status(401).json({ error: 'Pizza não cadastrada' });
     } else {
         await pizza.remove();
         return res.status(200).json(pizza);
@@ -264,7 +261,7 @@ router.delete('/del/produto/:id', async (req: any, res: any) => {
     const produto = await produtos.findById(id);
 
     if (!produto) {
-        return res.status(401).json({ error: "Produto não cadastrado", });
+        return res.status(401).json({ error: 'Produto não cadastrado' });
     } else {
         await produto.remove();
         return res.status(200).json(produto);
@@ -274,7 +271,6 @@ router.delete('/del/produto/:id', async (req: any, res: any) => {
 // Rotas para o admin ver relatório de vendas
 router.get('/relatorio/:dataInicio/:dataFim', async (req: any, res: any) => {
     const { dataInicio, dataFim } = req.params;
-
 });
 
 export default router;

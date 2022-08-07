@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./AdminNavbar.module.scss";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './AdminNavbar.module.scss';
 
 const AdminNavbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -25,10 +25,12 @@ const AdminNavbar = () => {
                     </button>
                 </div>
             </nav>
-            <div className={styles.menu}
+            <div
+                className={styles.menu}
                 style={{
-                    transform: isOpen ? "translateX(0)" : "translateX(98%)"
-                }}>
+                    transform: isOpen ? 'translateX(0)' : 'translateX(98%)'
+                }}
+            >
                 <ul>
                     <li>
                         <Link to="/admin/menu-admin">Menu Admin</Link>
@@ -37,7 +39,9 @@ const AdminNavbar = () => {
                         <Link to="/admin/gerir-pizzas">Gerir Pizzas</Link>
                     </li>
                     <li>
-                        <Link to="/admin/gerir-ingredientes">Gerir Ingredientes</Link>
+                        <Link to="/admin/gerir-ingredientes">
+                            Gerir Ingredientes
+                        </Link>
                     </li>
                     <li>
                         <Link to="/admin/gerir-produtos">Gerir Produtos</Link>
@@ -46,20 +50,21 @@ const AdminNavbar = () => {
                         <Link to="/admin/gerir-usuarios">Gerir Usuarios</Link>
                     </li>
                     <li>
-                        <button 
+                        <button
                             onClick={() => {
                                 // remover o token do localStorage
-                                localStorage.removeItem("token");
+                                localStorage.removeItem('token');
                                 // redirecionar para a página de login
-                                navigate("/");
-                            }}>
-                            Logout</button>
+                                navigate('/');
+                            }}
+                        >
+                            Logout
+                        </button>
                     </li>
                 </ul>
             </div>
         </>
     );
-}
+};
 
 export default AdminNavbar;
-

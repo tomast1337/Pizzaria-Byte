@@ -1,17 +1,17 @@
 import express from 'express';
 import rotas from './Routes';
 import cors from 'cors';
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 import getConnection from './DataBase';
 
 const main = async () => {
     dotenv.config();
-    const PORT: string = "3000" || process.env.PORT;
+    const PORT: string = '3000' || process.env.PORT;
     const server: express.Application = express();
 
     try {
         await getConnection();
-        console.log("Banco de dados conectado com sucesso");
+        console.log('Banco de dados conectado com sucesso');
     } catch (error) {
         console.error(error);
         process.exit(1);
@@ -23,18 +23,18 @@ const main = async () => {
     // application/json middleware
     server.use(express.json());
 
-    //rotas 
+    //rotas
     server.use('/api', rotas);
 
     // 404 handler
     server.use((req, res, next) => {
-        res.status(404).send("404: Page not found");
+        res.status(404).send('404: Page not found');
     });
 
     server.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
         console.log(`http://localhost:${PORT}`);
     });
-}
+};
 
 main();

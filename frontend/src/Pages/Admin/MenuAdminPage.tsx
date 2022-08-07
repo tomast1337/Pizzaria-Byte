@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./MenuAdminPage.module.scss";
-import MenuNav from "../../Components/Admin/AdminNavbar";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './MenuAdminPage.module.scss';
+import MenuNav from '../../Components/Admin/AdminNavbar';
 
 const MenuAdminPage = () => {
     return (
@@ -9,6 +9,6 @@ const MenuAdminPage = () => {
             <MenuNav />
         </>
     );
-}
+};
 
 export default MenuAdminPage;

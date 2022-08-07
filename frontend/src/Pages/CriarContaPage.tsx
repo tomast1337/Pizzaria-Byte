@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     selectConfirmarSenha,
     selectEmail,
@@ -12,10 +12,10 @@ import {
     setSenha,
     setConfirmarSenha,
     criarContaFetch,
-    criarContaData,
-} from "../Features/Login/CriarContaSlice";
-import LandingPageModel from "../Components/LandingPageModel";
-import styles from "./CriarContaPage.module.scss";
+    criarContaData
+} from '../Features/Login/CriarContaSlice';
+import LandingPageModel from '../Components/LandingPageModel';
+import styles from './CriarContaPage.module.scss';
 
 const CriarContaPage = () => {
     const nome = useSelector(selectNome);
@@ -29,25 +29,25 @@ const CriarContaPage = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        document.title = "Pizzaria ON - Criar Usuário";
+        document.title = 'Pizzaria ON - Criar Usuário';
     }, []);
 
-    const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data:criarContaData = {
+        const data: criarContaData = {
             nome,
             email,
             senha,
-            confirmarSenha,
+            confirmarSenha
         };
-        if (erro === "") {
+        if (erro === '') {
             dispatcher(criarContaFetch(data));
         }
-        if (erro === "") {
+        if (erro === '') {
             // redirect to login page
-            navigate("/");
+            navigate('/');
         }
-    }
+    };
 
     return (
         <div className={styles.page}>
@@ -57,12 +57,10 @@ const CriarContaPage = () => {
             </div>
             <div>
                 <div className={styles.erro}>
-                    <h3>
-                        {erro}
-                    </h3>
+                    <h3>{erro}</h3>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="nome">Nome</label>
                         <input
                             id="nome"
@@ -74,7 +72,7 @@ const CriarContaPage = () => {
                             autoComplete="on"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="email">Email</label>
                         <input
                             id="email"
@@ -86,7 +84,7 @@ const CriarContaPage = () => {
                             autoComplete="on"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="senha">Senha</label>
                         <input
                             id="senha"
@@ -98,7 +96,7 @@ const CriarContaPage = () => {
                             autoComplete="off"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
+                    <div className={styles['form-group']}>
                         <label htmlFor="confirmarSenha">Confirmar Senha:</label>
                         <input
                             id="confirmarSenha"
@@ -110,18 +108,21 @@ const CriarContaPage = () => {
                             autoComplete="off"
                         />
                     </div>
-                    <div className={styles["form-group"]}>
-                        <button className={styles["form-button"]} type="submit">Criar Conta</button>
+                    <div className={styles['form-group']}>
+                        <button className={styles['form-button']} type="submit">
+                            Criar Conta
+                        </button>
                     </div>
-                    <div className={styles["form-group"]}>
-                        <Link className={styles["form-button"]} to="/">Voltar</Link>
+                    <div className={styles['form-group']}>
+                        <Link className={styles['form-button']} to="/">
+                            Voltar
+                        </Link>
                     </div>
-
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default () => (
     <LandingPageModel>

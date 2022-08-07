@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./MenuNav.module.scss";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './MenuNav.module.scss';
 
 const MenuNav = () => {
     const QuantidadeItensCarrinho = 5;
@@ -24,11 +24,13 @@ const MenuNav = () => {
                     </button>
                 </div>
             </nav>
-            <div className={styles.menu}
+            <div
+                className={styles.menu}
                 style={{
-                    transform: isOpen ? "translateX(0)" : "translateX(98%)"
-                }}>
-                <ul >
+                    transform: isOpen ? 'translateX(0)' : 'translateX(98%)'
+                }}
+            >
+                <ul>
                     <li>
                         <Link to="/cliente/menu">Menu</Link>
                     </li>
@@ -44,35 +46,34 @@ const MenuNav = () => {
                     <li>
                         <Link to="/cliente/carrinho">
                             Carrinho
-                            {
-                                QuantidadeItensCarrinho > 0 ?
-                                    <span
-                                        className={styles.quantidadeItensCarrinho}>
-                                        {QuantidadeItensCarrinho} {
-                                            QuantidadeItensCarrinho > 1 ?
-                                                "itens" : "item"
-                                        }
-                                    </span>
-                                    :
-                                    null
-
-                            }
+                            {QuantidadeItensCarrinho > 0 ? (
+                                <span
+                                    className={styles.quantidadeItensCarrinho}
+                                >
+                                    {QuantidadeItensCarrinho}{' '}
+                                    {QuantidadeItensCarrinho > 1
+                                        ? 'itens'
+                                        : 'item'}
+                                </span>
+                            ) : null}
                         </Link>
                     </li>
                     <li>
-                        <button 
+                        <button
                             onClick={() => {
                                 // remover o token do localStorage
-                                localStorage.removeItem("token");
+                                localStorage.removeItem('token');
                                 // redirecionar para a página de login
-                                navigate("/");
-                            }}>
-                            Logout</button>
+                                navigate('/');
+                            }}
+                        >
+                            Logout
+                        </button>
                     </li>
                 </ul>
             </div>
         </>
     );
-}
+};
 
 export default MenuNav;

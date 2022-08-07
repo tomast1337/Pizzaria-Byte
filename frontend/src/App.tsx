@@ -1,44 +1,43 @@
-import * as React from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MenuCliente from "./Pages/Cliente/Menu";
-import { store } from "./Features/store";
+import * as React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MenuCliente from './Pages/Cliente/Menu';
+import { store } from './Features/store';
 
 /* Login */
-import CriarContaPage from "./Pages/CriarContaPage";
-import LoingPage from "./Pages/LoginPage";
+import CriarContaPage from './Pages/CriarContaPage';
+import LoingPage from './Pages/LoginPage';
 
 /* Cliente */
-import CriarPizza from "./Pages/Cliente/CriarPizza";
-import Carrinho from "./Pages/Cliente/Carrinho";
-import MeusPedidos from "./Pages/Cliente/MeusPedidos";
-import MinhaConta from "./Pages/Cliente/MinhaConta";
-import FinalizarPedido from "./Pages/Cliente/FinalizarPedido";
+import CriarPizza from './Pages/Cliente/CriarPizza';
+import Carrinho from './Pages/Cliente/Carrinho';
+import MeusPedidos from './Pages/Cliente/MeusPedidos';
+import MinhaConta from './Pages/Cliente/MinhaConta';
+import FinalizarPedido from './Pages/Cliente/FinalizarPedido';
 
 /* Admin */
-import MenuAdminPage from "./Pages/Admin/MenuAdminPage";
-import GerirPizzasPage from "./Pages/Admin/GerirPizzasPage";
-import GerirIngredientesPage from "./Pages/Admin/GerirIngredientesPage";
-import GerirProdutosPage from "./Pages/Admin/GerirProdutosPage";
-import GerirUserPage from "./Pages/Admin/GerirUserPage";
+import MenuAdminPage from './Pages/Admin/MenuAdminPage';
+import GerirPizzasPage from './Pages/Admin/GerirPizzasPage';
+import GerirIngredientesPage from './Pages/Admin/GerirIngredientesPage';
+import GerirProdutosPage from './Pages/Admin/GerirProdutosPage';
+import GerirUserPage from './Pages/Admin/GerirUserPage';
 
 export default () => {
     const [token, setToken] = React.useState(null);
-    const [userType, setUserType] = React.useState("");
+    const [userType, setUserType] = React.useState('');
 
     React.useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         if (token) {
             setToken(token);
-            const user = JSON.parse(atob(token.split(".")[1]));
+            const user = JSON.parse(atob(token.split('.')[1]));
             setUserType(user.type);
         }
     }, []);
 
-
     return (
         <Provider store={store}>
-            <BrowserRouter basename={"/"}>
+            <BrowserRouter basename={'/'}>
                 <Routes>
                     {/*Login
                     /
@@ -56,12 +55,23 @@ export default () => {
                     */}
 
                     <Route path="/cliente/menu" element={<MenuCliente />} />
-                    <Route path="/cliente/criar-pizza" element={<CriarPizza />} />
-                    <Route path="/cliente/meus-pedidos" element={<MeusPedidos />} />
+                    <Route
+                        path="/cliente/criar-pizza"
+                        element={<CriarPizza />}
+                    />
+                    <Route
+                        path="/cliente/meus-pedidos"
+                        element={<MeusPedidos />}
+                    />
                     <Route path="/cliente/carrinho" element={<Carrinho />} />
-                    <Route path="/cliente/minha-conta" element={<MinhaConta />} />
-                    <Route path="/cliente/finalizar-pedido" element={<FinalizarPedido />} />
-
+                    <Route
+                        path="/cliente/minha-conta"
+                        element={<MinhaConta />}
+                    />
+                    <Route
+                        path="/cliente/finalizar-pedido"
+                        element={<FinalizarPedido />}
+                    />
 
                     {/*Admin*
                         /admin/menu-admin
@@ -72,14 +82,24 @@ export default () => {
                     */}
 
                     <Route path="/admin/menu" element={<MenuAdminPage />} />
-                    <Route path="/admin/gerir-pizzas" element={<GerirPizzasPage />} />
-                    <Route path="/admin/gerir-ingredientes" element={<GerirIngredientesPage />} />
-                    <Route path="/admin/gerir-produtos" element={<GerirProdutosPage />} />
-                    <Route path="/admin/gerir-usuarios" element={<GerirUserPage />} />
-
+                    <Route
+                        path="/admin/gerir-pizzas"
+                        element={<GerirPizzasPage />}
+                    />
+                    <Route
+                        path="/admin/gerir-ingredientes"
+                        element={<GerirIngredientesPage />}
+                    />
+                    <Route
+                        path="/admin/gerir-produtos"
+                        element={<GerirProdutosPage />}
+                    />
+                    <Route
+                        path="/admin/gerir-usuarios"
+                        element={<GerirUserPage />}
+                    />
 
                     {/*Cozinheiro*/}
-
 
                     {/*Entregador*/}
 
@@ -89,4 +109,4 @@ export default () => {
             </BrowserRouter>
         </Provider>
     );
-}
+};

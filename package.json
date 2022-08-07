@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --prefix \"{name} -- \" --kill-others --names \"BACKEND⚙️⚙️ ,FRONTEND📱\" \"cd backend && npm run start\" \" cd frontend && npm run start\"",
     "setup": "((npm i) & (cd backend && npm i) & (cd frontend && npm i)) && exit 0",
-    "format": "prettier --write 'frontend/src/**/*.{ts,tsx,scss}' 'backend/src/**/*.{ts}' --parser babel --print-width 80 --tab-width 4"
+    "format": "prettier --write './frontend/src/**/*.{ts,tsx}' './backend/src/**/*.ts' --config .prettierrc"
   },
   "repository": {
     "type": "git",

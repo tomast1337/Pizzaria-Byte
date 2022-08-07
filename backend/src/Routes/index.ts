@@ -13,7 +13,6 @@ import {
     isCliente,
     isCozinheiro,
     isEntregador
-
 } from '../Middlewares/auth';
 
 const router: express.Router = express.Router();

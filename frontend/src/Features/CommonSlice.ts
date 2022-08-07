@@ -1,7 +1,7 @@
-import axios from "axios";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-import { BACKEND_URL } from "../variables";
+import axios from 'axios';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from './store';
+import { BACKEND_URL } from '../variables';
 
 export type ingredienteData = {
     _id: string;
@@ -10,7 +10,7 @@ export type ingredienteData = {
     imagem: File;
     descricao: string;
     pesoPorcao: number;
-}
+};
 
 export type pizzaData = {
     _id: string;
@@ -18,7 +18,7 @@ export type pizzaData = {
     descricao: string;
     imagem: string;
     ingredientes: string[];
-}
+};
 
 export type produtoData = {
     _id: string;
@@ -26,7 +26,7 @@ export type produtoData = {
     descricao: string;
     imagem: string;
     preco: number;
-}
+};
 
 export const fetchIngredientes = createAsyncThunk<
     ingredienteData[],
@@ -37,23 +37,21 @@ export const fetchIngredientes = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->("common/fetchIngredientes", async (_, { rejectWithValue }: any) => {
+>('common/fetchIngredientes', async (_, { rejectWithValue }: any) => {
     try {
-        const token = localStorage.getItem("token") || "";
+        const token = localStorage.getItem('token') || '';
         const response = await axios.get(`${BACKEND_URL}cliente/ingredientes`, {
             headers: {
-                "x-auth-token": token,
+                'x-auth-token': token
             }
         });
         return response.data;
-    }
-    catch (error: any) {
+    } catch (error: any) {
         if (error.response) {
             console.log(error.response.data);
             return rejectWithValue(`${error.response.data.error}`);
-        }
-        else if (error.request) {
-            return rejectWithValue("Erro no servidor");
+        } else if (error.request) {
+            return rejectWithValue('Erro no servidor');
         }
     }
 });
@@ -67,23 +65,21 @@ export const fetchPizzas = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->("common/fetchPizzas", async (_, { rejectWithValue }: any) => {
+>('common/fetchPizzas', async (_, { rejectWithValue }: any) => {
     try {
-        const token = localStorage.getItem("token") || "";
+        const token = localStorage.getItem('token') || '';
         const response = await axios.get(`${BACKEND_URL}cliente/pizzas`, {
             headers: {
-                "x-auth-token": token,
+                'x-auth-token': token
             }
         });
         return response.data;
-    }
-    catch (error: any) {
+    } catch (error: any) {
         if (error.response) {
             console.log(error.response.data);
             return rejectWithValue(`${error.response.data.error}`);
-        }
-        else if (error.request) {
-            return rejectWithValue("Erro no servidor");
+        } else if (error.request) {
+            return rejectWithValue('Erro no servidor');
         }
     }
 });
@@ -97,29 +93,27 @@ export const fetchProdutos = createAsyncThunk<
             setErro: (erro: string) => void;
         };
     }
->("common/fetchProdutos", async (_, { rejectWithValue }: any) => {
+>('common/fetchProdutos', async (_, { rejectWithValue }: any) => {
     try {
-        const token = localStorage.getItem("token") || "";
+        const token = localStorage.getItem('token') || '';
         const response = await axios.get(`${BACKEND_URL}cliente/produtos`, {
             headers: {
-                "x-auth-token": token,
+                'x-auth-token': token
             }
         });
         return response.data;
-    }
-    catch (error: any) {
+    } catch (error: any) {
         if (error.response) {
             console.log(error.response.data);
             return rejectWithValue(`${error.response.data.error}`);
-        }
-        else if (error.request) {
-            return rejectWithValue("Erro no servidor");
+        } else if (error.request) {
+            return rejectWithValue('Erro no servidor');
         }
     }
 });
 
 const CommonSlice = createSlice({
-    name: "common",
+    name: 'common',
     initialState: {
         ingredientes: [] as ingredienteData[],
         carregandoIngredientes: true,
@@ -127,7 +121,7 @@ const CommonSlice = createSlice({
         carregandoPizzas: true,
         produtos: [] as produtoData[],
         carregandoProdutos: true,
-        erro: "" as string,
+        erro: '' as string
     },
     reducers: {
         setErro: (state, action: PayloadAction<string>) => {
@@ -136,43 +130,55 @@ const CommonSlice = createSlice({
     },
     extraReducers: {
         /*------------------------------------fetchIngredientes------------------------------------*/
-        [fetchIngredientes.fulfilled]: (state, action: PayloadAction<ingredienteData[]>) => {
+        [fetchIngredientes.fulfilled]: (
+            state,
+            action: PayloadAction<ingredienteData[]>
+        ) => {
             state.ingredientes = action.payload;
             state.carregandoIngredientes = false;
-        }
-        [fetchIngredientes.rejected]: (state, action: PayloadAction<string>) => {
+        },
+        [fetchIngredientes.rejected]: (
+            state,
+            action: PayloadAction<string>
+        ) => {
             state.erro = action.payload;
-        }
+        },
         [fetchIngredientes.pending]: (state) => {
             state.carregandoIngredientes = true;
-        }
-/*------------------------------------fetchPizzas------------------------------------*/
-        [fetchPizzas.fulfilled]: (state, action: PayloadAction<pizzaData[]>) => {
+        },
+        /*------------------------------------fetchPizzas------------------------------------*/
+        [fetchPizzas.fulfilled]: (
+            state,
+            action: PayloadAction<pizzaData[]>
+        ) => {
             state.pizzas = action.payload;
             state.carregandoPizzas = false;
-        }
+        },
         [fetchPizzas.rejected]: (state, action: PayloadAction<string>) => {
             state.erro = action.payload;
-        }
+        },
         [fetchPizzas.pending]: (state) => {
             state.carregandoPizzas = true;
-        }
-/*------------------------------------fetchProdutos------------------------------------*/
-        [fetchProdutos.fulfilled]: (state, action: PayloadAction<produtoData[]>) => {
+        },
+        /*------------------------------------fetchProdutos------------------------------------*/
+        [fetchProdutos.fulfilled]: (
+            state,
+            action: PayloadAction<produtoData[]>
+        ) => {
             state.produtos = action.payload;
             state.carregandoProdutos = false;
-        }
+        },
         [fetchProdutos.rejected]: (state, action: PayloadAction<string>) => {
             state.erro = action.payload;
-        }
+        },
         [fetchProdutos.pending]: (state) => {
             state.carregandoProdutos = true;
         }
     }
 });
 
-
-export const selectIngredientes = (state: RootState) => state.common.ingredientes;
+export const selectIngredientes = (state: RootState) =>
+    state.common.ingredientes;
 export const selectPizzas = (state: RootState) => state.common.pizzas;
 export const selectProdutos = (state: RootState) => state.common.produtos;
 
