@@ -21,12 +21,12 @@ const main = async () => {
     // criar pasta assets caso não exista
     if (!fs.existsSync('./assets')) fs.mkdirSync('./assets');
     //servir arquivos estáticos na pasta assets
-    server.use('/assets',express.static('assets'));
-    
+    server.use('/assets', express.static('assets'));
+
     //criar pasta public caso não exista
     if (!fs.existsSync('./public')) fs.mkdirSync('./public');
     //servir arquivos estáticos na pasta public
-    server.use('/',express.static('public'));
+    server.use('/', express.static('public'));
 
     // Cors middleware
     server.use(cors());
