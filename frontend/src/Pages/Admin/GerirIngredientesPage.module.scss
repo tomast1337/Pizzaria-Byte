@@ -11,10 +11,12 @@
     .erro {
         color: $alert-danger;
         font-size: 1.5rem;
+        min-height: 1.5rem;
         font-weight: bold;
         margin-top: 1rem;
         font-family: $text-alt;
         min-height: 2.5rem;
+        text-align: center;
     }
 
     .container {
@@ -135,10 +137,10 @@
                 color: $white;
                 display: block;
                 width: fit-content;
-                margin: 5px auto;
+                margin: 1rem auto;
                 font-family: $text  !important;
                 font-weight: bold;
-
+                min-width: 250px;
                 &[type="submit"] {
                     border: 1px solid $alert-success;
                     background-color: $alert-success;

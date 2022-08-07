@@ -11,7 +11,12 @@ import {
 
 const router: express.Router = express.Router();
 
-
+// criar diretório para imagens se não existirem
+if (!fs.existsSync('./public/uploads')) {
+    fs.mkdirSync('./public');
+    fs.mkdirSync('./public/uploads');
+    console.log('Diretório "uploads" não existe e foi criado');
+}
 
 const upload = formidable({
     encoding: 'utf-8',
@@ -87,8 +92,16 @@ const moveFiles = (tipo: tiposPaths, imagem: any, nome: string) => {
 
     // verifica se os diretórios existem e cria se não existirem
     if (!fs.existsSync(tipo)) {
-        fs.mkdirSync(tipo);
-        console.log(`Diretório ${tipo} estava inexistente e foi criado`);
+        // remove de dot and split by /
+        const folderNames = tipo.replace(/\./g, '').split('/');
+        let path = '.';
+        for (let i = 0; i < folderNames.length; i++) {
+            path += '/' + folderNames[i];
+            if (!fs.existsSync(path)) {
+                fs.mkdirSync(path);
+                console.log(`O diretório ${path} não existe e foi criado`);
+            }
+        }
     }
 
     const path = tipo.toString();
@@ -106,7 +119,7 @@ router.post('/ingrediente', upload, async (req: any, res: any) => {
     const files = req.files;
     const { _id, nome, preco, descricao, pesoPorcao } = req.fields;
 
-    if (!(nome || preco || descricao || pesoPorcao) || !(files && _id)) {
+    if (!(nome || preco || descricao || pesoPorcao)) {
         return res.status(400).json({ error: "Preencha todos os campos", });
     }
 

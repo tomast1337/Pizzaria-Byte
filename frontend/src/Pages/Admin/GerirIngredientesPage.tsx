@@ -39,15 +39,29 @@ const GerirIngredientesPage = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+
+        const imageFile = document.getElementById("imagem") as HTMLInputElement;
+        const file = imageFile.files[0];
         const ingredienteDatar: IngredienteData = {
             _idSelecionado: _idSelecionado,
             nome: nome,
             preco: preco,
-            imagem: imagem,
+            imagem: file,
             descricao: descricao,
             pesoPorcao: pesoPorcao,
         } as IngredienteData;
         dispatch(submit(ingredienteDatar));
+    }
+
+    const resetFields = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(setNome(""));
+        dispatch(setPreco(""));
+        dispatch(setImagem(""));
+        dispatch(setDescricao(""));
+        dispatch(setPesoPorcao(""));
+        setImagemPreview("");
     }
 
     React.useEffect(() => {
@@ -86,6 +100,9 @@ const GerirIngredientesPage = () => {
                 */}
                 <div className={styles.container}>
                     <h2>Alterar Ingrediente</h2>
+                    <div className={styles.erro}>
+                        <h3>{erro}</h3>
+                    </div>
                     <form onSubmit={handleSubmit}>
                         <div className={styles["form-group"]}>
                             <label htmlFor="nome">Nome</label>
@@ -129,8 +146,8 @@ const GerirIngredientesPage = () => {
                                 id="imagem"
                                 value={imagem}
                                 onChange={(e) => {
-                                    dispatch(setImagem(e.target.value))
                                     setImagemPreview(URL.createObjectURL(e.target.files[0]))
+                                    dispatch(setImagem(e.target.value));
                                 }}
                                 accept="image/*"
                             />
@@ -157,8 +174,10 @@ const GerirIngredientesPage = () => {
                             />
                         </div>
                         <div className={styles["form-group"]}>
-                            <button type="submit">Alterar</button>
-                            <button type="reset">Limpar</button>
+                            <button type="submit">{
+                                _idSelecionado === "" ? "Cadastrar" : "Atualizar"
+                            }</button>
+                            <button type="reset" onClick={resetFields}>Limpar</button>
                         </div>
 
                     </form>

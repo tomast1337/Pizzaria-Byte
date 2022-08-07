@@ -108,6 +108,11 @@
                 font-weight: bold;
                 transition: all 0.3s ease-in-out;
 
+                // desktop
+                @media (min-width: 1025px) {
+                    font-size: 2em;
+                }
+
                 &:hover {
                     color: $brand3;
                 }

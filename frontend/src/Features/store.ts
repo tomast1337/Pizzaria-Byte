@@ -8,7 +8,17 @@ export const store = configureStore({
         // Login / Criar Conta
         criarConta: CriarContaSlice,
         login: LoginSlice,
+        
+        // Cliente
+        
+
+        // Admin
         gerirIngredientes: GerirIngredientesSlice,
+        
+        // Cozinheiro
+
+        // Entregador
+
     }
 });
 

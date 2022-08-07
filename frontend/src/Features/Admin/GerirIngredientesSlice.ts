@@ -7,7 +7,7 @@ export interface IngredienteData {
     _idSelecionado: string;
     nome: string;
     preco: number;
-    imagem: string;
+    imagem: File;
     descricao: string;
     pesoPorcao: number;
 }
@@ -38,11 +38,16 @@ export const submit = createAsyncThunk<
         fromData.append("preco", data.preco.toString());
         fromData.append("descricao", data.descricao);
         fromData.append("pesoPorcao", data.pesoPorcao.toString());
-        
-        const response = await axios.post(`${BACKEND_URL}ingrediente`, fromData);
-        
+
+        const token = localStorage.getItem("token") || "";
+
+        const response = await axios.post(`${BACKEND_URL}admin/ingrediente`, fromData, {
+            headers: {
+                "x-auth-token": token,
+            }
+        });
         console.log(response);
-        
+
         return response.data;
     }
     catch (error: any) {
