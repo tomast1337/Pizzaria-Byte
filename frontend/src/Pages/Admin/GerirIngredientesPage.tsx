@@ -17,7 +17,9 @@ import {
     IngredienteData,
     SelectIdSelecionado,
     setidSelecionado,
-    submit
+    submit,
+    setErro,
+    deleteIngrediente
 } from '../../Features/Admin/GerirIngredientesSlice';
 import {
     fetchIngredientes,
@@ -46,7 +48,7 @@ const Ingreditente = (prop: IngredienteType) => {
             dispatcher(setidSelecionado(prop._id));
             dispatcher(setNome(prop.nome));
             dispatcher(setPreco(prop.preco));
-            dispatcher(setDescricao('descricao'));
+            dispatcher(setDescricao(prop.descricao));
             dispatcher(setPesoPorcao(prop.pesoPorcao));
         }
     };
@@ -118,6 +120,14 @@ const GerirIngredientesPage = () => {
     const _idSelecionado = useSelector(SelectIdSelecionado);
     const [imagemPreview, setImagemPreview] = React.useState('');
 
+    const scrollToTop = () => {
+        //scroll to id = "Ingredientes"
+        const erro = document.getElementById('Ingredientes');
+        if (erro) {
+            erro.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const imageFile = document.getElementById('imagem') as HTMLInputElement;
@@ -130,16 +140,26 @@ const GerirIngredientesPage = () => {
             descricao: descricao,
             pesoPorcao: pesoPorcao
         } as IngredienteData;
+
         dispatcher(submit(ingredienteDatar));
+
+        setTimeout(() => {
+            dispatcher(fetchIngredientes());
+        }, 1000);
+        setTimeout(() => {
+            dispatcher(setErro(''));
+        }, 5000);
+        scrollToTop();
     };
 
     const resetFields = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatcher(setNome(''));
-        dispatcher(setPreco(''));
+        dispatcher(setPreco(1));
         dispatcher(setDescricao(''));
-        dispatcher(setPesoPorcao(''));
+        dispatcher(setPesoPorcao(10));
         setImagemPreview('');
+        scrollToTop();
     };
 
     React.useEffect(() => {
@@ -155,7 +175,7 @@ const GerirIngredientesPage = () => {
                     <h1>Gerir Ingredientes</h1>
                 </div>
                 {/* Lista de Ingredientes cadastrados */}
-                <div className={styles.container}>
+                <div className={styles.container} id="Ingredientes">
                     <h2>Ingredientes Disponíveis</h2>
                     <IngredientesList />
                 </div>
@@ -190,7 +210,7 @@ const GerirIngredientesPage = () => {
                             <input
                                 type="number"
                                 id="preco"
-                                step="0.01"
+                                step="0.25"
                                 value={preco}
                                 onChange={(e) =>
                                     dispatcher(setPreco(e.target.value))
@@ -242,7 +262,7 @@ const GerirIngredientesPage = () => {
                             <input
                                 type="number"
                                 id="pesoPorcao"
-                                step="0.01"
+                                step="0.25"
                                 value={pesoPorcao}
                                 onChange={(e) =>
                                     dispatcher(setPesoPorcao(e.target.value))
@@ -259,6 +279,24 @@ const GerirIngredientesPage = () => {
                             <button type="reset" onClick={resetFields}>
                                 Limpar
                             </button>
+                            {/* Delete se não for uma criação */}
+                            {_idSelecionado !== '' && (
+                                <button
+                                    className={styles['delete-button']}
+                                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                                        e.preventDefault();
+                                        dispatcher(deleteIngrediente(_idSelecionado))
+                                        setTimeout(() => {
+                                            dispatcher(fetchIngredientes());
+                                        }, 1000);
+                                        setTimeout(() => {
+                                            dispatcher(setErro(''));
+                                        }, 5000);
+                                        scrollToTop();
+                                    }}>
+                                    Excluir
+                                </button>
+                            )}
                         </div>
                     </form>
                 </div>

@@ -17,6 +17,13 @@
         font-family: $text-alt;
         min-height: 2.5rem;
         text-align: center;
+
+        // desktop
+        //Desktop
+        @media (min-width: 1025px) {
+            font-size: 1rem;
+            min-height: 1rem;
+        }
     }
 
     .container {
@@ -49,6 +56,7 @@
         }
 
         // desktop
+        //Desktop
         @media (min-width: 1025px) {
             width: 80%;
         }
@@ -59,6 +67,11 @@
         width: 100%;
         margin: auto;
 
+        //Desktop
+        @media (min-width: 1025px) {
+            margin: 5px auto;
+            width: 70%;
+        }
 
         .form-group {
             width: 90%;
@@ -66,6 +79,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
+
 
             input {
                 display: block;
@@ -78,6 +93,11 @@
                 &:focus {
                     outline: none;
                     border-color: $admin2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
                 }
             }
 
@@ -92,6 +112,11 @@
                     outline: none;
                     border-color: $admin2;
                 }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
             }
 
             label {
@@ -99,6 +124,11 @@
                 display: block;
                 width: 100%;
                 margin-bottom: .5rem;
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
             }
 
             textarea {
@@ -128,6 +158,11 @@
                 ::-webkit-scrollbar-thumb {
                     background: $brand2;
                 }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    font-size: 20px;
+                }
             }
 
             button {
@@ -141,27 +176,39 @@
                 font-family: $text  !important;
                 font-weight: bold;
                 min-width: 250px;
+
                 &[type="submit"] {
                     border: 1px solid $alert-success;
                     background-color: $alert-success;
                 }
 
                 &[type="reset"] {
-                    border: 1px solid $alert-danger;
+                    border: 1px solid $alert-warning;
+                    background-color: $alert-warning;
+                }
+                &.delete-button{
                     background-color: $alert-danger;
+                    border: 1px solid $alert-danger;
                 }
             }
 
             //image preview
             img {
+                object-fit: cover;
                 width: 50%;
                 height: auto;
+                aspect-ratio: 1/1;
                 border-radius: .5rem;
                 box-shadow: 0 0 .2rem $black;
 
                 &:focus {
                     outline: none;
                     border-color: $admin2;
+                }
+
+                //Desktop
+                @media (min-width: 1025px) {
+                    width: 25%;
                 }
             }
 
@@ -187,7 +234,7 @@
     }
 }
 
-div.ingredienteList{
+div.ingredienteList {
     overflow: auto;
     white-space: nowrap;
     display: flex;
@@ -196,6 +243,7 @@ div.ingredienteList{
     align-items: center;
     width: 100%;
     height: fit-content;
+
     &::-webkit-scrollbar {
         width: 10px;
         height: 10px;
@@ -206,46 +254,49 @@ div.ingredienteList{
         background-attachment: fixed;
         position: absolute;
     }
-    
+
     /* Track */
     &::-webkit-scrollbar-track {
         background: transparent;
     }
-    
+
     /* Handle */
     &::-webkit-scrollbar-thumb {
         background: $admin2;
         border-radius: 0px;
         border-radius: 5px;
     }
-    
+
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
         border-radius: 10px;
     }
 }
 
-.ingrediente{
+.ingrediente {
     width: 20vw;
     height: fit-content;
     margin: .5em 1em;
     padding: .5em;
     border-radius: .5rem;
     background-color: $admin2;
-    .nome{
+
+    .nome {
         font-family: $title;
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
         margin-top: .1rem;
     }
-    .filed{
+
+    .filed {
         font-family: $text;
         font-size: 1rem;
         text-align: center;
         margin-top: .1rem;
         display: block;
-        span{
+
+        span {
             font-family: $text-alt;
             font-size: 1rem;
             text-align: center;
@@ -253,19 +304,23 @@ div.ingredienteList{
             font-weight: bold;
         }
     }
-    .imagem{
+
+    .imagem {
         width: 100%;
         height: auto;
         border-radius: .5rem;
-        img{
+
+        img {
             width: 100%;
             aspect-ratio: 1;
             height: auto;
             border-radius: .5rem;
             box-shadow: 0 0 .2rem $black;
+            object-fit: cover;
         }
     }
-    button{
+
+    button {
         border-radius: .5rem;
         font-size: 1.5rem;
         color: $white;
@@ -276,5 +331,5 @@ div.ingredienteList{
         height: fit-content;
         font-family: $text  !important;
     }
-    
+
 }

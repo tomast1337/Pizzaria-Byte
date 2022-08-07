@@ -55,12 +55,42 @@ export const submit = createAsyncThunk<
                 }
             }
         );
-        console.log(response);
-
         return response.data;
     } catch (error: any) {
         if (error.response) {
-            console.log(error.response.data);
+            return rejectWithValue(`${error.response.data.error}`);
+        } else if (error.request) {
+            return rejectWithValue('Erro no servidor');
+        } else {
+            return rejectWithValue('Erro desconhecido');
+        }
+    }
+});
+
+export const deleteIngrediente = createAsyncThunk<
+    string,
+    string,
+    {
+        rejectValue: string;
+        extra: {
+            setErro: (erro: string) => void;
+        };
+    }
+>('admin/deleteIngrediente', async (id: string, { rejectWithValue }: any) => {
+    try {
+        const token = localStorage.getItem('token') || '';
+        const response = await axios(
+            {
+                method: 'delete',
+                url: `${BACKEND_URL}admin/del/ingrediente/${id}`,
+                headers: {
+                    'x-auth-token': token
+                }
+            }
+        );
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
             return rejectWithValue(`${error.response.data.error}`);
         } else if (error.request) {
             return rejectWithValue('Erro no servidor');
@@ -77,10 +107,10 @@ const GerirIngredientes = createSlice({
         _idSelecionado: '',
         erro: '',
         nome: '',
-        preco: 4.5,
+        preco: 1,
         imagem: '',
         descricao: '',
-        pesoPorcao: 75.4
+        pesoPorcao: 10,
     },
     reducers: {
         setidSelecionado: (state, action) => {
@@ -100,17 +130,36 @@ const GerirIngredientes = createSlice({
         },
         setPesoPorcao: (state, action) => {
             state.pesoPorcao = action.payload;
+        },
+        setErro: (state, action) => {
+            state.erro = action.payload;
         }
     },
     extraReducers: {
         [submit.fulfilled]: (state, action: PayloadAction<IngredienteData>) => {
-            state.erro = 'Sucesso';
+            state.erro = 'Ingrediente Adicionado/Alterado com sucesso';
         },
         [submit.rejected]: (state, action: PayloadAction<string>) => {
             state.erro = action.payload;
         },
         [submit.pending]: (state) => {
             state.erro = 'Carregando...';
+        },
+        [deleteIngrediente.fulfilled]: (state, action: PayloadAction<string>) => {
+            state.erro = 'Ingrediente removido com sucesso';
+            state._idSelecionado = '';
+            state.erro = '';
+            state.nome = '';
+            state.preco = 1;
+            state.imagem = '';
+            state.descricao = '';
+            state.pesoPorcao = 10;
+        },
+        [deleteIngrediente.rejected]: (state, action: PayloadAction<string>) => {
+            state.erro = "Erro ao remover ingrediente";
+        },
+        [deleteIngrediente.pending]: (state) => {
+            state.erro = 'Excluindo...';
         }
     }
 });
@@ -121,7 +170,8 @@ export const {
     setImagem,
     setDescricao,
     setPesoPorcao,
-    setidSelecionado
+    setidSelecionado,
+    setErro
 } = GerirIngredientes.actions;
 
 export const SelectErro = (state: RootState) => state.gerirIngredientes.erro;

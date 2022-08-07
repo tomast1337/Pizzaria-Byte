@@ -234,9 +234,14 @@ router.delete('/del/ingrediente/:id', async (req: any, res: any) => {
     const { id } = req.params;
 
     const ingrediente = await ingredientes.findById(id);
-
     if (!ingrediente) {
         return res.status(401).json({ error: 'Ingrediente não cadastrado' });
+    }else{
+        const image_to_delete = ingrediente.imagem;
+        fs.unlinkSync(image_to_delete);
+        await ingrediente.remove();
+        console.log(`O ingrediente ${ingrediente.nome} foi excluído`);
+        return res.status(200).json(ingrediente);
     }
 });
 
