@@ -46,6 +46,11 @@ router.use('/admin', [isLogged, isAdmin], AdminRoutes);
 
 /*
 ---Cliente---
+
+/api/cliente/ingredientes
+/api/cliente/pizzas
+/api/cliente/produtos
+
 /api/cliente/pedidos/:token
 /api/cliente/carrinho/:token
 /api/cliente/pedido/:token/:id
