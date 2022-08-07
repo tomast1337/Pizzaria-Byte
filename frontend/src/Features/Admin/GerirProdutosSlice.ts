@@ -38,8 +38,7 @@ export const submit = createAsyncThunk<
             console.log(data._idSelecionado);
             if (data._idSelecionado !== '')
                 fromData.append('_id', data._idSelecionado);
-            if (data.imagem) 
-            fromData.append('imagem', data.imagem);
+            if (data.imagem) fromData.append('imagem', data.imagem);
 
             fromData.append('nome', data.nome);
             fromData.append('descricao', data.descricao);
@@ -106,7 +105,7 @@ const GerirProdutosSlice = createSlice({
         descricao: '' as string,
         imagem: '' as string,
         preco: 5 as number,
-        erro: '' as string,
+        erro: '' as string
     },
     reducers: {
         setidSelecionado: (state, action) => {
