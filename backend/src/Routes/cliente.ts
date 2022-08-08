@@ -1,8 +1,8 @@
+import * as dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { tokenData } from '../Middlewares/auth';
-import { ingredientes, pedidos, pizzas, produtos, usuarios } from '../Negocio';
-import * as dotenv from 'dotenv';
+import { ingredientes, pedidos, pizzas, produtos } from '../Negocio';
 dotenv.config();
 
 const router: express.Router = express.Router();

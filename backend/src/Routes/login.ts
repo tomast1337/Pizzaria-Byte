@@ -1,8 +1,8 @@
+import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import { usuarios } from '../Negocio';
-import * as dotenv from 'dotenv';
 dotenv.config();
 
 const saltRounds: number = (process.env.SALT_ROUNDS as unknown as number) || 10;

@@ -1,5 +1,5 @@
-import mongoose, { connect, Mongoose } from 'mongoose';
 import * as dotenv from 'dotenv';
+import { connect } from 'mongoose';
 dotenv.config();
 
 const MONGO_URI: string | null = process.env.MONGODB_URI || null;

@@ -1,9 +1,9 @@
-import express from 'express';
-import rotas from './Routes';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import getConnection from './DataBase';
+import express from 'express';
 import fs from 'fs';
+import getConnection from './DataBase';
+import rotas from './Routes';
 
 const main = async () => {
     dotenv.config();

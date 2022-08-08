@@ -1,18 +1,17 @@
-import LoginRoutes from './login';
 import AdminRoutes from './admin';
+import CarrinhoRoutes from './carrinho';
 import ClienteRoutes from './cliente';
 import CozinheiroRoutes from './cozinheiro';
 import EntregadorRoutes from './entregador';
-import CarrinhoRoutes from './carrinho';
+import LoginRoutes from './login';
 
 import express from 'express';
 
 import {
-    isLogged,
     isAdmin,
     isCliente,
     isCozinheiro,
-    isEntregador
+    isEntregador, isLogged
 } from '../Middlewares/auth';
 
 const router: express.Router = express.Router();
