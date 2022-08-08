@@ -5,12 +5,11 @@ import MenuNav from '../../Components/Admin/AdminNavbar';
 
 const UserEditForm = () => {
     const dispatcher = useDispatch();
-    const changeUserRole = () => {
+    const changeUserRole = () => {};
 
-    }
-
-    return <form>
-        {/* fields:
+    return (
+        <form>
+            {/* fields:
             - Ver _id
             - Ver email
             - Ver Nome
@@ -23,59 +22,66 @@ const UserEditForm = () => {
                 cozinheiro
             - Ver Histórico de pedidos
         */}
-        <div className={styles['form-group']}>
-            <span>#ID</span>
-        </div>
-        <div className={styles['form-group']}>
-            <span>Email</span>
-        </div>
-        <div className={styles['form-group']}>
-            <span>Nome</span>
-        </div>
-        <div className={styles['form-group']}>
-            <label htmlFor="alterarSenha">Altear senha</label>
-            <input
-                type="text"
-                id="alterarSenha"
-                placeholder="Digite nova senha"
-            />
-        </div>
-        <div className={styles['form-group']}>
-            <h2>Tipo do usuário</h2>
-            <div className={styles.radioOption} >
-                <span>Cliente:</span>
-                <input type="radio" id="user" name="user" value="user" />
+            <div className={styles['form-group']}>
+                <span>#ID</span>
             </div>
-            <div className={styles.radioOption} >
-                <span>Admin:</span>
-                <input type="radio" id="admin" name="admin" value="admin" />
+            <div className={styles['form-group']}>
+                <span>Email</span>
             </div>
-            <div className={styles.radioOption} >
-                <span>Entregador:</span>
-                <input type="radio" id="entregador" name="entregador" value="entregador" />
+            <div className={styles['form-group']}>
+                <span>Nome</span>
             </div>
-            <div className={styles.radioOption} >
-                <span>Cozinheiro:</span>
-                <input type="radio" id="cozinheiro" name="cozinheiro" value="cozinheiro" />
+            <div className={styles['form-group']}>
+                <label htmlFor="alterarSenha">Altear senha</label>
+                <input
+                    type="text"
+                    id="alterarSenha"
+                    placeholder="Digite nova senha"
+                />
             </div>
-        </div>
-        <div className={styles['form-group']}>
-            <button type="submit">
-                Confirmar alterações
-            </button>
-        </div>
-        <div className={styles.pedidos}>
-            <h2>Pedidos de </h2>
-        </div>
-    </form>
-}
+            <div className={styles['form-group']}>
+                <h2>Tipo do usuário</h2>
+                <div className={styles.radioOption}>
+                    <span>Cliente:</span>
+                    <input type="radio" id="user" name="user" value="user" />
+                </div>
+                <div className={styles.radioOption}>
+                    <span>Admin:</span>
+                    <input type="radio" id="admin" name="admin" value="admin" />
+                </div>
+                <div className={styles.radioOption}>
+                    <span>Entregador:</span>
+                    <input
+                        type="radio"
+                        id="entregador"
+                        name="entregador"
+                        value="entregador"
+                    />
+                </div>
+                <div className={styles.radioOption}>
+                    <span>Cozinheiro:</span>
+                    <input
+                        type="radio"
+                        id="cozinheiro"
+                        name="cozinheiro"
+                        value="cozinheiro"
+                    />
+                </div>
+            </div>
+            <div className={styles['form-group']}>
+                <button type="submit">Confirmar alterações</button>
+            </div>
+            <div className={styles.pedidos}>
+                <h2>Pedidos de </h2>
+            </div>
+        </form>
+    );
+};
 
 const GerirUserPage = () => {
     const dispatcher = useDispatch();
 
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-
-    }
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {};
     return (
         <>
             <MenuNav />
@@ -96,9 +102,7 @@ const GerirUserPage = () => {
                             />
                         </div>
                         <div className={styles['form-group']}>
-                            <button type="submit">
-                                Buscar
-                            </button>
+                            <button type="submit">Buscar</button>
                         </div>
                     </form>
                 </div>

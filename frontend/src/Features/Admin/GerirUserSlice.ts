@@ -3,15 +3,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { BACKEND_URL } from '../../variables';
 
-
 const GerirUserSlice = createSlice({
-    name:"gerirProdutos",
-    initialState:{
-        emailSelecionado:""
+    name: 'gerirProdutos',
+    initialState: {
+        emailSelecionado: ''
     },
-    reducers: {
-
-    }
+    reducers: {}
 });
 
 export default GerirUserSlice.reducer;
