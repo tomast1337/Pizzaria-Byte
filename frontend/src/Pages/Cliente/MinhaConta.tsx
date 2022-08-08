@@ -12,12 +12,12 @@ const MinhaConta = () => {
     const endereçoUltimaEntrega = 'Rua Teste, 123';
     const dataUltimaEntrega = '01/01/2020';
     const numeroPedido = '12345';
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     React.useEffect(() => {
         // set window title
         window.document.title = 'Minha Conta';
-        if(!verifyToken()) {
-            navigate('/')
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, []);
 

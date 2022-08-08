@@ -5,8 +5,7 @@ export const verifyToken = () => {
             const decoded = JSON.parse(atob(token.split('.')[1]));
             if (decoded.exp > Date.now() / 1000) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         } catch (err) {
@@ -14,4 +13,4 @@ export const verifyToken = () => {
         }
     }
     return false;
-}
+};

@@ -4,7 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import LandingPageModel from '../Components/LandingPageModel';
 import {
     logar,
-    LoginData, selectEmail, selectError, selectSenha, setEmail, setError, setSenha
+    LoginData,
+    selectEmail,
+    selectError,
+    selectSenha,
+    setEmail,
+    setError,
+    setSenha
 } from '../Features/Login/LoginSlice';
 import styles from './CriarContaPage.module.scss';
 

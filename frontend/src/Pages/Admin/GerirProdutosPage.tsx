@@ -3,7 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MenuNav from '../../Components/Admin/AdminNavbar';
 import {
-    deleteProduto, ProdutoData, selectDescricao, selectErro, selectIdSelecionado, selectImagem, selectNome, selectPreco, setDescricao, setErro, setidSelecionado, setImagem, setNome, setPreco, submit
+    deleteProduto,
+    ProdutoData,
+    selectDescricao,
+    selectErro,
+    selectIdSelecionado,
+    selectImagem,
+    selectNome,
+    selectPreco,
+    setDescricao,
+    setErro,
+    setidSelecionado,
+    setImagem,
+    setNome,
+    setPreco,
+    submit
 } from '../../Features/Admin/GerirProdutosSlice';
 import {
     fetchProdutos,
@@ -96,8 +110,8 @@ const GerirProdutosPage = () => {
     const preco = useSelector(selectPreco);
     const erro = useSelector(selectErro);
     const [imagemPreview, setImagemPreview] = React.useState('');
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     const scrollToTop = () => {
         //scroll to id = "Ingredientes"
         const elem = document.getElementById('Produtos');
@@ -139,13 +153,13 @@ const GerirProdutosPage = () => {
         setImagemPreview('');
         scrollToTop();
     };
-    
+
     React.useEffect(() => {
         //set window title
         document.title = 'Gerir Produtos';
-        
-        if(!verifyToken()) {
-            navigate('/')
+
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, []);
     return (

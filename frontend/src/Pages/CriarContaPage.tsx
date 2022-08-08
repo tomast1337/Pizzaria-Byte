@@ -3,11 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LandingPageModel from '../Components/LandingPageModel';
 import {
-    criarContaData, criarContaFetch, selectConfirmarSenha,
+    criarContaData,
+    criarContaFetch,
+    selectConfirmarSenha,
     selectEmail,
     selectError,
     selectNome,
-    selectSenha, setConfirmarSenha, setEmail, setNome, setSenha
+    selectSenha,
+    setConfirmarSenha,
+    setEmail,
+    setNome,
+    setSenha
 } from '../Features/Login/CriarContaSlice';
 import styles from './CriarContaPage.module.scss';
 

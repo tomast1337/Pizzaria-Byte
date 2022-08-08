@@ -10,12 +10,12 @@ const Carrinho = () => {
     const pizzas = {};
     const pizzasPopulares = {};
     const produtos = {};
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     React.useEffect(() => {
         // set window title
         window.document.title = 'Carrinho';
-        if(!verifyToken()) {
-            navigate('/')
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, []);
     return (

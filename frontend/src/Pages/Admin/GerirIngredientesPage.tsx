@@ -3,10 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MenuNav from '../../Components/Admin/AdminNavbar';
 import {
-    deleteIngrediente, IngredienteData, SelectDescricao, SelectErro, SelectIdSelecionado, SelectImagem, SelectNome, SelectPesoPorcao, SelectPreco, setDescricao, setErro, setidSelecionado, setImagem, setNome, setPesoPorcao, setPreco, submit
+    deleteIngrediente,
+    IngredienteData,
+    SelectDescricao,
+    SelectErro,
+    SelectIdSelecionado,
+    SelectImagem,
+    SelectNome,
+    SelectPesoPorcao,
+    SelectPreco,
+    setDescricao,
+    setErro,
+    setidSelecionado,
+    setImagem,
+    setNome,
+    setPesoPorcao,
+    setPreco,
+    submit
 } from '../../Features/Admin/GerirIngredientesSlice';
 import {
-    fetchIngredientes, IngredienteType, SelectCarregandoIngredientes,
+    fetchIngredientes,
+    IngredienteType,
+    SelectCarregandoIngredientes,
     SelectIngredientes
 } from '../../Features/CommonSlice';
 import { verifyToken } from '../../utils';
@@ -63,15 +81,15 @@ const IngredientesList = () => {
     const dispatcher = useDispatch();
     const ingredientes = useSelector(SelectIngredientes);
     const carregando = useSelector(SelectCarregandoIngredientes);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     React.useEffect(() => {
         // set window title
         window.document.title = 'Gerir Ingredientes';
 
         dispatcher(fetchIngredientes());
-        
-        if(!verifyToken()) {
-            navigate('/')
+
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, [dispatcher]);
 

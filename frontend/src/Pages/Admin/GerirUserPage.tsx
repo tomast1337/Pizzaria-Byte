@@ -8,12 +8,12 @@ import styles from './GerirUserPage.module.scss';
 const UserEditForm = () => {
     const dispatcher = useDispatch();
     const changeUserRole = () => {};
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     React.useEffect(() => {
         // set window title
         window.document.title = 'Gerir Usuários';
-        if(!verifyToken()) {
-            navigate('/')
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, []);
     return (

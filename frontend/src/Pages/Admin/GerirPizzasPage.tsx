@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { verifyToken } from '../../utils';
 
 const GerirPizzasPage = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     React.useEffect(() => {
         // set window title
         window.document.title = 'Gerir Pizzas';
-        if(!verifyToken()) {
-            navigate('/')
+        if (!verifyToken()) {
+            navigate('/');
         }
     }, []);
     return (

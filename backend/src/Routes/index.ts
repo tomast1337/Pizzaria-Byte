@@ -11,7 +11,8 @@ import {
     isAdmin,
     isCliente,
     isCozinheiro,
-    isEntregador, isLogged
+    isEntregador,
+    isLogged
 } from '../Middlewares/auth';
 
 const router: express.Router = express.Router();
