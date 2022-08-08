@@ -1,12 +1,21 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styles from './GerirUserPage.module.scss';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import MenuNav from '../../Components/Admin/AdminNavbar';
+import { verifyToken } from '../../utils';
+import styles from './GerirUserPage.module.scss';
 
 const UserEditForm = () => {
     const dispatcher = useDispatch();
     const changeUserRole = () => {};
-
+    const navigate = useNavigate()
+    React.useEffect(() => {
+        // set window title
+        window.document.title = 'Gerir Usuários';
+        if(!verifyToken()) {
+            navigate('/')
+        }
+    }, []);
     return (
         <form>
             {/* fields:

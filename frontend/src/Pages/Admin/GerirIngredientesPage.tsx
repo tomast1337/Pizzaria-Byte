@@ -1,33 +1,17 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './GerirIngredientesPage.module.scss';
+import { useNavigate } from 'react-router-dom';
 import MenuNav from '../../Components/Admin/AdminNavbar';
 import {
-    SelectErro,
-    SelectNome,
-    SelectPreco,
-    SelectImagem,
-    SelectDescricao,
-    SelectPesoPorcao,
-    setNome,
-    setPreco,
-    setImagem,
-    setDescricao,
-    setPesoPorcao,
-    IngredienteData,
-    SelectIdSelecionado,
-    setidSelecionado,
-    submit,
-    setErro,
-    deleteIngrediente
+    deleteIngrediente, IngredienteData, SelectDescricao, SelectErro, SelectIdSelecionado, SelectImagem, SelectNome, SelectPesoPorcao, SelectPreco, setDescricao, setErro, setidSelecionado, setImagem, setNome, setPesoPorcao, setPreco, submit
 } from '../../Features/Admin/GerirIngredientesSlice';
 import {
-    fetchIngredientes,
-    SelectCarregandoIngredientes,
-    SelectIngredientes,
-    IngredienteType
+    fetchIngredientes, IngredienteType, SelectCarregandoIngredientes,
+    SelectIngredientes
 } from '../../Features/CommonSlice';
+import { verifyToken } from '../../utils';
 import { BACKEND_URL_NO_API } from '../../variables';
+import styles from './GerirIngredientesPage.module.scss';
 
 const Ingrediente = (prop: IngredienteType) => {
     const dispatcher = useDispatch();
@@ -79,10 +63,16 @@ const IngredientesList = () => {
     const dispatcher = useDispatch();
     const ingredientes = useSelector(SelectIngredientes);
     const carregando = useSelector(SelectCarregandoIngredientes);
-
+    const navigate = useNavigate()
     React.useEffect(() => {
         // set window title
+        window.document.title = 'Gerir Ingredientes';
+
         dispatcher(fetchIngredientes());
+        
+        if(!verifyToken()) {
+            navigate('/')
+        }
     }, [dispatcher]);
 
     return (

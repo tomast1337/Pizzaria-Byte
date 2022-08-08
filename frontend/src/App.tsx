@@ -1,26 +1,26 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MenuCliente from './Pages/Cliente/Menu';
 import { store } from './Features/store';
+import MenuCliente from './Pages/Cliente/Menu';
 
 /* Login */
 import CriarContaPage from './Pages/CriarContaPage';
 import LoingPage from './Pages/LoginPage';
 
 /* Cliente */
-import CriarPizza from './Pages/Cliente/CriarPizza';
 import Carrinho from './Pages/Cliente/Carrinho';
+import CriarPizza from './Pages/Cliente/CriarPizza';
+import FinalizarPedido from './Pages/Cliente/FinalizarPedido';
 import MeusPedidos from './Pages/Cliente/MeusPedidos';
 import MinhaConta from './Pages/Cliente/MinhaConta';
-import FinalizarPedido from './Pages/Cliente/FinalizarPedido';
 
 /* Admin */
-import MenuAdminPage from './Pages/Admin/MenuAdminPage';
-import GerirPizzasPage from './Pages/Admin/GerirPizzasPage';
 import GerirIngredientesPage from './Pages/Admin/GerirIngredientesPage';
+import GerirPizzasPage from './Pages/Admin/GerirPizzasPage';
 import GerirProdutosPage from './Pages/Admin/GerirProdutosPage';
 import GerirUserPage from './Pages/Admin/GerirUserPage';
+import MenuAdminPage from './Pages/Admin/MenuAdminPage';
 
 export default () => {
     const [token, setToken] = React.useState(null);

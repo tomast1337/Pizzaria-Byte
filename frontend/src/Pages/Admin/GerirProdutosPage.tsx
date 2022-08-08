@@ -1,31 +1,19 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './GerirProdutosPage.module.scss';
+import { useNavigate } from 'react-router-dom';
 import MenuNav from '../../Components/Admin/AdminNavbar';
+import {
+    deleteProduto, ProdutoData, selectDescricao, selectErro, selectIdSelecionado, selectImagem, selectNome, selectPreco, setDescricao, setErro, setidSelecionado, setImagem, setNome, setPreco, submit
+} from '../../Features/Admin/GerirProdutosSlice';
 import {
     fetchProdutos,
     ProdutoType,
     SelectCarregandoProdutos,
     SelectProdutos
 } from '../../Features/CommonSlice';
-import {
-    setidSelecionado,
-    setNome,
-    setDescricao,
-    setImagem,
-    setPreco,
-    setErro,
-    selectIdSelecionado,
-    selectNome,
-    selectDescricao,
-    selectImagem,
-    selectPreco,
-    selectErro,
-    deleteProduto,
-    submit,
-    ProdutoData
-} from '../../Features/Admin/GerirProdutosSlice';
+import { verifyToken } from '../../utils';
 import { BACKEND_URL_NO_API } from '../../variables';
+import styles from './GerirProdutosPage.module.scss';
 
 const Produto = (prop: ProdutoType) => {
     const dispatcher = useDispatch();
@@ -108,7 +96,8 @@ const GerirProdutosPage = () => {
     const preco = useSelector(selectPreco);
     const erro = useSelector(selectErro);
     const [imagemPreview, setImagemPreview] = React.useState('');
-
+    const navigate = useNavigate()
+    
     const scrollToTop = () => {
         //scroll to id = "Ingredientes"
         const elem = document.getElementById('Produtos');
@@ -150,12 +139,15 @@ const GerirProdutosPage = () => {
         setImagemPreview('');
         scrollToTop();
     };
-
+    
     React.useEffect(() => {
         //set window title
         document.title = 'Gerir Produtos';
+        
+        if(!verifyToken()) {
+            navigate('/')
+        }
     }, []);
-
     return (
         <>
             <MenuNav />

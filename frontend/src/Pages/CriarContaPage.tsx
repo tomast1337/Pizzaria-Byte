@@ -1,20 +1,14 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import LandingPageModel from '../Components/LandingPageModel';
 import {
-    selectConfirmarSenha,
+    criarContaData, criarContaFetch, selectConfirmarSenha,
     selectEmail,
     selectError,
     selectNome,
-    selectSenha,
-    setNome,
-    setEmail,
-    setSenha,
-    setConfirmarSenha,
-    criarContaFetch,
-    criarContaData
+    selectSenha, setConfirmarSenha, setEmail, setNome, setSenha
 } from '../Features/Login/CriarContaSlice';
-import LandingPageModel from '../Components/LandingPageModel';
 import styles from './CriarContaPage.module.scss';
 
 const CriarContaPage = () => {

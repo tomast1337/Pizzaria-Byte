@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    selectEmail,
-    selectSenha,
-    selectError,
-    setEmail,
-    setSenha,
-    logar,
-    LoginData,
-    setError
-} from '../Features/Login/LoginSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import LandingPageModel from '../Components/LandingPageModel';
+import {
+    logar,
+    LoginData, selectEmail, selectError, selectSenha, setEmail, setError, setSenha
+} from '../Features/Login/LoginSlice';
 import styles from './CriarContaPage.module.scss';
 
 const LoingPage = () => {
@@ -43,7 +37,6 @@ const LoingPage = () => {
 
         setTimeout(() => {
             const token = localStorage.getItem('token');
-
             if (token) {
                 const user = JSON.parse(atob(token.split('.')[1]));
                 // verificar se o token ainda é válido

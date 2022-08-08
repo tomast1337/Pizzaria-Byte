@@ -1,6 +1,7 @@
 @use '../../global-css-vars.scss' as *;
 
 .page {
+    transition: 1s;
     width: 100%;
     height: fit-content;
     min-height: 100vh;

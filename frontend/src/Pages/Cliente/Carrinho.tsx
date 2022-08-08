@@ -3,12 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './Carrinho.module.scss';
 import stylesBase from './clienteBase.module.scss';
 import MenuNav from '../../Components/Cliente/MenuNav';
+import { useNavigate } from 'react-router-dom';
+import { verifyToken } from '../../utils';
 
 const Carrinho = () => {
     const pizzas = {};
     const pizzasPopulares = {};
     const produtos = {};
-
+    const navigate = useNavigate()
+    React.useEffect(() => {
+        // set window title
+        window.document.title = 'Carrinho';
+        if(!verifyToken()) {
+            navigate('/')
+        }
+    }, []);
     return (
         <>
             <MenuNav />

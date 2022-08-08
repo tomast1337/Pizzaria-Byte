@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './MinhaConta.module.scss';
 import stylesBase from './clienteBase.module.scss';
 import MenuNav from '../../Components/Cliente/MenuNav';
+import { useNavigate } from 'react-router-dom';
+import { verifyToken } from '../../utils';
 
 const MinhaConta = () => {
     const nome = 'Nome Teste';
@@ -10,6 +12,14 @@ const MinhaConta = () => {
     const endereçoUltimaEntrega = 'Rua Teste, 123';
     const dataUltimaEntrega = '01/01/2020';
     const numeroPedido = '12345';
+    const navigate = useNavigate()
+    React.useEffect(() => {
+        // set window title
+        window.document.title = 'Minha Conta';
+        if(!verifyToken()) {
+            navigate('/')
+        }
+    }, []);
 
     return (
         <>
