@@ -41,11 +41,10 @@ const UserEditForm = () => {
         const user: UserData = {
             idSelecionado,
             alterarSenha,
-            userType,
+            userType
         };
         dispatcher(submitUser(user));
-    }
-
+    };
 
     React.useEffect(() => {
         // set window title

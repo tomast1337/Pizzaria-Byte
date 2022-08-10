@@ -222,7 +222,7 @@ router.post('/user/:id', async (req: any, res: any) => {
             if (validType.includes(userType)) {
                 user.type = userType;
             } else {
-                console.log({userType,validType});
+                console.log({ userType, validType });
                 return res
                     .status(400)
                     .json({ error: 'Tipo de usuário inválido' });
