@@ -69,11 +69,12 @@ router.post('/register', async (req: any, res: any) => {
             nome
         });
         newUser.save();
-        return res.status(200).json({ message: 'Usuário cadastrado com sucesso' });
+        return res
+            .status(200)
+            .json({ message: 'Usuário cadastrado com sucesso' });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Erro ao criar conta' });
-
     }
 });
 

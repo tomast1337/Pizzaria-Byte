@@ -28,7 +28,7 @@ const usuariosSchema: Schema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: Object.values(UserTypes).filter(type => isNaN(Number(type))),
+        enum: Object.values(UserTypes).filter((type) => isNaN(Number(type))),
         default: 'user'
     }
 });

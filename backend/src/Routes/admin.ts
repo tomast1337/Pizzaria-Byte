@@ -64,7 +64,9 @@ router.post('/promover/:email', async (req: any, res: any) => {
     if (!user) {
         return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
-    const validType = Object.values(UserTypes).filter(type => isNaN(Number(type)));
+    const validType = Object.values(UserTypes).filter((type) =>
+        isNaN(Number(type))
+    );
     if (!validType.includes(type)) {
         return res.status(400).json({ error: 'Tipo de usuário inválido' });
     } else {
@@ -236,11 +238,15 @@ router.post('/user/id', async (req: any, res: any) => {
             user.senha = hash;
         }
         if (userType) {
-            const validType = Object.values(UserTypes).filter(type => isNaN(Number(type)));
+            const validType = Object.values(UserTypes).filter((type) =>
+                isNaN(Number(type))
+            );
             if (!validType.includes(userType)) {
                 user.type = userType;
-            }else{
-                return res.status(400).json({ error: 'Tipo de usuário inválido' });
+            } else {
+                return res
+                    .status(400)
+                    .json({ error: 'Tipo de usuário inválido' });
             }
         }
         await user.save();
