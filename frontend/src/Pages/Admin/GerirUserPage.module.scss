@@ -153,3 +153,12 @@
         }
     }
 }
+
+.erro{
+    font-family: $text;
+    font-size: 1.5em;
+    color: $alert-danger;
+    margin: 1rem auto;
+    display: block;
+    text-align: center;
+}

@@ -54,28 +54,6 @@ router.get('/pedidos/:email', async (req: any, res: any) => {
     return res.status(200).json(pedidos_found);
 });
 
-// Rota para uma admin alterar o tipo de usuário pelo email
-router.post('/promover/:email', async (req: any, res: any) => {
-    const { email } = req.params;
-    const { type } = req.body;
-
-    const user = await usuarios.findOne({ email });
-
-    if (!user) {
-        return res.status(401).json({ error: 'Usuário não cadastrado' });
-    }
-    const validType = Object.values(UserTypes).filter((type) =>
-        isNaN(Number(type))
-    );
-    if (!validType.includes(type)) {
-        return res.status(400).json({ error: 'Tipo de usuário inválido' });
-    } else {
-        user.type = type;
-        await user.save();
-        return res.status(200).json(user);
-    }
-});
-
 const checkFiles = (files: any) => {
     if (!files.imagem) {
         console.log('Não foi enviado nenhuma imagem');
@@ -223,13 +201,13 @@ router.post('/produto', upload, async (req: any, res: any) => {
     }
 });
 
-router.post('/user/id', async (req: any, res: any) => {
-    const { _id } = req.fields;
+router.post('/user/:id', async (req: any, res: any) => {
+    const { id } = req.params;
     const { alterarSenha, userType } = req.body;
-    if (!_id) {
+    if (!id) {
         return res.status(400).json({ error: 'Preencha todos os campos' });
     }
-    const user = await usuarios.findOne({ _id });
+    const user = await usuarios.findOne({ _id: id });
     if (user) {
         if (alterarSenha) {
             // hash da senha
@@ -241,9 +219,10 @@ router.post('/user/id', async (req: any, res: any) => {
             const validType = Object.values(UserTypes).filter((type) =>
                 isNaN(Number(type))
             );
-            if (!validType.includes(userType)) {
+            if (validType.includes(userType)) {
                 user.type = userType;
             } else {
+                console.log({userType,validType});
                 return res
                     .status(400)
                     .json({ error: 'Tipo de usuário inválido' });

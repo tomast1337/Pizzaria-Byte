@@ -102,7 +102,7 @@ export const submitUser = createAsyncThunk<
 >('gerirUsers/submitUser', async (userData, { rejectWithValue }: any) => {
     try {
         const token = localStorage.getItem('token') || '';
-        const response = await axios.put(
+        const response = await axios.post(
             `${BACKEND_URL}admin/user/${userData.idSelecionado}`,
             {
                 alterarSenha: userData.alterarSenha,
@@ -139,10 +139,10 @@ const GerirUserSlice = createSlice({
     },
     reducers: {
         setUserType: (state, action) => {
-            state.emailSelecionado = action.payload;
+            state.userType = action.payload;
         },
         setAlterarSenha: (state, action) => {
-            state.emailSelecionado = action.payload;
+            state.alterarSenha = action.payload;
         },
         setEmailSelecionado: (state, action) => {
             state.emailSelecionado = action.payload;

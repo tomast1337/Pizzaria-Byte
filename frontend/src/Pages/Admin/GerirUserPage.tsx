@@ -21,7 +21,6 @@ import {
     fetchUserPedidos,
     fetchUserInfo,
     PedidoType,
-    UserType,
     UserTypeEnum,
     selectErroEmail
 } from '../../Features/Admin/GerirUserSlice';
@@ -37,6 +36,17 @@ const UserEditForm = () => {
     const pedidos = useSelector(selectPedidos);
     const emailSelecionado = useSelector(selectEmailSelecionado);
 
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const user: UserData = {
+            idSelecionado,
+            alterarSenha,
+            userType,
+        };
+        dispatcher(submitUser(user));
+    }
+
+
     React.useEffect(() => {
         // set window title
         window.document.title = 'Gerir Usuários';
@@ -45,7 +55,7 @@ const UserEditForm = () => {
         }
     }, []);
     return (
-        <form>
+        <form onSubmit={submit}>
             {/* fields:
             - Ver _id
             - Ver email
