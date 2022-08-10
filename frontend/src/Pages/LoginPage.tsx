@@ -75,7 +75,6 @@ const LoingPage = () => {
         tokenRedirect();
 
         dispatcher(setError(''));
-
     }, []);
     return (
         <div className={styles.page}>

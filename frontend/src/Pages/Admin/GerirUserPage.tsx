@@ -26,7 +26,6 @@ import {
     selectErroEmail
 } from '../../Features/Admin/GerirUserSlice';
 
-
 const UserEditForm = () => {
     const dispatcher = useDispatch();
     const navigate = useNavigate();
@@ -37,8 +36,6 @@ const UserEditForm = () => {
     const userType = useSelector(selectUserType) as UserTypeEnum;
     const pedidos = useSelector(selectPedidos);
     const emailSelecionado = useSelector(selectEmailSelecionado);
-
-
 
     React.useEffect(() => {
         // set window title
@@ -143,17 +140,13 @@ const UserEditForm = () => {
             </div>
             <div className={styles.pedidos}>
                 <h2>Pedidos de {nomeSelecionado}</h2>
-                {
-                    pedidos.length > 0 ?
-                        pedidos.map((pedido: PedidoType) => {
-                            return (
-                                <>
-                                </>
-                            );
-                        }
-                        ) :
-                        <h2>O Usuário { nomeSelecionado } não tem pedidos</h2>
-                }
+                {pedidos.length > 0 ? (
+                    pedidos.map((pedido: PedidoType) => {
+                        return <></>;
+                    })
+                ) : (
+                    <h2>O Usuário {nomeSelecionado} não tem pedidos</h2>
+                )}
             </div>
         </form>
     );
@@ -165,7 +158,6 @@ const GerirUserPage = () => {
     const erro = useSelector(selectErro);
     const erroEmail = useSelector(selectErroEmail);
     const idSelecionado = useSelector(selectIdSelecionado);
-
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -194,7 +186,9 @@ const GerirUserPage = () => {
                                 placeholder="Email do Usuário"
                                 value={emailSelecionado}
                                 onChange={(e) => {
-                                    dispatcher(setEmailSelecionado(e.target.value));
+                                    dispatcher(
+                                        setEmailSelecionado(e.target.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -208,12 +202,11 @@ const GerirUserPage = () => {
                         {erro && <div className={styles.erro}>{erro}</div>}
                     </div>
                     <h1>Informações do Usuário</h1>
-                    {
-                        idSelecionado === '' ?
-                            <h2>Nem um usuário selecionado</h2>
-                            :
-                            <UserEditForm />
-                    }
+                    {idSelecionado === '' ? (
+                        <h2>Nem um usuário selecionado</h2>
+                    ) : (
+                        <UserEditForm />
+                    )}
                 </div>
             </div>
         </>
