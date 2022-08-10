@@ -23,7 +23,7 @@ const LoingPage = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        document.title = 'Pizzaria ON - Login';
+        document.title = 'Pizzaria Byte - Login';
     }, []);
 
     const tokenRedirect = () => {
@@ -73,11 +73,13 @@ const LoingPage = () => {
     React.useEffect(() => {
         // caso o usuário já tenha feito o login, redirecionar para a página correta
         tokenRedirect();
+
+        dispatcher(setError(''));
+
     }, []);
     return (
         <div className={styles.page}>
             <div className={styles.logo}>
-                <h1>Pizzaria ON</h1>
                 <h2>Login</h2>
             </div>
             <div>

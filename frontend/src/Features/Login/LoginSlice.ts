@@ -60,6 +60,7 @@ const LoginSlice = createSlice({
         },
         setSenha: (state, action) => {
             state.senha = action.payload;
+            state.error = '';
         },
         setError: (state, action) => {
             state.error = action.payload;

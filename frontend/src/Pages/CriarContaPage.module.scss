@@ -5,28 +5,24 @@
     color: $black;
 
     .logo {
-        margin-bottom: 1rem;
-
-        h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            color: $brand1;
-            margin-bottom: 0;
-            font-family: $title;
-        }
-
         h2 {
             margin-top: 0;
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
             color: $brand2;
             font-family: $sub-title;
+            text-align: center;
+
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 2rem;
+            }
         }
     }
 
     .erro {
         color: $alert-danger;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         margin-top: 1rem;
         font-family: $text-alt;
@@ -36,42 +32,64 @@
     form {
         margin-top: 1rem;
         font-family: $text;
+
         .form-group {
             margin-bottom: 1rem;
         }
+
+
+        //Desktop
+        @media (min-width: 1025px) {
+
+            .form-group input,
+            label {
+                font-size: 1rem;
+            }
+        }
+
 
         .form-group input {
             display: block;
             border-radius: .5rem;
             border: 1px solid $brand1;
             padding: 0.5rem;
-            font-size: 1.5rem;
+            font-size: 2rem;
             width: 100%;
 
             &:focus {
                 outline: none;
                 border-color: $brand2;
             }
+
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 1rem;
+            }
         }
 
         .form-group label {
-            font-size: 1.5rem;
+            font-size: 2rem;
             display: block;
             width: 100%;
+
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 1rem;
+            }
         }
 
         .form-group button,
         a {
-            border-radius: 0;
+            border-radius: .5rem;
             border: 1px solid $brand1;
             padding: 0.5rem;
-            font-size: 1.5rem;
+            font-size: 3rem;
             background-color: $brand1;
             color: $brand2;
             display: block;
             width: fit-content;
             margin: 0 auto;
-            font-family: $text !important;
+            font-family: $text  !important;
             font-weight: bold;
 
             &:focus {
@@ -88,9 +106,20 @@
             &:active,
             &:link {
                 text-decoration: none;
-                font-size: 1.5rem;
+                font-size: 3rem;
                 text-align: center;
+            }
+
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 2rem;
+
+                &:visited,
+                &:active,
+                &:link {
+                    font-size: 2rem;
+                }
             }
         }
     }
-} 
+}

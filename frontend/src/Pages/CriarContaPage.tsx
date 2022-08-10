@@ -29,7 +29,7 @@ const CriarContaPage = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        document.title = 'Pizzaria ON - Criar Usuário';
+        document.title = 'Pizzaria Byte - Criar Usuário';
     }, []);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +52,6 @@ const CriarContaPage = () => {
     return (
         <div className={styles.page}>
             <div className={styles.logo}>
-                <h1>Pizzaria ON</h1>
                 <h2>Criar Conta</h2>
             </div>
             <div>
