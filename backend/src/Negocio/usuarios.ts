@@ -1,5 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 
+export enum UserTypes {
+    admin = 'admin',
+    user = 'user',
+    cozinheiro = 'cozinheiro',
+    entregador = 'entregador'
+}
+
 const usuariosSchema: Schema = new Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -21,7 +28,7 @@ const usuariosSchema: Schema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['admin', 'user', 'cozinheiro', 'entregador'],
+        enum: Object.values(UserTypes).filter(type => isNaN(Number(type))),
         default: 'user'
     }
 });

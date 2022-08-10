@@ -2,6 +2,12 @@ import express from 'express';
 import formidable from 'express-formidable';
 import fs from 'fs';
 import { ingredientes, pedidos, pizzas, produtos, usuarios } from '../Negocio';
+import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
+import { UserTypes } from '../Negocio/usuarios';
+dotenv.config();
+
+const saltRounds: number = (process.env.SALT_ROUNDS as unknown as number) || 10;
 
 const router: express.Router = express.Router();
 
@@ -58,7 +64,7 @@ router.post('/promover/:email', async (req: any, res: any) => {
     if (!user) {
         return res.status(401).json({ error: 'Usuário não cadastrado' });
     }
-    const validType = ['admin', 'user', 'cozinheiro', 'entregador'];
+    const validType = Object.values(UserTypes).filter(type => isNaN(Number(type)));
     if (!validType.includes(type)) {
         return res.status(400).json({ error: 'Tipo de usuário inválido' });
     } else {
@@ -212,6 +218,35 @@ router.post('/produto', upload, async (req: any, res: any) => {
         });
         await produtos.create(novoProduto);
         return res.status(200).json(novoProduto);
+    }
+});
+
+router.post('/user/id', async (req: any, res: any) => {
+    const { _id } = req.fields;
+    const { alterarSenha, userType } = req.body;
+    if (!_id) {
+        return res.status(400).json({ error: 'Preencha todos os campos' });
+    }
+    const user = await usuarios.findOne({ _id });
+    if (user) {
+        if (alterarSenha) {
+            // hash da senha
+            const salt = bcrypt.genSaltSync(saltRounds);
+            const hash = bcrypt.hashSync(alterarSenha, salt);
+            user.senha = hash;
+        }
+        if (userType) {
+            const validType = Object.values(UserTypes).filter(type => isNaN(Number(type)));
+            if (!validType.includes(userType)) {
+                user.type = userType;
+            }else{
+                return res.status(400).json({ error: 'Tipo de usuário inválido' });
+            }
+        }
+        await user.save();
+        return res.status(200).json(user);
+    } else {
+        return res.status(400).json({ error: 'Usuário não encontrado' });
     }
 });
 

@@ -59,25 +59,22 @@ router.post('/register', async (req: any, res: any) => {
     }
 
     // hash da senha
-    await bcrypt.genSalt(saltRounds, (err: any, salt: any) => {
-        bcrypt.hash(password, salt, (err: any, hash: any) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ error: 'Erro ao criar conta' });
-            }
-            // adicionar usuário
-            const newUser = new usuarios({
-                email,
-                senha: hash,
-                nome
-            });
-            newUser.save();
-            console.log('Usuário cadastrado com sucesso');
-            return res
-                .status(200)
-                .json({ message: 'Usuário cadastrado com sucesso' });
+    try {
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const senha = bcrypt.hashSync(password, salt);
+        // adicionar usuário
+        const newUser = new usuarios({
+            email,
+            senha,
+            nome
         });
-    });
+        newUser.save();
+        return res.status(200).json({ message: 'Usuário cadastrado com sucesso' });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Erro ao criar conta' });
+
+    }
 });
 
 router.post('/verify', async (req: any, res: any) => {

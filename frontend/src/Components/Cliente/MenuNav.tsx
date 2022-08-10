@@ -14,7 +14,7 @@ const MenuNav = () => {
         <>
             <nav className={styles.menuBar}>
                 <div className={styles.logo}>
-                    <h1>Pizzaria ON</h1>
+                    <h1>Pizzaria Byte</h1>
                 </div>
                 <div className={styles.menuButton}>
                     <button onClick={menuToggle}>

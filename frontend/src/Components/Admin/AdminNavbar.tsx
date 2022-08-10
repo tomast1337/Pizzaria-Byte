@@ -12,7 +12,7 @@ const AdminNavbar = () => {
         <>
             <nav className={styles.menuBar}>
                 <div className={styles.logo}>
-                    <h1>Pizzaria ON - Admin</h1>
+                    <h1>Pizzaria Byte - Admin</h1>
                 </div>
                 <div className={styles.menuButton}>
                     <button onClick={menuToggle}>
