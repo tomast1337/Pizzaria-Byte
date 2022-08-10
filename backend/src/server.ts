@@ -39,7 +39,9 @@ const main = async () => {
 
     // 404 handler
     server.use((req, res, next) => {
-        res.status(404).send('404: Page not found');
+        res.status(404).json({
+            error: 'Rota não encontrada'
+        });
     });
 
     server.listen(PORT, () => {
