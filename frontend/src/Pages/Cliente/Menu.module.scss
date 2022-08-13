@@ -1,0 +1,78 @@
+@use '../../global-css-vars.scss' as *;
+
+.produtoCard {
+    width: fit-content;
+    height: fit-content;
+    margin: .5em 1em;
+    padding: .5em;
+    border-radius: .5rem;
+    background-color: $brand2;
+
+    .produtoCardImg {
+        width: 100%;
+        height: auto;
+        border-radius: .5rem;
+
+        img {
+            width: 400px;
+            display: block;
+            margin: auto;
+            aspect-ratio: 1;
+            height: auto;
+            border-radius: .5rem;
+            box-shadow: 0 0 .2rem $black;
+            object-fit: cover;
+
+            //Desktop
+            @media (min-width: 1025px) {
+                width: 250px;
+            } 
+
+        }
+    }
+
+    .produtoCardInfo {
+        h2 {
+            font-family: $text;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: .1rem;
+            margin-bottom: .01rem;
+            display: block;
+            //Desktop
+            @media (min-width: 1025px) {
+                
+            } 
+        }
+
+        p {
+            font-family: $text-alt;
+            font-size: 2em;
+            text-align: center;
+            margin: 0 10px;
+            font-weight: bold;
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 1em;
+            } 
+        }
+    }
+
+    .produtoCardBtn {
+        button {
+            border-radius: .5rem;
+            font-size: 3rem;
+            color: $white;
+            background-color: $alert-info;
+            display: block;
+            width: fit-content;
+            margin: .3rem auto;
+            height: fit-content;
+            font-family: $text  !important;
+            //Desktop
+            @media (min-width: 1025px) {
+                font-size: 1.5rem;
+            } 
+        }
+    }
+}

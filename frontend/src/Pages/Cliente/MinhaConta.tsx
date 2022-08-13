@@ -27,21 +27,23 @@ const MinhaConta = () => {
             <div className={stylesBase.page}>
                 <div className={stylesBase.container}>
                     <h1>Minha Conta</h1>
-                    <div className={stylesBase.left}>
-                        <h2>Dados Conta</h2>
-                        <h3>Nome</h3>
-                        <p>{nome}</p>
-                        <h3>Email</h3>
-                        <p>{email}</p>
-                    </div>
-                    <div className={stylesBase.right}>
-                        <h2>Dados Ultima Entrega</h2>
-                        <h3>Endereço</h3>
-                        <p>{endereçoUltimaEntrega}</p>
-                        <h3>Data</h3>
-                        <p>{dataUltimaEntrega}</p>
-                        <h3>Numero Pedido</h3>
-                        <p>{numeroPedido}</p>
+                    <div className={stylesBase['text-container']}>
+                        <div className={stylesBase.coluna}>
+                            <h2>Dados Conta</h2>
+                            <h3>Nome</h3>
+                            <p>{nome}</p>
+                            <h3>Email</h3>
+                            <p>{email}</p>
+                        </div>
+                        <div className={stylesBase.coluna}>
+                            <h2>Dados Ultima Entrega</h2>
+                            <h3>Endereço</h3>
+                            <p>{endereçoUltimaEntrega}</p>
+                            <h3>Data</h3>
+                            <p>{dataUltimaEntrega}</p>
+                            <h3>Numero Pedido</h3>
+                            <p>{numeroPedido}</p>
+                        </div>
                     </div>
                 </div>
             </div>

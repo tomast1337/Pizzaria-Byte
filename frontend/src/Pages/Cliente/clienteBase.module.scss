@@ -1,61 +1,111 @@
 @use '../../global-css-vars.scss' as *;
 
 .page {
-
     width: 100%;
     height: fit-content;
     min-height: 100vh;
     margin: auto auto;
     padding: 10vh 10px;
-    background-color: $brand3;
+    background-color: $admin1;
 
     .container {
-        margin: 10em auto;
-        width: 99%;
-        margin: auto auto;
-        padding: 1vh auto;
-        color: $black;
+
+        box-shadow: 0 0 .2rem $black;
+        background-color: $white;
+        margin: 10px auto;
         border-radius: 1rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);    
-        background-color: $white;    
+
         h1 {
             font-family: $title;
             font-size: 3em;
             font-weight: bold;
             text-align: center;
         }
-    
+
         h2 {
             font-family: $text;
-            font-size: 2em;
+            font-size: 2.5em;
             text-align: center;
         }
-    
+
         h3 {
             font-family: $text;
             font-size: 1.5em;
         }
-        p{
+
+        p {
             font-family: $text-alt;
             font-size: 1.5em;
         }
-    
-    
+
         // desktop
         @media (min-width: 1025px) {
             width: 90%;
         }
+
+        .text-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: auto auto;
+
+            .coluna {
+                width: 100%;
+                text-align: left;
+                margin: .2rem 0;
+                padding: 0 2em;
+
+            }
+
+            // desktop
+            @media (min-width: 1025px) {
+                .coluna {
+                    width: 40%;
+                }
+            }
+        }
+
+
     }
 }
 
-.left {
-    float: left;
-    margin: 0 auto;
-    width: 50%;
-}
+.list {
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
 
-.right {
-    float: right;
-    margin: 0 auto;
-    width: 50%;
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background: $white;
+        background-blend-mode: lighten;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $brand2;
+        border-radius: 0px;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        border-radius: 10px;
+    }
 }
