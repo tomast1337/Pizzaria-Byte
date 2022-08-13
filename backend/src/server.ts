@@ -43,21 +43,22 @@ const main = async () => {
             error: 'Rota não encontrada'
         });
     });
-    
+
     // ctrl + c handler
     process.on('SIGINT', () => {
         console.log('SIGINT: Saindo do servidor');
         process.exit(0);
     });
-        
 
-    server.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-        console.log(`http://localhost:${PORT}`);
-    }).on('error', (error: Error) => {
-        console.error(error);
-        process.exit(1);
-    });
+    server
+        .listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+            console.log(`http://localhost:${PORT}`);
+        })
+        .on('error', (error: Error) => {
+            console.error(error);
+            process.exit(1);
+        });
 };
 
 export default main;
