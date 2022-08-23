@@ -173,6 +173,9 @@ const GerirIngredientesPage = () => {
     React.useEffect(() => {
         // set window title
         document.title = 'Gerir Ingredientes';
+        if (!verifyToken()) {
+            navigate('/');
+        }
     }, []);
 
     return (
