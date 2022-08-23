@@ -18,7 +18,7 @@ import {
     SelectPreco,
     SelectImagem,
     SelectDescricao
-} from "../../Features/Admin/GerirPizzasSlice";
+} from '../../Features/Admin/GerirPizzasSlice';
 const GerirPizzasPage = () => {
     const navigate = useNavigate();
     const dispatcher = useDispatch();
@@ -60,11 +60,11 @@ const GerirPizzasPage = () => {
         setImagemPreview('');
 
         scrollToTop();
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    }
+    };
 
     return (
         <>
@@ -130,12 +130,8 @@ const GerirPizzasPage = () => {
                             <button type="reset" onClick={resetFields}>
                                 Limpar
                             </button>
-                            <button type="submit">
-                                Salvar
-                            </button>
-                            <button type="submit">
-                                Excluir
-                            </button>
+                            <button type="submit">Salvar</button>
+                            <button type="submit">Excluir</button>
                         </div>
                     </form>
                 </div>

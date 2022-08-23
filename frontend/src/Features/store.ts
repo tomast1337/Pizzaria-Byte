@@ -5,7 +5,7 @@ import GerirIngredientesSlice from './Admin/GerirIngredientesSlice';
 import CommonSlice from './CommonSlice';
 import GerirProdutosSlice from './Admin/GerirProdutosSlice';
 import GerirUserSlice from './Admin/GerirUserSlice';
-import metadesPizzaSlice  from './Pizza/MetadesPizzaSlice';
+import metadesPizzaSlice from './Pizza/MetadesPizzaSlice';
 import GerirPizzasSlice from './Admin/GerirPizzasSlice';
 
 export const store = configureStore({
@@ -25,12 +25,10 @@ export const store = configureStore({
         gerirIngredientes: GerirIngredientesSlice,
         gerirProdutos: GerirProdutosSlice,
         gerirUsers: GerirUserSlice,
-        gerirPizzas:GerirPizzasSlice
+        gerirPizzas: GerirPizzasSlice
         // Cozinheiro
 
         // Entregador
-
-        
     }
 });
 

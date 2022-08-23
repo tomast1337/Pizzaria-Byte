@@ -14,16 +14,15 @@ export interface MetadePizzaData {
 const metadesPizzaSlice = createSlice({
     name: 'metadesPizza',
     initialState: {
-        metades: [[], [], [], []],
+        metades: [[], [], [], []]
     },
     reducers: {
         setMetades: (state, action: PayloadAction<MetadePizzaData>) => {
             state.metades = action.payload.metades;
-        },
+        }
     }
 });
 export const { setMetades } = metadesPizzaSlice.actions;
-
 
 export const selectMetades = (state: RootState) => state.metadesPizza.metades;
 

@@ -20,7 +20,7 @@ const GerirPizzasSlice = createSlice({
         nome: '',
         preco: 1,
         imagem: '',
-        descricao: '',
+        descricao: ''
     },
     reducers: {
         setidSelecionado: (state, action) => {
@@ -58,8 +58,7 @@ export const SelectIdSelecionado = (state: RootState) =>
     state.gerirPizzas._idSelecionado;
 export const SelectNome = (state: RootState) => state.gerirPizzas.nome;
 export const SelectPreco = (state: RootState) => state.gerirPizzas.preco;
-export const SelectImagem = (state: RootState) =>
-    state.gerirPizzas.imagem;
+export const SelectImagem = (state: RootState) => state.gerirPizzas.imagem;
 export const SelectDescricao = (state: RootState) =>
     state.gerirPizzas.descricao;
 
